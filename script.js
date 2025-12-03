@@ -23,17 +23,17 @@ const siteConfig = {
     videos: [
         { 
             title: "עושה סדר - פסק הדין אירועי הדרבי", 
-            img: "azran/assets/images/seder.png", 
+            img: "assets/images/seder.png", 
             link: "https://www.instagram.com/p/DQoMbAWk5Aw/" 
         },
         { 
             title: "סיכום המשחק - הפועל ירושלים VS הפועל", 
-            img: "azran/assets/images/katamon.png", 
+            img: "assets/images/katamon.png", 
             link: "www.instagram.com/p/DQ1GqBjk6w-/" 
         },
         { 
             title: "הפועל VS סכנין", 
-            img: "azran/assets/images/sakhnin.jpg", 
+            img: "assets/images/sakhnin.jpg", 
             link: "https://www.instagram.com/p/DQ1GqBjk6w-/" 
         }
     ],
