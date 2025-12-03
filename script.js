@@ -23,7 +23,7 @@ const siteConfig = {
     videos: [
         { 
             title: "עושה סדר - פסק הדין אירועי הדרבי", 
-            img: "assets/images/seder.png", 
+            img: "azran/assets/images/seder.png", 
             link: "https://www.instagram.com/p/DQoMbAWk5Aw/" 
         },
         { 
