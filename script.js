@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
         
         // שכפול נדיב למילוי כל מסך ולופ חלק
-        brandsTrack.innerHTML = singleSet.repeat(10);
+        brandsTrack.innerHTML = singleSet.repeat(20);
     }
 
     // Social Links
