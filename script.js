@@ -20,25 +20,27 @@ const siteConfig = {
         { value: "24/7", label: "פעילות בקהילה" }
     ],
 
-    videos: [
+videos: [
         { 
             title: "עושה סדר - פסק הדין אירועי הדרבי", 
-            img: "assets/images/seder.png", 
+            // תיקון: שימוש בקישור ישיר (Raw) כדי למנוע בעיות נתיב
+            img: "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/seder.png", 
             link: "https://www.instagram.com/p/DQoMbAWk5Aw/" 
         },
         { 
             title: "סיכום המשחק - הפועל ירושלים VS הפועל", 
-            img: "assets/images/katamon.png", 
-            link: "www.instagram.com/p/DQ1GqBjk6w-/" 
+            // תיקון: קישור ישיר לתמונה
+            img: "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/katamon.png", 
+            // תיקון קריטי: הוספת https://
+            link: "https://www.instagram.com/p/DQ1GqBjk6w-/" 
         },
         { 
             title: "הפועל VS סכנין", 
-            img: "https://github.com/azranmor66/azran/blob/main/assets/images/sakhnin.jpg", 
+            // תיקון קריטי: החלפת blob ב-raw
+            img: "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/sakhnin.jpg", 
             link: "https://www.instagram.com/p/DQ1GqBjk6w-/" 
         }
-    ],
-
-    services: [
+    ],    services: [
         { 
             title: "סרטוני ספיישל וסקירות", 
             icon: "video",
