@@ -28,12 +28,12 @@ const siteConfig = {
         },
         { 
             title: "סיכום המשחק - הפועל ירושלים VS הפועל", 
-            img: "assets/images/katamon.png", 
+            img: "azran/assets/images/katamon.png", 
             link: "www.instagram.com/p/DQ1GqBjk6w-/" 
         },
         { 
             title: "הפועל VS סכנין", 
-            img: "assets/images/sakhnin.jpg", 
+            img: "azran/assets/images/sakhnin.jpg", 
             link: "https://www.instagram.com/p/DQ1GqBjk6w-/" 
         }
     ],
@@ -58,9 +58,9 @@ const siteConfig = {
     
     // רשימת הלוגואים לשיתופי פעולה
     brands: [
-        "assets/images/sav.jpg",
-        "assets/images/tinok.webp",
-        "assets/images/ibi.png" 
+        "azran/assets/images/sav.jpg",
+        "azran/assets/images/tinok.webp",
+        "azran/assets/images/ibi.png" 
     ],
 
     social: {
