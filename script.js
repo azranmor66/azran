@@ -60,7 +60,7 @@ videos: [
     
     // רשימת הלוגואים לשיתופי פעולה
     brands: [
-        "azran/assets/images/sav.jpg",
+        "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/sakhnin.jpg",
         "azran/assets/images/tinok.webp",
         "azran/assets/images/ibi.png" 
     ],
