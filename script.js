@@ -33,7 +33,7 @@ const siteConfig = {
         },
         { 
             title: "הפועל VS סכנין", 
-            img: "assets/images/sakhnin.jpg", 
+            img: "https://github.com/azranmor66/azran/blob/main/assets/images/sakhnin.jpg", 
             link: "https://www.instagram.com/p/DQ1GqBjk6w-/" 
         }
     ],
