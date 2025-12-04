@@ -62,7 +62,7 @@ videos: [
     brands: [
         "azran/assets/images/sav.jpg",
         "azran/assets/images/tinok.webp",
-        "azran/assets/images/ibi.png" 
+        "azran/assets/images/sav.jpg" 
     ],
 
     social: {
