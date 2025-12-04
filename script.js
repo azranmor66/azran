@@ -37,7 +37,7 @@ videos: [
         { 
             title: "הפועל VS סכנין", 
             // תיקון קריטי: החלפת blob ב-raw
-            img: "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/sakhnin.jpg", 
+            img: "azran/assets/images/sakhnin.jpg", 
             link: "https://www.instagram.com/p/DQ1GqBjk6w-/" 
         }
     ],    services: [
