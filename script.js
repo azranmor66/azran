@@ -114,8 +114,7 @@ const siteConfig = {
     brands: [
         "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/sav.jpg",
         "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/tinok.webp",
-        "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/sav.jpg",
-        "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/tinok.webp"
+        "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/ibi.png"
     ],
 
     social: {
