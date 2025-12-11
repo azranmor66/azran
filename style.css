@@ -5,17 +5,16 @@
     --text-main: #ffffff;
     
     /* === CONTROL PANEL === */
-    --logo-height: 450px;       /* גובה לוגו במחשב */
-    --marquee-height: 180px;    /* גובה פס השותפים */
-    --brand-img-size: 120px;     /* גודל תמונות שותפים */
+    --logo-height: 450px;
+    --marquee-height: 180px;
+    --brand-img-size: 120px;
 }
 
-/* הגדרות למובייל (עד 768 פיקסלים) */
 @media (max-width: 768px) {
     :root {
         --logo-height: 250px;
         --marquee-height: 100px;
-        --brand-img-size: 50px;
+        --brand-img-size: 60px;
     }
 }
 
@@ -27,7 +26,6 @@ body {
     overflow-x: hidden;
 }
 
-/* שימוש במשתנה לגודל הלוגו */
 .hero-logo {
     height: var(--logo-height);
     width: auto;
@@ -106,7 +104,7 @@ body {
     border-color: var(--accent);
 }
 
-/* === MARQUEE (SLIDER) === */
+/* === MARQUEE === */
 .marquee-container {
     width: 100%;
     height: var(--marquee-height);
@@ -127,8 +125,8 @@ body {
 .brand-item {
     height: var(--brand-img-size);
     width: auto;
-    margin: 0 4rem;
-    opacity: 0.5;
+    margin: 0 3rem;
+    opacity: 0.6;
     filter: grayscale(100%);
     transition: all 0.3s;
     object-fit: contain;
