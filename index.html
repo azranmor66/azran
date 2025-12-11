@@ -15,14 +15,15 @@
 
     <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden py-10">
         <div class="absolute inset-0 z-0">
-            <img src="assets/images/hero-bg.jpg" class="w-full h-full object-cover opacity-30 grayscale" onerror="this.style.display='none'">
+            <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/hero-bg.jpg" class="w-full h-full object-cover opacity-30 grayscale" onerror="this.style.display='none'">
             <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-dark)] via-transparent to-black"></div>
         </div>
         
         <div class="relative z-20 max-w-4xl mx-auto flex flex-col items-center gap-6 animate-fade-in">
-            <img src="assets/images/logo.png" alt="Logo" class="hero-logo object-contain mb-8 drop-shadow-2xl hover:scale-105 transition duration-500">
+            <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png" alt="Logo" class="hero-logo object-contain mb-8 drop-shadow-2xl hover:scale-105 transition duration-500">
             
             <h1 id="hero-title" class="text-4xl md:text-6xl font-black tracking-tight leading-tight"></h1>
+            <p id="hero-subtitle" class="text-xl text-gray-300 font-light tracking-wide"></p>
             
             <a href="#about" class="btn-primary mt-8 md:mt-12">
                 בואו נכיר <i data-lucide="arrow-down"></i>
@@ -40,7 +41,7 @@
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-800 bg-[#111]">
                         <div class="grid md:grid-cols-2">
                             <div class="h-[300px] md:h-[400px] relative">
-                                <img src="assets/images/about-bg.jpg" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
+                                <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/about-bg.jpg" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
                                 <div class="absolute inset-0 bg-black/40"></div>
                             </div>
                             <div class="p-6 md:p-12 flex items-center text-right">
@@ -50,22 +51,50 @@
                     </div>
                 </div>
 
-                <a href="#stats" class="btn-primary">
+                <a href="#stats-insta" class="btn-primary">
                     נתונים מהרשתות <i data-lucide="arrow-down"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="stats" class="min-h-screen flex flex-col items-center justify-center py-20 bg-[#080808]">
+    <section id="stats-insta" class="py-20 bg-[#080808] border-t border-gray-900">
         <div class="container mx-auto px-6 flex flex-col items-center">
-            <h2 class="text-4xl md:text-5xl font-black mb-16 text-center text-white">המספרים מדברים</h2>
+            <h2 id="stats-insta-title" class="text-3xl md:text-4xl font-black mb-12 text-center text-white"></h2>
             
-            <div id="stats-grid" class="grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8 text-center w-full max-w-5xl mb-16">
+            <div id="stats-insta-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center w-full max-w-4xl mb-12">
                 </div>
 
-            <a href="#content" class="btn-primary">
-                בואו להכיר את התוכן שלי <i data-lucide="arrow-down"></i>
+            <a href="#stats-general" class="text-gray-500 hover:text-white transition animate-bounce mt-4">
+                <i data-lucide="chevron-down" class="w-8 h-8"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="stats-general" class="py-20 bg-[#050505]">
+        <div class="container mx-auto px-6 flex flex-col items-center">
+            <h2 id="stats-general-title" class="text-3xl md:text-4xl font-black mb-12 text-center text-white"></h2>
+            
+            <div id="stats-general-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center w-full max-w-4xl mb-16">
+                </div>
+
+            <a href="#collaborations" class="btn-primary">
+                מי עובד איתי? <i data-lucide="arrow-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="collaborations" class="py-16 bg-black border-y border-gray-900 flex flex-col items-center justify-center overflow-hidden">
+        <div class="w-full text-center">
+            <h2 class="text-3xl md:text-4xl font-black mb-12 text-center text-white red-underline">שיתופי פעולה</h2>
+            
+            <div class="marquee-container w-full">
+                <div class="marquee-track" id="brands-track">
+                    </div>
+            </div>
+            
+            <a href="#content" class="btn-primary mt-12">
+                לתוכן שלי <i data-lucide="arrow-down"></i>
             </a>
         </div>
     </section>
@@ -73,36 +102,21 @@
     <section id="content" class="min-h-screen flex flex-col items-center justify-center py-20">
         <div class="container mx-auto px-6 flex flex-col items-center">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black text-white red-underline">התוכן שלי</h2>
+                <h2 id="video-title" class="text-4xl md:text-5xl font-black text-white red-underline"></h2>
             </div>
 
             <div id="video-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mb-16">
                 </div>
 
-            <a href="#collaborations" class="btn-primary">
-                בואו לעבוד איתי <i data-lucide="briefcase"></i>
-            </a>
-        </div>
-    </section>
-
-    <section id="collaborations" class="py-20 bg-black border-t border-gray-900 flex flex-col items-center justify-center">
-        <div class="container mx-auto px-6 w-full text-center">
-            <h2 class="text-4xl md:text-5xl font-black mb-12 text-center text-white red-underline">שיתופי פעולה</h2>
-            
-            <div class="marquee-container w-full">
-                <div class="marquee-track" id="brands-track">
-                    </div>
-            </div>
-            
-            <a href="#services" class="mt-12 inline-block text-gray-500 hover:text-white animate-bounce">
-                <i data-lucide="chevron-down" class="w-8 h-8"></i>
+            <a href="#services" class="btn-primary">
+                השירותים שלי <i data-lucide="arrow-down"></i>
             </a>
         </div>
     </section>
 
     <section id="services" class="min-h-screen flex flex-col items-center justify-center py-20 bg-[#0a0a0a]">
         <div class="container mx-auto px-6 flex flex-col items-center">
-            <h2 class="text-4xl md:text-5xl font-black mb-4 text-center text-white">השירותים שלי</h2>
+            <h2 id="services-title" class="text-4xl md:text-5xl font-black mb-4 text-center text-white"></h2>
             <p class="text-gray-400 text-center mb-16 text-xl">איך נוכל לשתף פעולה</p>
             
             <div id="services-grid" class="grid md:grid-cols-3 gap-8 w-full max-w-6xl mb-16">
