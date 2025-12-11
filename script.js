@@ -11,8 +11,8 @@ const treeConfig = {
             highlight: true 
         },
         { 
-            label: "קהילת האוהדים בווטסאפ", 
-            url: "https://chat.whatsapp.com/...", // עדכן לינק
+            label: "הפועל על פי עזרן - ערוץ הווטסאפ הרשמי", 
+            url: "https://whatsapp.com/channel/0029VbBiFme2UPBIGn82mC3Z", // עדכן לינק
             icon: "message-circle", 
             visible: true 
         },
@@ -38,13 +38,13 @@ const treeConfig = {
             label: "יוטיוב", 
             url: "https://youtube.com/...", // עדכן לינק
             icon: "youtube", 
-            visible: true 
+            visible: false 
         },
         { 
             label: "ספוטיפיי", 
             url: "https://open.spotify.com/...", // עדכן לינק
             icon: "headphones", 
-            visible: true 
+            visible: false 
         }
     ]
 };
@@ -62,14 +62,14 @@ const siteConfig = {
     אני כאן כדי לתת קול למה שכולנו חושבים. בלי פילטרים, בלי פוליטיקלי קורקט, ועם הרבה תשוקה למשחק.`,
 
     // --- Stats: Community & Audience (Unified) ---
-    statsCommunityTitle: "הקהל והקהילה שלי",
+    statsCommunityTitle: "הקהילה שלי",
     statsCommunity: [
-        { value: "+12K", label: "עוקבים באינסטגרם" },
-        { value: "+150K", label: "חשיפה חודשית" },
-        { value: "+17.5K", label: "ממוצע צפיות לרילס" },
-        { value: "50+", label: "לקוחות מרוצים" },
-        { value: "4", label: "שנות ניסיון" },
-        { value: "24/7", label: "פעילות בקהילה" }
+        { value: "+11K", label: "עוקבים" },
+        { value: "+1.2M", label: "חשיפה חודשית" },
+        { value: "+22.5K", label: "ממוצע צפיות לרילס" },
+        { value: "+12.5K", label: "מעורבות חודשית" },
+        { value: "18-35", label: "טווח גילאים עיקרי" },
+        { value: "+2.2K+", label: "ממוצע צפיות בסטורי" }
         // רוצה עוד? פשוט תוסיף כאן עוד שורה עם פסיק
     ],
 
