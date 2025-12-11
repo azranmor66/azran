@@ -4,17 +4,28 @@
     --accent: #ff0040;
     --text-main: #ffffff;
     
-    /* === CONTROL PANEL === */
+    /* === DESKTOP SIZES === */
     --logo-height: 450px;
     --marquee-height: 180px;
     --brand-img-size: 120px;
 }
 
+/* === MOBILE SIZES (התאמה מלאה למובייל) === */
 @media (max-width: 768px) {
     :root {
-        --logo-height: 250px;
-        --marquee-height: 100px;
-        --brand-img-size: 60px;
+        --logo-height: 220px;      /* לוגו קטן יותר שלא יתפוס את כל המסך */
+        --marquee-height: 100px;   /* פס גלילה צר יותר */
+        --brand-img-size: 60px;    /* לוגואים קטנים יותר */
+    }
+    
+    /* תיקון לגודל פונט בכותרות ענק במובייל */
+    h1 {
+        font-size: 2.5rem !important; /* כותרת ראשית קריאה */
+        line-height: 1.2 !important;
+    }
+    
+    h2 {
+        font-size: 2rem !important;
     }
 }
 
@@ -29,6 +40,7 @@ body {
 .hero-logo {
     height: var(--logo-height);
     width: auto;
+    max-width: 90vw; /* שלא יחרוג מרוחב המסך במובייל */
 }
 
 @keyframes fadeIn {
@@ -55,6 +67,7 @@ body {
     text-decoration: none;
     text-align: center;
     white-space: nowrap;
+    width: fit-content; /* חשוב למירכוז */
 }
 
 .btn-primary:hover {
@@ -125,11 +138,18 @@ body {
 .brand-item {
     height: var(--brand-img-size);
     width: auto;
-    margin: 0 3rem;
+    margin: 0 2rem; /* רווח קטן יותר במובייל */
     opacity: 0.6;
     filter: grayscale(100%);
     transition: all 0.3s;
     object-fit: contain;
+}
+
+/* התאמת רווחים לדסקטופ */
+@media (min-width: 768px) {
+    .brand-item {
+        margin: 0 4rem;
+    }
 }
 
 .brand-item:hover {
