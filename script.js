@@ -1,5 +1,5 @@
 // ==========================================
-// ערוך את הנתונים כאן (SiteConfig)
+// Site Configuration
 // ==========================================
 
 const siteConfig = {
@@ -13,7 +13,7 @@ const siteConfig = {
     מה שהתחיל כסרטונים ספונטניים מהרכב אחרי משחקים, הפך לקהילה של אלפי עוקבים שמחפשים את האמת הלא מהונדסת.
     אני כאן כדי לתת קול למה שכולנו חושבים. בלי פילטרים, בלי פוליטיקלי קורקט, ועם הרבה תשוקה למשחק.`,
 
-    // --- Stats: Instagram Community ---
+    // --- Stats: Instagram ---
     statsInstaTitle: "הקהילה באינסטגרם",
     statsInsta: [
         { value: "+12K", label: "עוקבים" },
@@ -33,12 +33,12 @@ const siteConfig = {
     videoTitle: "התוכן שלי",
     videos: [
         { 
-            title: "עושה סדר - פסק הדין אירועי הדרבי", 
+            title: "עושה סדר - פסק הדין", 
             img: "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/seder.png", 
             link: "https://www.instagram.com/p/DQoMbAWk5Aw/" 
         },
         { 
-            title: "סיכום המשחק - הפועל ירושלים VS הפועל", 
+            title: "סיכום המשחק - ירושלים", 
             img: "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/katamon.png", 
             link: "https://www.instagram.com/p/DQ1GqBjk6w-/" 
         },
@@ -53,23 +53,23 @@ const siteConfig = {
     servicesTitle: "השירותים שלי",
     services: [
         { 
-            title: "סרטוני ספיישל וסקירות", 
+            title: "יצירת תוכן", 
             icon: "video", 
-            description: "הפקת סרטונים מושקעים לפני ואחרי משחקים, ניתוחים טקטיים בגובה העיניים וסיקור אירועים מיוחדים. הסרטונים מותאמים לרשתות החברתיות ומגיעים לקהל רחב ומעורב."
+            description: "הפקה ועריכה של סרטונים לרשתות החברתיות."
         },
         { 
             title: "שיווק שותפים", 
             icon: "share-2", 
-            description: "שיתופי פעולה אסטרטגיים המשלבים את המותג שלכם בתוך התוכן שלי בצורה טבעית ואותנטית. אנחנו יוצרים סיפור שמחבר בין המותג לבין הערכים של הקהילה."
+            description: "שיתופי פעולה המשלבים את המותג שלכם בתוכן שלי."
         },
         { 
-            title: "חסויות ושגרירות מותג", 
+            title: "חסויות ומותג", 
             icon: "megaphone", 
-            description: "חיבור ארוך טווח עם המותג שלכם. כשגריר מותג, אני מייצג אתכם בכל הפלטפורמות, יוצר תוכן בלעדי ומחזק את המודעות למותג בקרב קהל האוהדים."
+            description: "חיבור ארוך טווח ושגרירות מותג."
         }
     ],
     
-    // --- Brands (Marquee) ---
+    // --- Brands ---
     brands: [
         "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/sav.jpg",
         "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/tinok.webp",
@@ -87,138 +87,132 @@ const siteConfig = {
 };
 
 // ==========================================
-// Main Logic
+// Safe Rendering Logic
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. Fill Text Content
-    document.getElementById('hero-title').textContent = siteConfig.heroTitle;
-    document.getElementById('about-text').innerText = siteConfig.aboutText;
-    document.getElementById('stats-insta-title').textContent = siteConfig.statsInstaTitle;
-    document.getElementById('stats-general-title').textContent = siteConfig.statsGeneralTitle;
-    document.getElementById('video-title').textContent = siteConfig.videoTitle;
-    document.getElementById('services-title').textContent = siteConfig.servicesTitle;
+    // Helper function to safely set text
+    const setText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    };
 
-    // 2. Render Instagram Stats
+    // 1. Text Content
+    setText('hero-title', siteConfig.heroTitle);
+    setText('about-text', siteConfig.aboutText);
+    setText('stats-insta-title', siteConfig.statsInstaTitle);
+    setText('stats-general-title', siteConfig.statsGeneralTitle);
+    setText('video-title', siteConfig.videoTitle);
+    setText('services-title', siteConfig.servicesTitle);
+
+    // 2. Instagram Stats
     const instaGrid = document.getElementById('stats-insta-grid');
-    if(instaGrid) {
+    if (instaGrid && siteConfig.statsInsta) {
         instaGrid.innerHTML = siteConfig.statsInsta.map(stat => `
-            <div class="flex flex-col items-center group cursor-default">
-                <span class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tighter group-hover:text-[var(--accent)] transition duration-300">${stat.value}</span>
-                <div class="w-12 h-1 bg-[var(--accent)] rounded mb-3"></div>
-                <span class="text-gray-400 font-bold uppercase tracking-wider text-sm md:text-base">${stat.label}</span>
+            <div class="flex flex-col items-center p-4 bg-[#111] rounded-xl border border-gray-800">
+                <span class="text-4xl font-black text-white mb-2">${stat.value}</span>
+                <span class="text-gray-400 text-sm font-bold uppercase tracking-wider">${stat.label}</span>
             </div>
         `).join('');
     }
 
-    // 3. Render General Stats
+    // 3. General Stats
     const generalGrid = document.getElementById('stats-general-grid');
-    if(generalGrid) {
+    if (generalGrid && siteConfig.statsGeneral) {
         generalGrid.innerHTML = siteConfig.statsGeneral.map(stat => `
-            <div class="flex flex-col items-center group cursor-default">
-                <span class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tighter group-hover:text-[var(--accent)] transition duration-300">${stat.value}</span>
-                <div class="w-12 h-1 bg-[var(--accent)] rounded mb-3"></div>
-                <span class="text-gray-400 font-bold uppercase tracking-wider text-sm md:text-base">${stat.label}</span>
+            <div class="flex flex-col items-center p-4 bg-[#111] rounded-xl border border-gray-800">
+                <span class="text-4xl font-black text-white mb-2">${stat.value}</span>
+                <span class="text-gray-400 text-sm font-bold uppercase tracking-wider">${stat.label}</span>
             </div>
         `).join('');
     }
 
-    // 4. Render Videos
-    const videoContainer = document.getElementById('video-grid');
-    if(videoContainer) {
-        videoContainer.innerHTML = siteConfig.videos.map(video => `
-            <a href="${video.link}" target="_blank" class="relative group block overflow-hidden rounded-xl aspect-[9/16] border border-gray-800 bg-gray-900 transform transition duration-500 hover:-translate-y-2">
-                <img src="${video.img}" class="w-full h-full object-cover opacity-60 transition duration-500 group-hover:scale-110 group-hover:opacity-40" onerror="this.src='https://via.placeholder.com/400x600?text=Image+Error'">
+    // 4. Videos
+    const videoGrid = document.getElementById('video-grid');
+    if (videoGrid && siteConfig.videos) {
+        videoGrid.innerHTML = siteConfig.videos.map(video => `
+            <a href="${video.link}" target="_blank" class="relative block overflow-hidden rounded-xl aspect-[9/16] bg-gray-900 border border-gray-800">
+                <img src="${video.img}" class="w-full h-full object-cover opacity-80" onerror="this.style.display='none'">
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 transition group-hover:bg-[var(--accent)] group-hover:border-transparent">
+                    <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
                         <i data-lucide="play" class="fill-white text-white ml-1 w-6 h-6"></i>
                     </div>
                 </div>
-                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/80 to-transparent pt-12">
-                    <h3 class="text-xl font-bold text-center leading-tight text-white group-hover:text-[var(--accent)] transition">${video.title}</h3>
+                <div class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-black to-transparent">
+                    <h3 class="text-white font-bold text-center text-lg">${video.title}</h3>
                 </div>
             </a>
         `).join('');
     }
 
-    // 5. Render Services
-    const servicesContainer = document.getElementById('services-grid');
-    if(servicesContainer) {
-        servicesContainer.innerHTML = siteConfig.services.map((service, index) => `
-            <div onclick="openServiceModal(${index})" class="card-dark h-48 flex flex-col items-center justify-center relative overflow-hidden group hover:bg-[#151515] transition cursor-pointer transform hover:scale-105">
-                <div class="bg-[var(--accent)]/10 p-5 rounded-full mb-6 group-hover:bg-[var(--accent)] transition duration-500">
-                    <i data-lucide="${service.icon}" class="text-[var(--accent)] group-hover:text-white w-8 h-8 transition"></i>
+    // 5. Services
+    const servicesGrid = document.getElementById('services-grid');
+    if (servicesGrid && siteConfig.services) {
+        servicesGrid.innerHTML = siteConfig.services.map((service, index) => `
+            <div onclick="openServiceModal(${index})" class="p-6 bg-[#111] rounded-xl border border-gray-800 text-center cursor-pointer active:scale-95 transition">
+                <div class="w-12 h-12 bg-[var(--accent)]/20 rounded-full flex items-center justify-center mx-auto mb-4 text-[var(--accent)]">
+                    <i data-lucide="${service.icon}"></i>
                 </div>
-                <h3 class="text-xl font-bold text-white">${service.title}</h3>
-                <span class="text-xs text-gray-500 mt-2 opacity-0 group-hover:opacity-100 transition">לחץ לפרטים נוספים</span>
+                <h3 class="text-xl font-bold text-white mb-2">${service.title}</h3>
+                <p class="text-gray-500 text-sm">לחץ לפרטים</p>
             </div>
         `).join('');
     }
-    
-    // 6. Render Marquee (Brands)
+
+    // 6. Brands (Marquee)
     const brandsTrack = document.getElementById('brands-track');
-    if(brandsTrack && siteConfig.brands.length > 0) {
+    if (brandsTrack && siteConfig.brands) {
         const singleSet = siteConfig.brands.map(img => `
-            <img src="${img}" class="brand-item" alt="Brand Logo" onerror="this.style.display='none'">
+            <img src="${img}" class="brand-item" style="height: 60px; width: auto; margin: 0 20px; object-fit: contain;" onerror="this.style.display='none'">
         `).join('');
-        
         brandsTrack.innerHTML = singleSet.repeat(20);
     }
 
-    // 7. Render Social Links
+    // 7. Social Links
     const socialLinks = document.getElementById('social-links');
-    if(socialLinks) {
-        const links = [];
-        if(siteConfig.social.instagram) links.push({ icon: 'instagram', url: siteConfig.social.instagram });
-        if(siteConfig.social.tiktok) links.push({ icon: 'music-2', url: siteConfig.social.tiktok });
-        if(siteConfig.social.twitter) links.push({ icon: 'twitter', url: siteConfig.social.twitter });
-        
-        socialLinks.innerHTML = links.map(link => `
-            <a href="${link.url}" target="_blank" class="w-12 h-12 flex items-center justify-center bg-gray-900 rounded-full hover:bg-[var(--accent)] text-white transition hover:-translate-y-1">
-                <i data-lucide="${link.icon}" class="w-5 h-5"></i>
-            </a>
-        `).join('');
+    if (socialLinks && siteConfig.social) {
+        socialLinks.innerHTML = `
+            <a href="${siteConfig.social.instagram}" target="_blank" class="p-3 bg-[#222] rounded-full text-white"><i data-lucide="instagram"></i></a>
+            <a href="${siteConfig.social.tiktok}" target="_blank" class="p-3 bg-[#222] rounded-full text-white"><i data-lucide="music-2"></i></a>
+            <a href="${siteConfig.social.twitter}" target="_blank" class="p-3 bg-[#222] rounded-full text-white"><i data-lucide="twitter"></i></a>
+        `;
     }
 
     // Initialize Icons
-    lucide.createIcons();
+    if (window.lucide) {
+        lucide.createIcons();
+    }
 });
 
-// ==========================================
-// Modals Logic
-// ==========================================
-
+// Modals
 function openServiceModal(index) {
     const service = siteConfig.services[index];
     const modal = document.getElementById('service-modal');
+    if(!modal) return;
     
     document.getElementById('modal-title').textContent = service.title;
     document.getElementById('modal-desc').innerText = service.description;
     
-    // Using container ID to avoid overwriting the element
     const iconContainer = document.getElementById('modal-icon-container');
-    iconContainer.innerHTML = `<i data-lucide="${service.icon}" class="w-8 h-8"></i>`;
-    lucide.createIcons();
-
+    if(iconContainer) {
+        iconContainer.innerHTML = `<i data-lucide="${service.icon}" class="w-8 h-8"></i>`;
+        if(window.lucide) lucide.createIcons();
+    }
+    
     modal.classList.remove('hidden');
 }
 
 function closeServiceModal() {
-    document.getElementById('service-modal').classList.add('hidden');
+    const modal = document.getElementById('service-modal');
+    if(modal) modal.classList.add('hidden');
 }
 
 function openAccessibilityModal() {
-    document.getElementById('accessibility-modal').classList.remove('hidden');
+    const modal = document.getElementById('accessibility-modal');
+    if(modal) modal.classList.remove('hidden');
 }
 
 function closeAccessibilityModal() {
-    document.getElementById('accessibility-modal').classList.add('hidden');
+    const modal = document.getElementById('accessibility-modal');
+    if(modal) modal.classList.add('hidden');
 }
-
-document.addEventListener('keydown', function(event) {
-    if (event.key === "Escape") {
-        closeServiceModal();
-        closeAccessibilityModal();
-    }
-});
