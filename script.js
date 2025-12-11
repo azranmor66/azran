@@ -5,7 +5,6 @@
 const siteConfig = {
     // --- Hero ---
     heroTitle: "הקול של אוהדי הפועל תל אביב",
-    heroSubtitle: "יצירת תוכן | שיווק | אסטרטגיה",
     
     // --- About ---
     aboutText: `נעים להכיר, אני מור עזרן.
@@ -39,7 +38,7 @@ const siteConfig = {
             link: "https://www.instagram.com/p/DQoMbAWk5Aw/" 
         },
         { 
-            title: "סיכום המשחק - הפועל ירושלים", 
+            title: "סיכום המשחק - הפועל ירושלים VS הפועל", 
             img: "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/katamon.png", 
             link: "https://www.instagram.com/p/DQ1GqBjk6w-/" 
         },
@@ -54,24 +53,23 @@ const siteConfig = {
     servicesTitle: "השירותים שלי",
     services: [
         { 
-            title: "יצירת תוכן", 
+            title: "סרטוני ספיישל וסקירות", 
             icon: "video", 
-            description: "הפקה ועריכה של סרטונים לרשתות החברתיות, מותאמים לטרנדים ולשפה של הקהל."
+            description: "הפקת סרטונים מושקעים לפני ואחרי משחקים, ניתוחים טקטיים בגובה העיניים וסיקור אירועים מיוחדים. הסרטונים מותאמים לרשתות החברתיות ומגיעים לקהל רחב ומעורב."
         },
         { 
             title: "שיווק שותפים", 
             icon: "share-2", 
-            description: "שיתופי פעולה המשלבים את המותג שלכם בתוכן שלי בצורה אותנטית וממירה."
+            description: "שיתופי פעולה אסטרטגיים המשלבים את המותג שלכם בתוך התוכן שלי בצורה טבעית ואותנטית. אנחנו יוצרים סיפור שמחבר בין המותג לבין הערכים של הקהילה."
         },
         { 
-            title: "חסויות ומותג", 
+            title: "חסויות ושגרירות מותג", 
             icon: "megaphone", 
-            description: "חיבור ארוך טווח, שגרירות מותג וייצוג בערכים המשותפים לקהילה."
+            description: "חיבור ארוך טווח עם המותג שלכם. כשגריר מותג, אני מייצג אתכם בכל הפלטפורמות, יוצר תוכן בלעדי ומחזק את המודעות למותג בקרב קהל האוהדים."
         }
     ],
     
     // --- Brands (Marquee) ---
-    // כאן שמנו את הלינקים המלאים (Raw) כדי למנוע בעיות טעינה
     brands: [
         "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/sav.jpg",
         "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/tinok.webp",
@@ -96,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 1. Fill Text Content
     document.getElementById('hero-title').textContent = siteConfig.heroTitle;
-    document.getElementById('hero-subtitle').textContent = siteConfig.heroSubtitle;
     document.getElementById('about-text').innerText = siteConfig.aboutText;
     document.getElementById('stats-insta-title').textContent = siteConfig.statsInstaTitle;
     document.getElementById('stats-general-title').textContent = siteConfig.statsGeneralTitle;
@@ -128,9 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 4. Render Videos
-    const videoGrid = document.getElementById('video-grid');
-    if(videoGrid) {
-        videoGrid.innerHTML = siteConfig.videos.map(video => `
+    const videoContainer = document.getElementById('video-grid');
+    if(videoContainer) {
+        videoContainer.innerHTML = siteConfig.videos.map(video => `
             <a href="${video.link}" target="_blank" class="relative group block overflow-hidden rounded-xl aspect-[9/16] border border-gray-800 bg-gray-900 transform transition duration-500 hover:-translate-y-2">
                 <img src="${video.img}" class="w-full h-full object-cover opacity-60 transition duration-500 group-hover:scale-110 group-hover:opacity-40" onerror="this.src='https://via.placeholder.com/400x600?text=Image+Error'">
                 <div class="absolute inset-0 flex items-center justify-center">
@@ -146,9 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 5. Render Services
-    const servicesGrid = document.getElementById('services-grid');
-    if(servicesGrid) {
-        servicesGrid.innerHTML = siteConfig.services.map((service, index) => `
+    const servicesContainer = document.getElementById('services-grid');
+    if(servicesContainer) {
+        servicesContainer.innerHTML = siteConfig.services.map((service, index) => `
             <div onclick="openServiceModal(${index})" class="card-dark h-48 flex flex-col items-center justify-center relative overflow-hidden group hover:bg-[#151515] transition cursor-pointer transform hover:scale-105">
                 <div class="bg-[var(--accent)]/10 p-5 rounded-full mb-6 group-hover:bg-[var(--accent)] transition duration-500">
                     <i data-lucide="${service.icon}" class="text-[var(--accent)] group-hover:text-white w-8 h-8 transition"></i>
@@ -162,12 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. Render Marquee (Brands)
     const brandsTrack = document.getElementById('brands-track');
     if(brandsTrack && siteConfig.brands.length > 0) {
-        // Create single set of images
         const singleSet = siteConfig.brands.map(img => `
             <img src="${img}" class="brand-item" alt="Brand Logo" onerror="this.style.display='none'">
         `).join('');
         
-        // Duplicate 20 times for infinite seamless loop
         brandsTrack.innerHTML = singleSet.repeat(20);
     }
 
