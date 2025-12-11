@@ -2,18 +2,17 @@
 // 1. הגדרות עמוד הקישורים (Linktree) - index.html
 // ==========================================
 const treeConfig = {
-    // רשימת הקישורים - שנה את visible ל-false כדי להסתיר קישור זמנית
     links: [
         { 
-            label: "לאתר הרשמי & שיתופי פעולה", // הטקסט שיופיע
-            url: "home.html", // מפנה לאתר המלא שבנינו
-            icon: "globe", // שם האייקון מ-Lucide
-            visible: true, // האם להציג?
-            highlight: true // האם להדגיש בצבע?
+            label: "לאתר הרשמי & שיתופי פעולה", 
+            url: "home.html", 
+            icon: "globe", 
+            visible: true, 
+            highlight: true 
         },
         { 
             label: "קהילת האוהדים בווטסאפ", 
-            url: "https://chat.whatsapp.com/...", // שים פה את הלינק
+            url: "https://chat.whatsapp.com/...", // עדכן לינק
             icon: "message-circle", 
             visible: true 
         },
@@ -37,13 +36,13 @@ const treeConfig = {
         },
         { 
             label: "יוטיוב", 
-            url: "https://youtube.com/...", 
+            url: "https://youtube.com/...", // עדכן לינק
             icon: "youtube", 
             visible: true 
         },
         { 
             label: "ספוטיפיי", 
-            url: "https://open.spotify.com/...", 
+            url: "https://open.spotify.com/...", // עדכן לינק
             icon: "headphones", 
             visible: true 
         }
@@ -62,18 +61,16 @@ const siteConfig = {
     מה שהתחיל כסרטונים ספונטניים מהרכב אחרי משחקים, הפך לקהילה של אלפי עוקבים שמחפשים את האמת הלא מהונדסת.
     אני כאן כדי לתת קול למה שכולנו חושבים. בלי פילטרים, בלי פוליטיקלי קורקט, ועם הרבה תשוקה למשחק.`,
 
-    statsInstaTitle: "הקהילה באינסטגרם",
-    statsInsta: [
-        { value: "+12K", label: "עוקבים" },
+    // --- Stats: Community & Audience (Unified) ---
+    statsCommunityTitle: "הקהל והקהילה שלי",
+    statsCommunity: [
+        { value: "+12K", label: "עוקבים באינסטגרם" },
         { value: "+150K", label: "חשיפה חודשית" },
-        { value: "+17.5K", label: "ממוצע צפיות לרילס" }
-    ],
-
-    statsGeneralTitle: "נתונים כלליים",
-    statsGeneral: [
+        { value: "+17.5K", label: "ממוצע צפיות לרילס" },
         { value: "50+", label: "לקוחות מרוצים" },
         { value: "4", label: "שנות ניסיון" },
-        { value: "24/7", label: "זמינות לקהילה" }
+        { value: "24/7", label: "פעילות בקהילה" }
+        // רוצה עוד? פשוט תוסיף כאן עוד שורה עם פסיק
     ],
 
     videoTitle: "התוכן שלי",
@@ -135,11 +132,9 @@ const siteConfig = {
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // בדיקה: האם אנחנו בעמוד הקישורים (Linktree)?
     if (document.getElementById('links-container')) {
         renderLinktree();
     } 
-    // בדיקה: האם אנחנו באתר המלא (Portfolio)?
     else if (document.getElementById('hero')) {
         renderPortfolio();
     }
@@ -150,19 +145,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ------------------------------------------
-// פונקציית רינדור ה-Linktree
+// Linktree Rendering
 // ------------------------------------------
 function renderLinktree() {
     const container = document.getElementById('links-container');
-    
     const html = treeConfig.links
-        .filter(link => link.visible) // מציג רק מה שמוגדר כ-visible: true
+        .filter(link => link.visible)
         .map(link => {
-            // עיצוב שונה לכפתור המודגש (האתר העסקי)
             const baseClass = "w-full p-4 rounded-xl flex items-center justify-between transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg group";
             const normalClass = "bg-[#111] border border-[#222] hover:border-[#ff0040]";
             const highlightClass = "bg-[#ff0040] border border-[#ff0040] text-white hover:bg-[#d90036]";
-            
             const themeClass = link.highlight ? highlightClass : normalClass;
             const iconColor = link.highlight ? "text-white" : "text-[#ff0040]";
 
@@ -176,40 +168,32 @@ function renderLinktree() {
             </a>
             `;
         }).join('');
-
     container.innerHTML = html;
 }
 
 // ------------------------------------------
-// פונקציית רינדור האתר המלא (Portfolio)
+// Portfolio Rendering
 // ------------------------------------------
 function renderPortfolio() {
-    // 1. Text Content
     const setText = (id, text) => { const el = document.getElementById(id); if(el) el.textContent = text; };
     
     setText('hero-title', siteConfig.heroTitle);
     if(document.getElementById('about-text')) document.getElementById('about-text').innerText = siteConfig.aboutText;
-    setText('stats-insta-title', siteConfig.statsInstaTitle);
-    setText('stats-general-title', siteConfig.statsGeneralTitle);
+    
+    // כותרת הסטטיסטיקות החדשה
+    setText('stats-community-title', siteConfig.statsCommunityTitle);
+    
     setText('video-title', siteConfig.videoTitle);
     setText('services-title', siteConfig.servicesTitle);
 
-    // 2. Grids
     const renderGrid = (id, data, templateFn) => {
         const el = document.getElementById(id);
         if(el && data) el.innerHTML = data.map(templateFn).join('');
     };
 
-    renderGrid('stats-insta-grid', siteConfig.statsInsta, stat => `
-        <div class="flex flex-col items-center group cursor-default">
-            <span class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tighter group-hover:text-[var(--accent)] transition duration-300">${stat.value}</span>
-            <div class="w-12 h-1 bg-[var(--accent)] rounded mb-3"></div>
-            <span class="text-gray-400 font-bold uppercase tracking-wider text-sm md:text-base">${stat.label}</span>
-        </div>
-    `);
-
-    renderGrid('stats-general-grid', siteConfig.statsGeneral, stat => `
-        <div class="flex flex-col items-center group cursor-default">
+    // Render Community Stats (The Unified Grid)
+    renderGrid('stats-community-grid', siteConfig.statsCommunity, stat => `
+        <div class="flex flex-col items-center p-6 bg-[#111] rounded-xl border border-gray-800 hover:border-[#ff0040] transition duration-300 group">
             <span class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tighter group-hover:text-[var(--accent)] transition duration-300">${stat.value}</span>
             <div class="w-12 h-1 bg-[var(--accent)] rounded mb-3"></div>
             <span class="text-gray-400 font-bold uppercase tracking-wider text-sm md:text-base">${stat.label}</span>
@@ -266,7 +250,7 @@ function renderPortfolio() {
 }
 
 // ------------------------------------------
-// Modals (Portfolio Only)
+// Modals
 // ------------------------------------------
 function openServiceModal(index) {
     const service = siteConfig.services[index];
