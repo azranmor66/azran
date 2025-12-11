@@ -1,19 +1,67 @@
 // ==========================================
-// Site Configuration
+// 1. הגדרות עמוד הקישורים (Linktree) - index.html
 // ==========================================
+const treeConfig = {
+    // רשימת הקישורים - שנה את visible ל-false כדי להסתיר קישור זמנית
+    links: [
+        { 
+            label: "לאתר הרשמי & שיתופי פעולה", // הטקסט שיופיע
+            url: "home.html", // מפנה לאתר המלא שבנינו
+            icon: "globe", // שם האייקון מ-Lucide
+            visible: true, // האם להציג?
+            highlight: true // האם להדגיש בצבע?
+        },
+        { 
+            label: "קהילת האוהדים בווטסאפ", 
+            url: "https://chat.whatsapp.com/...", // שים פה את הלינק
+            icon: "message-circle", 
+            visible: true 
+        },
+        { 
+            label: "אינסטגרם", 
+            url: "https://www.instagram.com/morazran/", 
+            icon: "instagram", 
+            visible: true 
+        },
+        { 
+            label: "טיקטוק", 
+            url: "https://www.tiktok.com/@azranmor", 
+            icon: "music-2", 
+            visible: true 
+        },
+        { 
+            label: "טוויטר (X)", 
+            url: "https://x.com/AzranMor", 
+            icon: "twitter", 
+            visible: true 
+        },
+        { 
+            label: "יוטיוב", 
+            url: "https://youtube.com/...", 
+            icon: "youtube", 
+            visible: true 
+        },
+        { 
+            label: "ספוטיפיי", 
+            url: "https://open.spotify.com/...", 
+            icon: "headphones", 
+            visible: true 
+        }
+    ]
+};
 
+// ==========================================
+// 2. הגדרות האתר המלא (Portfolio) - home.html
+// ==========================================
 const siteConfig = {
-    // --- Hero ---
     heroTitle: "הקול של אוהדי הפועל תל אביב",
     
-    // --- About ---
     aboutText: `נעים להכיר, אני מור עזרן.
     התואר שבאמת מגדיר אותי הוא לא 'יוצר תוכן', אלא אוהד. גדלתי בשער 5, נשמתי את הדשא ואת ריח הנקניקיות.
     
     מה שהתחיל כסרטונים ספונטניים מהרכב אחרי משחקים, הפך לקהילה של אלפי עוקבים שמחפשים את האמת הלא מהונדסת.
     אני כאן כדי לתת קול למה שכולנו חושבים. בלי פילטרים, בלי פוליטיקלי קורקט, ועם הרבה תשוקה למשחק.`,
 
-    // --- Stats: Instagram ---
     statsInstaTitle: "הקהילה באינסטגרם",
     statsInsta: [
         { value: "+12K", label: "עוקבים" },
@@ -21,7 +69,6 @@ const siteConfig = {
         { value: "+17.5K", label: "ממוצע צפיות לרילס" }
     ],
 
-    // --- Stats: General ---
     statsGeneralTitle: "נתונים כלליים",
     statsGeneral: [
         { value: "50+", label: "לקוחות מרוצים" },
@@ -29,11 +76,10 @@ const siteConfig = {
         { value: "24/7", label: "זמינות לקהילה" }
     ],
 
-    // --- Video Gallery ---
     videoTitle: "התוכן שלי",
     videos: [
         { 
-            title: "עושה סדר - פסק הדין", 
+            title: "עושה סדר - פסק הדין אירועי הדרבי", 
             img: "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/seder.png", 
             link: "https://www.instagram.com/p/DQoMbAWk5Aw/" 
         },
@@ -49,27 +95,25 @@ const siteConfig = {
         }
     ],
 
-    // --- Services ---
     servicesTitle: "השירותים שלי",
     services: [
         { 
             title: "יצירת תוכן", 
             icon: "video", 
-            description: "הפקה ועריכה של סרטונים לרשתות החברתיות."
+            description: "הפקה ועריכה של סרטונים לרשתות החברתיות, מותאמים לטרנדים ולשפה של הקהל."
         },
         { 
             title: "שיווק שותפים", 
             icon: "share-2", 
-            description: "שיתופי פעולה המשלבים את המותג שלכם בתוכן שלי."
+            description: "שיתופי פעולה המשלבים את המותג שלכם בתוכן שלי בצורה אותנטית וממירה."
         },
         { 
             title: "חסויות ומותג", 
             icon: "megaphone", 
-            description: "חיבור ארוך טווח ושגרירות מותג."
+            description: "חיבור ארוך טווח, שגרירות מותג וייצוג בערכים המשותפים לקהילה."
         }
     ],
     
-    // --- Brands ---
     brands: [
         "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/sav.jpg",
         "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/tinok.webp",
@@ -77,7 +121,6 @@ const siteConfig = {
         "https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/tinok.webp"
     ],
 
-    // --- Social ---
     social: {
         instagram: "https://www.instagram.com/morazran/",
         tiktok: "https://www.tiktok.com/@azranmor",
@@ -87,104 +130,144 @@ const siteConfig = {
 };
 
 // ==========================================
-// Safe Rendering Logic
+// Main Logic Router
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Helper function to safely set text
-    const setText = (id, text) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = text;
-    };
-
-    // 1. Text Content
-    setText('hero-title', siteConfig.heroTitle);
-    setText('about-text', siteConfig.aboutText);
-    setText('stats-insta-title', siteConfig.statsInstaTitle);
-    setText('stats-general-title', siteConfig.statsGeneralTitle);
-    setText('video-title', siteConfig.videoTitle);
-    setText('services-title', siteConfig.servicesTitle);
-
-    // 2. Instagram Stats
-    const instaGrid = document.getElementById('stats-insta-grid');
-    if (instaGrid && siteConfig.statsInsta) {
-        instaGrid.innerHTML = siteConfig.statsInsta.map(stat => `
-            <div class="flex flex-col items-center p-4 bg-[#111] rounded-xl border border-gray-800">
-                <span class="text-4xl font-black text-white mb-2">${stat.value}</span>
-                <span class="text-gray-400 text-sm font-bold uppercase tracking-wider">${stat.label}</span>
-            </div>
-        `).join('');
+    
+    // בדיקה: האם אנחנו בעמוד הקישורים (Linktree)?
+    if (document.getElementById('links-container')) {
+        renderLinktree();
+    } 
+    // בדיקה: האם אנחנו באתר המלא (Portfolio)?
+    else if (document.getElementById('hero')) {
+        renderPortfolio();
     }
 
-    // 3. General Stats
-    const generalGrid = document.getElementById('stats-general-grid');
-    if (generalGrid && siteConfig.statsGeneral) {
-        generalGrid.innerHTML = siteConfig.statsGeneral.map(stat => `
-            <div class="flex flex-col items-center p-4 bg-[#111] rounded-xl border border-gray-800">
-                <span class="text-4xl font-black text-white mb-2">${stat.value}</span>
-                <span class="text-gray-400 text-sm font-bold uppercase tracking-wider">${stat.label}</span>
-            </div>
-        `).join('');
-    }
-
-    // 4. Videos
-    const videoGrid = document.getElementById('video-grid');
-    if (videoGrid && siteConfig.videos) {
-        videoGrid.innerHTML = siteConfig.videos.map(video => `
-            <a href="${video.link}" target="_blank" class="relative block overflow-hidden rounded-xl aspect-[9/16] bg-gray-900 border border-gray-800">
-                <img src="${video.img}" class="w-full h-full object-cover opacity-80" onerror="this.style.display='none'">
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
-                        <i data-lucide="play" class="fill-white text-white ml-1 w-6 h-6"></i>
-                    </div>
-                </div>
-                <div class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-black to-transparent">
-                    <h3 class="text-white font-bold text-center text-lg">${video.title}</h3>
-                </div>
-            </a>
-        `).join('');
-    }
-
-    // 5. Services
-    const servicesGrid = document.getElementById('services-grid');
-    if (servicesGrid && siteConfig.services) {
-        servicesGrid.innerHTML = siteConfig.services.map((service, index) => `
-            <div onclick="openServiceModal(${index})" class="p-6 bg-[#111] rounded-xl border border-gray-800 text-center cursor-pointer active:scale-95 transition">
-                <div class="w-12 h-12 bg-[var(--accent)]/20 rounded-full flex items-center justify-center mx-auto mb-4 text-[var(--accent)]">
-                    <i data-lucide="${service.icon}"></i>
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2">${service.title}</h3>
-                <p class="text-gray-500 text-sm">לחץ לפרטים</p>
-            </div>
-        `).join('');
-    }
-
-    // 6. Brands (Marquee)
-    const brandsTrack = document.getElementById('brands-track');
-    if (brandsTrack && siteConfig.brands) {
-        const singleSet = siteConfig.brands.map(img => `
-            <img src="${img}" class="brand-item" style="height: 60px; width: auto; margin: 0 20px; object-fit: contain;" onerror="this.style.display='none'">
-        `).join('');
-        brandsTrack.innerHTML = singleSet.repeat(20);
-    }
-
-    // 7. Social Links
-    const socialLinks = document.getElementById('social-links');
-    if (socialLinks && siteConfig.social) {
-        socialLinks.innerHTML = `
-            <a href="${siteConfig.social.instagram}" target="_blank" class="p-3 bg-[#222] rounded-full text-white"><i data-lucide="instagram"></i></a>
-            <a href="${siteConfig.social.tiktok}" target="_blank" class="p-3 bg-[#222] rounded-full text-white"><i data-lucide="music-2"></i></a>
-            <a href="${siteConfig.social.twitter}" target="_blank" class="p-3 bg-[#222] rounded-full text-white"><i data-lucide="twitter"></i></a>
-        `;
-    }
-
-    // Initialize Icons
     if (window.lucide) {
         lucide.createIcons();
     }
 });
 
-// Modals
+// ------------------------------------------
+// פונקציית רינדור ה-Linktree
+// ------------------------------------------
+function renderLinktree() {
+    const container = document.getElementById('links-container');
+    
+    const html = treeConfig.links
+        .filter(link => link.visible) // מציג רק מה שמוגדר כ-visible: true
+        .map(link => {
+            // עיצוב שונה לכפתור המודגש (האתר העסקי)
+            const baseClass = "w-full p-4 rounded-xl flex items-center justify-between transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg group";
+            const normalClass = "bg-[#111] border border-[#222] hover:border-[#ff0040]";
+            const highlightClass = "bg-[#ff0040] border border-[#ff0040] text-white hover:bg-[#d90036]";
+            
+            const themeClass = link.highlight ? highlightClass : normalClass;
+            const iconColor = link.highlight ? "text-white" : "text-[#ff0040]";
+
+            return `
+            <a href="${link.url}" target="${link.url.startsWith('http') ? '_blank' : '_self'}" class="${baseClass} ${themeClass}">
+                <div class="flex items-center gap-4">
+                    <span class="${iconColor} group-hover:text-white transition"><i data-lucide="${link.icon}"></i></span>
+                    <span class="font-bold text-lg">${link.label}</span>
+                </div>
+                <i data-lucide="chevron-left" class="opacity-50 group-hover:opacity-100 transition"></i>
+            </a>
+            `;
+        }).join('');
+
+    container.innerHTML = html;
+}
+
+// ------------------------------------------
+// פונקציית רינדור האתר המלא (Portfolio)
+// ------------------------------------------
+function renderPortfolio() {
+    // 1. Text Content
+    const setText = (id, text) => { const el = document.getElementById(id); if(el) el.textContent = text; };
+    
+    setText('hero-title', siteConfig.heroTitle);
+    if(document.getElementById('about-text')) document.getElementById('about-text').innerText = siteConfig.aboutText;
+    setText('stats-insta-title', siteConfig.statsInstaTitle);
+    setText('stats-general-title', siteConfig.statsGeneralTitle);
+    setText('video-title', siteConfig.videoTitle);
+    setText('services-title', siteConfig.servicesTitle);
+
+    // 2. Grids
+    const renderGrid = (id, data, templateFn) => {
+        const el = document.getElementById(id);
+        if(el && data) el.innerHTML = data.map(templateFn).join('');
+    };
+
+    renderGrid('stats-insta-grid', siteConfig.statsInsta, stat => `
+        <div class="flex flex-col items-center group cursor-default">
+            <span class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tighter group-hover:text-[var(--accent)] transition duration-300">${stat.value}</span>
+            <div class="w-12 h-1 bg-[var(--accent)] rounded mb-3"></div>
+            <span class="text-gray-400 font-bold uppercase tracking-wider text-sm md:text-base">${stat.label}</span>
+        </div>
+    `);
+
+    renderGrid('stats-general-grid', siteConfig.statsGeneral, stat => `
+        <div class="flex flex-col items-center group cursor-default">
+            <span class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tighter group-hover:text-[var(--accent)] transition duration-300">${stat.value}</span>
+            <div class="w-12 h-1 bg-[var(--accent)] rounded mb-3"></div>
+            <span class="text-gray-400 font-bold uppercase tracking-wider text-sm md:text-base">${stat.label}</span>
+        </div>
+    `);
+
+    renderGrid('video-grid', siteConfig.videos, video => `
+        <a href="${video.link}" target="_blank" class="relative group block overflow-hidden rounded-xl aspect-[9/16] border border-gray-800 bg-gray-900 transform transition duration-500 hover:-translate-y-2">
+            <img src="${video.img}" class="w-full h-full object-cover opacity-60 transition duration-500 group-hover:scale-110 group-hover:opacity-40" onerror="this.src='https://via.placeholder.com/400x600?text=Image+Error'">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 transition group-hover:bg-[var(--accent)] group-hover:border-transparent">
+                    <i data-lucide="play" class="fill-white text-white ml-1 w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/80 to-transparent pt-12">
+                <h3 class="text-xl font-bold text-center leading-tight text-white group-hover:text-[var(--accent)] transition">${video.title}</h3>
+            </div>
+        </a>
+    `);
+
+    renderGrid('services-grid', siteConfig.services, (service, index) => `
+        <div onclick="openServiceModal(${index})" class="card-dark h-48 flex flex-col items-center justify-center relative overflow-hidden group hover:bg-[#151515] transition cursor-pointer transform hover:scale-105">
+            <div class="bg-[var(--accent)]/10 p-5 rounded-full mb-6 group-hover:bg-[var(--accent)] transition duration-500">
+                <i data-lucide="${service.icon}" class="text-[var(--accent)] group-hover:text-white w-8 h-8 transition"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">${service.title}</h3>
+            <span class="text-xs text-gray-500 mt-2 opacity-0 group-hover:opacity-100 transition">לחץ לפרטים נוספים</span>
+        </div>
+    `);
+
+    // Marquee
+    const brandsTrack = document.getElementById('brands-track');
+    if(brandsTrack && siteConfig.brands.length > 0) {
+        const singleSet = siteConfig.brands.map(img => `
+            <img src="${img}" class="brand-item" onerror="this.style.display='none'">
+        `).join('');
+        brandsTrack.innerHTML = singleSet.repeat(20);
+    }
+
+    // Social Links
+    const socialContainer = document.getElementById('social-links');
+    if(socialContainer) {
+        const links = [];
+        if(siteConfig.social.instagram) links.push({ icon: 'instagram', url: siteConfig.social.instagram });
+        if(siteConfig.social.tiktok) links.push({ icon: 'music-2', url: siteConfig.social.tiktok });
+        if(siteConfig.social.twitter) links.push({ icon: 'twitter', url: siteConfig.social.twitter });
+        
+        socialContainer.innerHTML = links.map(link => `
+            <a href="${link.url}" target="_blank" class="w-12 h-12 flex items-center justify-center bg-gray-900 rounded-full hover:bg-[var(--accent)] text-white transition hover:-translate-y-1">
+                <i data-lucide="${link.icon}" class="w-5 h-5"></i>
+            </a>
+        `).join('');
+    }
+}
+
+// ------------------------------------------
+// Modals (Portfolio Only)
+// ------------------------------------------
 function openServiceModal(index) {
     const service = siteConfig.services[index];
     const modal = document.getElementById('service-modal');
@@ -192,13 +275,9 @@ function openServiceModal(index) {
     
     document.getElementById('modal-title').textContent = service.title;
     document.getElementById('modal-desc').innerText = service.description;
-    
     const iconContainer = document.getElementById('modal-icon-container');
-    if(iconContainer) {
-        iconContainer.innerHTML = `<i data-lucide="${service.icon}" class="w-8 h-8"></i>`;
-        if(window.lucide) lucide.createIcons();
-    }
-    
+    iconContainer.innerHTML = `<i data-lucide="${service.icon}" class="w-8 h-8"></i>`;
+    lucide.createIcons();
     modal.classList.remove('hidden');
 }
 
@@ -216,3 +295,10 @@ function closeAccessibilityModal() {
     const modal = document.getElementById('accessibility-modal');
     if(modal) modal.classList.add('hidden');
 }
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        closeServiceModal();
+        closeAccessibilityModal();
+    }
+});
