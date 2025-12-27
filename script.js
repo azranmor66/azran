@@ -43,9 +43,9 @@ const treeConfig = {
         },
         { 
             label: "ספוטיפיי", 
-            url: "https://open.spotify.com/...", // עדכן לינק
+            url: "https://open.spotify.com/show/4N3nNHjjF0Qi4u7zoAAjjr", // עדכן לינק
             icon: "headphones", 
-            visible: false 
+            visible: true 
         }
     ]
 };
