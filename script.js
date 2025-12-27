@@ -3,13 +3,7 @@
 // ==========================================
 const treeConfig = {
     links: [
-        { 
-            label: "לאתר הרשמי & שיתופי פעולה", 
-            url: "home.html", 
-            icon: "globe", 
-            visible: true, 
-            highlight: true 
-        },
+       
         { 
             label: "הפועל על פי עזרן - ערוץ הווטסאפ הרשמי", 
             url: "https://whatsapp.com/channel/0029VbBiFme2UPBIGn82mC3Z", // עדכן לינק
@@ -39,6 +33,13 @@ const treeConfig = {
             url: "https://youtube.com/...", // עדכן לינק
             icon: "youtube", 
             visible: false 
+        },
+         { 
+            label: "לאתר הרשמי & שיתופי פעולה", 
+            url: "home.html", 
+            icon: "globe", 
+            visible: true, 
+            highlight: true 
         },
         { 
             label: "ספוטיפיי", 
