@@ -27,34 +27,54 @@
             padding: 15px 10%; display: flex; justify-content: space-between; align-items: center;
         }
         .nav-logo { font-size: 1.5rem; font-weight: 900; color: var(--white); text-decoration: none; }
-        .nav-logo span { color: var(--primary-red); }
         .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: var(--text-gray); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary-red); }
+        .nav-links a { color: var(--text-gray); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
         .ads-btn { background: var(--primary-red); color: white !important; padding: 5px 15px; border-radius: 8px; }
 
-        /* Hero Section */
+        /* Hero */
         .hero { 
-            height: 60vh; display: flex; flex-direction: column; justify-content: center; 
+            height: 50vh; display: flex; flex-direction: column; justify-content: center; 
             align-items: center; text-align: center; padding: 0 10%; 
             background: radial-gradient(circle at center, rgba(230, 30, 42, 0.1) 0%, transparent 70%); 
         }
         .hero-logo { max-width: 250px; height: auto; margin-bottom: 25px; }
-        .hero p { font-size: 1.5rem; color: var(--text-gray); max-width: 700px; font-weight: 300; }
 
-        /* Section Styling */
         section { padding: 60px 10%; }
         .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 40px; border-right: 5px solid var(--primary-red); padding-right: 15px; }
 
-        /* Content Grid (Embeds) */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; align-items: start; }
-        .embed-card { background: var(--card-bg); border-radius: 20px; padding: 15px; border: 1px solid var(--border-color); display: flex; justify-content: center; min-height: 500px; }
+        /* Video Grid - FIXED HEIGHT */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 25px; 
+            align-items: start; 
+        }
+        .embed-card { 
+            background: var(--card-bg); 
+            border-radius: 20px; 
+            padding: 10px; 
+            border: 1px solid var(--border-color); 
+            display: flex; 
+            justify-content: center;
+            height: 650px; /* גובה קבוע לסרטוני אינסטגרם */
+            overflow: hidden;
+        }
 
         /* Podcasts Grid */
-        .podcasts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .spotify-box { border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); background: #000; }
+        .podcasts-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+            gap: 20px; 
+        }
+        .spotify-box { 
+            border-radius: 15px; 
+            overflow: hidden; 
+            border: 1px solid var(--border-color); 
+            background: #000; 
+            min-height: 351px;
+        }
 
-        /* Articles Styling */
+        /* Articles */
         .articles-list { display: flex; flex-direction: column; gap: 20px; }
         .article-card { 
             display: flex; align-items: center; background: var(--card-bg); padding: 25px; 
@@ -63,26 +83,24 @@
         .article-card:hover { border-color: var(--gold); transform: translateX(-5px); }
         .outlet-logo { width: 70px; height: 70px; background: white; border-radius: 12px; display: flex; justify-content: center; align-items: center; padding: 8px; margin-left: 20px; flex-shrink: 0; }
         .outlet-logo img { max-width: 100%; height: auto; }
-        .article-text h4 { font-size: 1.4rem; margin-bottom: 5px; font-weight: 800; }
-        .article-text p { font-size: 1rem; color: var(--text-gray); }
+        .article-text h4 { font-size: 1.3rem; margin-bottom: 5px; font-weight: 800; }
 
-        /* Twitter Timeline Box */
+        /* Twitter Timeline */
         .twitter-wrapper { max-width: 900px; margin: 0 auto; background: var(--card-bg); border-radius: 20px; padding: 20px; border: 1px solid var(--border-color); height: 700px; overflow-y: auto; }
 
-        /* WhatsApp VIP */
         .wa-banner { background: linear-gradient(90deg, #25D366, #128C7E); padding: 50px; border-radius: 30px; text-align: center; margin: 40px 10%; }
         .wa-btn { background: white; color: #128C7E; padding: 15px 40px; border-radius: 12px; text-decoration: none; font-weight: 800; display: inline-block; margin-top: 20px; }
 
         footer { padding: 60px 10%; text-align: center; border-top: 1px solid var(--border-color); color: var(--text-gray); }
         .social-icons { display: flex; justify-content: center; gap: 25px; margin-bottom: 20px; font-size: 1.5rem; }
         .social-icons a { color: var(--text-gray); transition: 0.3s; }
-        .social-icons a:hover { color: var(--primary-red); }
 
         @media (max-width: 768px) {
             .hero-logo { max-width: 180px; }
             section { padding: 40px 5%; }
             .nav-links { display: none; }
             .podcasts-grid { grid-template-columns: 1fr; }
+            .embed-card { height: 550px; }
         }
     </style>
 </head>
@@ -100,7 +118,7 @@
     </nav>
 
     <section class="hero">
-        <img src="assets/images/logo.png" alt="עזרן לוגו" class="hero-logo">
+        <img src="assets/images/logo.png" alt="עזרן" class="hero-logo">
         <p>ניתוחי עומק, סיכומי משחקים וכל מה שקורה בלב של אוהדי הפועל תל אביב.</p>
     </section>
 
@@ -120,10 +138,10 @@
         <div class="section-title">פודקאסטים</div>
         <div class="podcasts-grid">
             <div class="spotify-box">
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/4" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/3D2b3F3X4b5N6u7M8L9K0J?utm_source=generator&theme=03" width="100%" height="351" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
             <div class="spotify-box">
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/5" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/3D2b3F3X4b5N6u7M8L9K0J?utm_source=generator&theme=04" width="100%" height="351" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -138,7 +156,6 @@
                     <p>וואלה! ספורט | ינואר 2026</p>
                 </div>
             </a>
-
             <a href="https://www.sport5.co.il/" target="_blank" class="article-card">
                 <div class="outlet-logo"><img src="https://upload.wikimedia.org/wikipedia/he/thumb/6/6e/Sport_5_logo.svg/1200px-Sport_5_logo.svg.png" alt="ספורט 5"></div>
                 <div class="article-text">
@@ -152,7 +169,7 @@
     <section id="tweets" style="background: rgba(255,255,255,0.01);">
         <div class="section-title">עדכונים חיים מ-X</div>
         <div class="twitter-wrapper">
-            <a class="twitter-timeline" data-theme="dark" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/AzranMor?ref_src=twsrc%5Etfw">Tweets by AzranMor</a>
+            <a class="twitter-timeline" data-theme="dark" data-chrome="noheader nofooter noborders transparent" data-tweet-limit="3" href="https://twitter.com/AzranMor?ref_src=twsrc%5Etfw">Tweets by AzranMor</a>
         </div>
     </section>
 
@@ -169,11 +186,10 @@
             <a href="https://www.tiktok.com/@azranmor"><i class="fab fa-tiktok"></i></a>
             <a href="https://whatsapp.com/channel/0029VbBiFme2UPBIGn82mC3Z"><i class="fab fa-whatsapp"></i></a>
         </div>
-        <p>© 2025 עזרן | כל הזכויות שמורות</p>
+        <p>© 2026 עזרן | כל הזכויות שמורות</p>
     </footer>
 
     <script async src="//www.instagram.com/embed.js"></script>
-    <script async src="https://www.tiktok.com/embed.js"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
