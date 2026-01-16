@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>עזרן | Media Kit</title>
+    <title>עזרן | Media Kit (Protected)</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,295 +14,297 @@
             --white: #ffffff;
             --text-gray: #b0b0b0;
             --border-color: rgba(255, 255, 255, 0.08);
-            
-            /* Social Colors */
             --twitter: #1DA1F2;
             --instagram: #E1306C;
             --tiktok: #00f2ea;
             --whatsapp: #25D366;
         }
 
+        /* Password Screen Styles */
+        #password-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .lock-icon { font-size: 3rem; color: var(--primary-red); margin-bottom: 20px; }
+        .gate-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; }
+        .gate-desc { color: var(--text-gray); margin-bottom: 30px; max-width: 400px; }
+        
+        #pass-input {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px 25px;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+        #pass-input:focus { border-color: var(--primary-red); }
+
+        .gate-btn {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        .gate-btn:hover { transform: scale(1.05); }
+        .error-msg { color: #ff4d4d; margin-top: 15px; display: none; font-weight: 600; }
+
+        /* Main Content - Hidden by default */
+        #main-content { display: none; }
+
+        /* Your Original Styles */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Assistant', sans-serif; }
         body { background-color: var(--dark-bg); color: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-        /* Header & Logo Section */
         header { padding: 40px 10%; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-
-        .logo-wrapper {
-            width: 130px;
-            height: 130px;
-            background: var(--card-bg);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid var(--border-color);
-            transition: 0.4s;
-            position: relative;
-        }
-        .logo-wrapper:hover { border-color: var(--primary-red); transform: scale(1.05); }
+        .logo-wrapper { width: 130px; height: 130px; background: var(--card-bg); border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid var(--border-color); transition: 0.4s; }
         .logo-wrapper img { max-width: 85%; max-height: 85%; object-fit: contain; }
-
         .brand-name { font-size: 2.2rem; font-weight: 900; letter-spacing: 2px; margin-top: 10px; }
 
-        /* Follower Cards - "Lively" Style */
-        .social-bar { 
-            display: flex; 
-            justify-content: center; 
-            gap: 15px; 
-            margin: 30px 0 60px; 
-            flex-wrap: wrap; 
-        }
-        .social-item { 
-            background: var(--card-bg); 
-            padding: 12px 25px; 
-            border-radius: 15px; 
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.3s;
-        }
-        .social-item i { font-size: 1.4rem; }
+        .social-bar { display: flex; justify-content: center; gap: 15px; margin: 30px 0 60px; flex-wrap: wrap; }
+        .social-item { background: var(--card-bg); padding: 12px 25px; border-radius: 15px; border: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; }
         .social-item.tw { border-bottom: 3px solid var(--twitter); }
         .social-item.ig { border-bottom: 3px solid var(--instagram); }
-        .social-item.tt { border-bottom: 3px solid var(--tiktok); }
+        .social-item.tt { border-bottom: 3px solid var(--white); }
         .social-item.wa { border-bottom: 3px solid var(--whatsapp); }
-        
         .social-info span { display: block; font-size: 1.2rem; font-weight: 800; line-height: 1; }
         .social-info label { font-size: 0.75rem; color: var(--text-gray); font-weight: 600; text-transform: uppercase; }
 
-        /* Hero */
         .hero { padding: 0 10% 60px; text-align: center; }
-        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; }
         .hero h1 span { color: var(--primary-red); }
-        .hero p { font-size: 1.4rem; color: var(--text-gray); max-width: 800px; margin: 0 auto; font-weight: 300; }
+        .hero p { font-size: 1.4rem; color: var(--text-gray); max-width: 800px; margin: 0 auto; }
 
-        /* Main Stats */
-        .main-stats { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-            gap: 20px; 
-            padding: 0 10%; 
-        }
-        .stat-box { 
-            background: var(--card-bg); 
-            padding: 40px 20px; 
-            border-radius: 20px; 
-            border: 1px solid var(--border-color); 
-            text-align: center;
-            transition: 0.3s;
-        }
-        .stat-box:hover { border-color: var(--primary-red); background: rgba(255,255,255,0.06); }
-        .stat-box h2 { font-size: 3.5rem; font-weight: 800; color: var(--white); margin-bottom: 5px; letter-spacing: -1px; }
+        .main-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 0 10%; }
+        .stat-box { background: var(--card-bg); padding: 40px 20px; border-radius: 20px; border: 1px solid var(--border-color); text-align: center; }
+        .stat-box h2 { font-size: 3.5rem; font-weight: 800; color: var(--white); }
         .stat-box .title { font-size: 1.1rem; font-weight: 700; color: var(--primary-red); }
         .stat-box .desc { font-size: 0.9rem; color: var(--text-gray); margin-top: 5px; }
 
-        /* Insights */
         .insights-section { padding: 80px 10%; margin-top: 40px; }
         .insights-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
-        .insights-text h3 { font-size: 2.2rem; margin-bottom: 25px; }
         .tags-container { display: flex; flex-wrap: wrap; gap: 10px; }
-        .tag { background: var(--card-bg); border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 12px; font-size: 1rem; font-weight: 600; }
+        .tag { background: var(--card-bg); border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 12px; font-weight: 600; }
         .tag b { color: var(--primary-red); margin-right: 4px; }
 
-        /* Influencer Index Box Fix */
-        .index-box { 
-            background: #121212; 
-            padding: 50px 30px; 
-            border-radius: 24px; 
-            border: 1px solid var(--border-color);
-            text-align: center;
-            position: relative;
-        }
-        .index-box::after {
-            content: ""; position: absolute; top: 0; right: 0; width: 5px; height: 100%; background: var(--primary-red); border-radius: 0 24px 24px 0;
-        }
-        .index-box h2 { font-size: 4rem; color: var(--white); font-weight: 900; line-height: 1; }
-        .index-box p { color: var(--text-gray); font-size: 1.1rem; font-weight: 600; margin-top: 10px; }
+        .index-box { background: #121212; padding: 50px 30px; border-radius: 24px; border: 1px solid var(--border-color); text-align: center; position: relative; }
+        .index-box::after { content: ""; position: absolute; top: 0; right: 0; width: 5px; height: 100%; background: var(--primary-red); border-radius: 0 24px 24px 0; }
+        .index-box h2 { font-size: 4rem; font-weight: 900; }
 
-        /* Pricing Area */
-        .section-title { text-align: center; font-size: 2.5rem; margin: 80px 0 40px; }
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 0 10% 80px; }
-        .p-card { background: var(--card-bg); padding: 50px 40px; border-radius: 30px; border: 1px solid var(--border-color); display: flex; flex-direction: column; position: relative; }
+        .p-card { background: var(--card-bg); padding: 50px 40px; border-radius: 30px; border: 1px solid var(--border-color); display: flex; flex-direction: column; }
         .p-card.featured { border: 2px solid var(--primary-red); }
-        
-        .p-card h4 { font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; }
-        
-        /* Pricing Typography Fix */
         .price-row { display: flex; align-items: flex-end; gap: 10px; margin-bottom: 35px; }
-        .price-row .amount { font-size: 3.5rem; font-weight: 800; line-height: 0.9; }
-        .price-row .label-wrap { display: flex; flex-direction: column; }
-        .price-row .label-wrap span { font-size: 0.9rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase; }
-
+        .price-row .amount { font-size: 3.5rem; font-weight: 800; }
         .p-list { list-style: none; margin-bottom: 40px; flex-grow: 1; }
-        .p-list li { margin-bottom: 12px; color: var(--text-gray); font-weight: 400; display: flex; align-items: center; font-size: 1.05rem; }
         .p-list li::before { content: "•"; color: var(--primary-red); margin-left: 10px; font-weight: 900; }
-        
-        .p-btn { background: var(--white); color: var(--dark-bg); text-decoration: none; padding: 20px; border-radius: 15px; text-align: center; font-weight: 800; font-size: 1.1rem; transition: 0.3s; }
+        .p-btn { background: var(--white); color: var(--dark-bg); text-decoration: none; padding: 20px; border-radius: 15px; text-align: center; font-weight: 800; }
         .p-card.featured .p-btn { background: var(--primary-red); color: var(--white); }
-        .p-btn:hover { background: #eee; transform: translateY(-3px); }
 
-        /* Contact Section */
-        .contact-area { padding: 100px 10%; text-align: center; border-top: 1px solid var(--border-color); background: rgba(255,255,255,0.01); }
-        .contact-area h2 { font-size: 3rem; margin-bottom: 30px; }
-        .contact-btns { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .c-btn { padding: 18px 45px; border-radius: 12px; font-size: 1.2rem; font-weight: 800; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .contact-area { padding: 100px 10%; text-align: center; border-top: 1px solid var(--border-color); }
+        .contact-btns { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .c-btn { padding: 18px 45px; border-radius: 12px; font-size: 1.2rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 10px; }
         .c-btn.wa { background: var(--whatsapp); color: white; }
         .c-btn.mail { border: 1px solid var(--white); color: white; }
-        .c-btn:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-
-        footer { padding: 60px; text-align: center; color: var(--text-gray); border-top: 1px solid var(--border-color); font-size: 0.9rem; }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .insights-grid { grid-template-columns: 1fr; }
-            .main-stats { padding: 0 5%; }
-            .pricing-grid { padding: 0 5% 60px; }
-            .index-box h2 { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-wrapper">
-            <img src="assets/images/logo.png" alt="עזרן">
-        </div>        
-        <div class="social-bar">
-            <div class="social-item tw">
-                <i class="fab fa-twitter" style="color: var(--twitter);"></i>
-                <div class="social-info"><span>5.8K</span><label>Followers</label></div>
-            </div>
-            <div class="social-item ig">
-                <i class="fab fa-instagram" style="color: var(--instagram);"></i>
-                <div class="social-info"><span>3.7K</span><label>Followers</label></div>
-            </div>
-            <div class="social-item tt">
-                <i class="fab fa-tiktok" style="color: var(--white);"></i>
-                <div class="social-info"><span>3.5K</span><label>Followers</label></div>
-            </div>
-            <div class="social-item wa">
-                <i class="fab fa-whatsapp" style="color: var(--whatsapp);"></i>
-                <div class="social-info"><span>1.1K+</span><label>VIP Community</label></div>
-            </div>
-        </div>
-    </header>
-
-    <section class="hero">
-        <h1>הבית של אוהדי הכדורגל בישראל <span>.</span></h1>
-        <p>ניתוח מקצועי וחיבור רגשי בגובה העיניים. חשיפה רחבה לקהל אוהדים אקטיבי שחי ונושם את המגרש בכל פלטפורמה.</p>
-    </section>
-
-    <section class="main-stats">
-        <div class="stat-box">
-            <h2>2.1M+</h2>
-            <div class="title">חשיפות חודשיות</div>
-            <div class="desc">סה"כ אימפקט רב-פלטפורמי</div>
-        </div>
-        <div class="stat-box">
-            <h2>450K+</h2>
-            <div class="title">צופים ייחודיים</div>
-            <div class="desc">Monthly Reach ממוצע</div>
-        </div>
-        <div class="stat-box">
-            <h2>31.3K</h2>
-            <div class="title">צפיות ממוצעות</div>
-            <div class="desc">לסרטון סיכום משחק</div>
-        </div>
-        <div class="stat-box">
-            <h2>10.9%</h2>
-            <div class="title">מעורבות (ER)</div>
-            <div class="desc">אחוז מעורבות מהגבוהים בשוק</div>
-        </div>
-                <div class="stat-box">
-            <h2>2.3K</h2>
-            <div class="title">סטורי</div>
-            <div class="desc">ממוצע צפיות יחודיות לסטורי בודד</div>
-        </div>
-
-    </section>
-
-    <section class="insights-section">
-        <div class="insights-grid">
-            <div class="insights-text">
-                <h3>מדדי מפתח למפרסמים</h3>
-                <div class="tags-container">
-                    <div class="tag">ממוצע צפיות בסטורי: <b>2,350+</b></div>
-                    <div class="tag">פילוח קהל: <b>92% גברים</b></div>
-                    <div class="tag">גילאים מרכזיים: <b>18-44</b></div>
-                    <div class="tag">יחס שיתופים: <b>ויראליות גבוהה</b></div>
-                    <div class="tag">זמן צפייה: <b>160 שניות בממוצע</b></div>
-                    <div class="tag"><b>קהל High-Intent</b></div>
-                </div>
-            </div>
-            <div class="index-box">
-                <h2>TOP 1%</h2>
-                <p>במדד מעורבות בישראל (נישת ספורט)</p>
-            </div>
-        </div>
-    </section>
-
-    <h2 class="section-title">שיתופי פעולה</h2>
-
-    <div class="pricing-grid">
-        <div class="p-card">
-            <h4>חיים בסטורי</h4>
-            <div class="price-row">
-                <div class="amount">₪450</div>
-                <div class="label-wrap"><span>לסטורי</span></div>
-            </div>
-            <ul class="p-list">
-                <li>סטורי מצולם (סקירת מוצר/שירות)</li>
-                <li>לינק ישיר להנעה לפעולה</li>
-                <li>חשיפה מיידית לקהל מטורגט</li>
-                <li>דוחות חשיפה מלאים בסיום</li>
-            </ul>
-            <a href="https://wa.me/972502026661" class="p-btn">לפרטים נוספים</a>
-        </div>
-
-        <div class="p-card featured">
-            <h4>חבילת ״יום המשחק״</h4>
-            <div class="price-row">
-                <div class="amount">₪1,800</div>
-                <div class="label-wrap"><span>לחבילת משחק</span></div>
-            </div>
-            <ul class="p-list">
-                <li>חסות פרימיום בסיכום המשחק (רילס/טיקטוק)</li>
-                <li>לוגו מותג רץ לאורך כל הסרטון</li>
-                <li>מעטפת 3 סטוריז (לפני, יום משחק, אחרי)</li>
-                <li>אזכור ייעודי בקהילת הווטסאפ</li>
-            </ul>
-            <a href="https://wa.me/972502026661" class="p-btn">לפרטים נוספים</a>
-        </div>
-
-        <div class="p-card">
-            <h4>חסות חודשית</h4>
-            <div class="price-row">
-                <div class="amount">₪6,800</div>
-                <div class="label-wrap"><span>לחודש מלא</span></div>
-            </div>
-            <ul class="p-list">
-                <li>ליווי צמוד לאורך 4 משחקי החודש</li>
-                <li>בלעדיות קטגורית למותג אחד בלבד</li>
-                <li>לינק קבוע ב-Bio ובאתר הבית</li>
-                <li>חשיפה מלאה בכל נכסי הדיגיטל</li>
-            </ul>
-            <a href="https://wa.me/972502026661" class="p-btn">לשותפות אסטרטגית</a>
-        </div>
+    <div id="password-gate">
+        <div class="lock-icon"><i class="fas fa-lock"></i></div>
+        <h2 class="gate-title">תוכן מוגן</h2>
+        <p class="gate-desc">המדיה-קיט של עזרן כולל נתונים עסקיים ופרטי התקשרות אישיים. נא להזין סיסמה כדי להמשיך.</p>
+        <input type="password" id="pass-input" placeholder="הזן סיסמה">
+        <button class="gate-btn" onclick="checkPassword()">כניסה למדיה קיט</button>
+        <p id="error-text" class="error-msg">סיסמה שגויה. נסה שוב.</p>
     </div>
 
-    <section class="contact-area">
-        <h2>בואו לכבוש את קהילת האוהדים החמה בישראל</h2>
-        <div class="contact-btns">
-            <a href="https://wa.me/972502026661" class="c-btn wa"><i class="fab fa-whatsapp"></i> WhatsApp Me</a>
-            <a href="mailto:mor@azran.cc" class="c-btn mail"><i class="far fa-envelope"></i> mor@azran.cc</a>
-        </div>
-    </section>
+    <div id="main-content">
+        <header>
+            <div class="logo-wrapper">
+                <img src="assets/images/logo.png" alt="עזרן">
+            </div>        
+            <div class="social-bar">
+                <div class="social-item tw">
+                    <i class="fab fa-twitter" style="color: var(--twitter);"></i>
+                    <div class="social-info"><span>5.8K</span><label>Followers</label></div>
+                </div>
+                <div class="social-item ig">
+                    <i class="fab fa-instagram" style="color: var(--instagram);"></i>
+                    <div class="social-info"><span>3.7K</span><label>Followers</label></div>
+                </div>
+                <div class="social-item tt">
+                    <i class="fab fa-tiktok" style="color: var(--white);"></i>
+                    <div class="social-info"><span>3.5K</span><label>Followers</label></div>
+                </div>
+                <div class="social-item wa">
+                    <i class="fab fa-whatsapp" style="color: var(--whatsapp);"></i>
+                    <div class="social-info"><span>1.1K+</span><label>VIP Community</label></div>
+                </div>
+            </div>
+        </header>
 
-    <footer>
-        <p>© 2026  עזרן | הנתונים מאומתים מתוך דוחות האנליטיקס הרשמיים</p>
-    </footer>
+        <section class="hero">
+            <h1>הבית של אוהדי הכדורגל בישראל <span>.</span></h1>
+            <p>ניתוח מקצועי וחיבור רגשי בגובה העיניים. חשיפה רחבה לקהל אוהדים אקטיבי שחי ונושם את המגרש בכל פלטפורמה.</p>
+        </section>
+
+        <section class="main-stats">
+            <div class="stat-box">
+                <h2>2.1M+</h2>
+                <div class="title">חשיפות חודשיות</div>
+                <div class="desc">סה"כ אימפקט רב-פלטפורמי</div>
+            </div>
+            <div class="stat-box">
+                <h2>450K+</h2>
+                <div class="title">צופים ייחודיים</div>
+                <div class="desc">Monthly Reach ממוצע</div>
+            </div>
+            <div class="stat-box">
+                <h2>31.3K</h2>
+                <div class="title">צפיות ממוצעות</div>
+                <div class="desc">לסרטון סיכום משחק</div>
+            </div>
+            <div class="stat-box">
+                <h2>10.9%</h2>
+                <div class="title">מעורבות (ER)</div>
+                <div class="desc">אחוז מעורבות מהגבוהים בשוק</div>
+            </div>
+            <div class="stat-box">
+                <h2>2.3K</h2>
+                <div class="title">סטורי</div>
+                <div class="desc">ממוצע צפיות יחודיות לסטורי בודד</div>
+            </div>
+        </section>
+
+        <section class="insights-section">
+            <div class="insights-grid">
+                <div class="insights-text">
+                    <h3>מדדי מפתח למפרסמים</h3>
+                    <div class="tags-container">
+                        <div class="tag">ממוצע צפיות בסטורי: <b>2,350+</b></div>
+                        <div class="tag">פילוח קהל: <b>92% גברים</b></div>
+                        <div class="tag">גילאים מרכזיים: <b>18-44</b></div>
+                        <div class="tag">יחס שיתופים: <b>ויראליות גבוהה</b></div>
+                        <div class="tag">זמן צפייה: <b>160 שניות בממוצע</b></div>
+                        <div class="tag"><b>קהל High-Intent</b></div>
+                    </div>
+                </div>
+                <div class="index-box">
+                    <h2>TOP 1%</h2>
+                    <p>במדד מעורבות בישראל (נישת ספורט)</p>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title">שיתופי פעולה</h2>
+
+        <div class="pricing-grid">
+            <div class="p-card">
+                <h4>חיים בסטורי</h4>
+                <div class="price-row">
+                    <div class="amount">₪450</div>
+                    <div class="label-wrap"><span>לסטורי</span></div>
+                </div>
+                <ul class="p-list">
+                    <li>סטורי מצולם (סקירת מוצר/שירות)</li>
+                    <li>לינק ישיר להנעה לפעולה</li>
+                    <li>חשיפה מיידית לקהל מטורגט</li>
+                    <li>דוחות חשיפה מלאים בסיום</li>
+                </ul>
+                <a href="https://wa.me/972502026661" class="p-btn">לפרטים נוספים</a>
+            </div>
+
+            <div class="p-card featured">
+                <h4>חבילת ״יום המשחק״</h4>
+                <div class="price-row">
+                    <div class="amount">₪1,800</div>
+                    <div class="label-wrap"><span>לחבילת משחק</span></div>
+                </div>
+                <ul class="p-list">
+                    <li>חסות פרימיום בסיכום המשחק (רילס/טיקטוק)</li>
+                    <li>לוגו מותג רץ לאורך כל הסרטון</li>
+                    <li>מעטפת 3 סטוריז (לפני, יום משחק, אחרי)</li>
+                    <li>אזכור ייעודי בקהילת הווטסאפ</li>
+                </ul>
+                <a href="https://wa.me/972502026661" class="p-btn">לפרטים נוספים</a>
+            </div>
+
+            <div class="p-card">
+                <h4>חסות חודשית</h4>
+                <div class="price-row">
+                    <div class="amount">₪6,800</div>
+                    <div class="label-wrap"><span>לחודש מלא</span></div>
+                </div>
+                <ul class="p-list">
+                    <li>ליווי צמוד לאורך 4 משחקי החודש</li>
+                    <li>בלעדיות קטגורית למותג אחד בלבד</li>
+                    <li>לינק קבוע ב-Bio ובאתר הבית</li>
+                    <li>חשיפה מלאה בכל נכסי הדיגיטל</li>
+                </ul>
+                <a href="https://wa.me/972502026661" class="p-btn">לשותפות אסטרטגית</a>
+            </div>
+        </div>
+
+        <section class="contact-area">
+            <h2>בואו לכבוש את קהילת האוהדים החמה בישראל</h2>
+            <div class="contact-btns">
+                <a href="https://wa.me/972502026661" class="c-btn wa"><i class="fab fa-whatsapp"></i> WhatsApp Me</a>
+                <a href="mailto:mor@azran.cc" class="c-btn mail"><i class="far fa-envelope"></i> mor@azran.cc</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026  עזרן | הנתונים מאומתים מתוך דוחות האנליטיקס הרשמיים</p>
+        </footer>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('pass-input').value;
+            const correctPassword = "Azran2026"; // הסיסמה שלך כאן
+            
+            if (password === correctPassword) {
+                document.getElementById('password-gate').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                document.getElementById('error-text').style.display = 'block';
+            }
+        }
+
+        // מאפשר לחיצה על Enter במקלדת לכניסה
+        document.getElementById('pass-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
 
 </body>
 </html>
