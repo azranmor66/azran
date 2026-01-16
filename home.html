@@ -47,12 +47,12 @@
         .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 40px; border-right: 5px solid var(--primary-red); padding-right: 15px; }
 
         /* Content Grid (Embeds) */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .embed-card { background: var(--card-bg); border-radius: 20px; padding: 15px; border: 1px solid var(--border-color); display: flex; justify-content: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; align-items: start; }
+        .embed-card { background: var(--card-bg); border-radius: 20px; padding: 15px; border: 1px solid var(--border-color); display: flex; justify-content: center; min-height: 500px; }
 
         /* Podcasts Grid */
-        .podcasts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
-        .spotify-box { border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); }
+        .podcasts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .spotify-box { border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); background: #000; }
 
         /* Articles Styling */
         .articles-list { display: flex; flex-direction: column; gap: 20px; }
@@ -67,7 +67,7 @@
         .article-text p { font-size: 1rem; color: var(--text-gray); }
 
         /* Twitter Timeline Box */
-        .twitter-wrapper { max-width: 900px; margin: 0 auto; background: var(--card-bg); border-radius: 20px; padding: 20px; border: 1px solid var(--border-color); height: 600px; overflow-y: auto; }
+        .twitter-wrapper { max-width: 900px; margin: 0 auto; background: var(--card-bg); border-radius: 20px; padding: 20px; border: 1px solid var(--border-color); height: 700px; overflow-y: auto; }
 
         /* WhatsApp VIP */
         .wa-banner { background: linear-gradient(90deg, #25D366, #128C7E); padding: 50px; border-radius: 30px; text-align: center; margin: 40px 10%; }
@@ -110,7 +110,7 @@
             <div class="embed-card">
                 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DThrTyHEz9L/" data-instgrm-version="14" style="width: 100%;"></blockquote>
             </div>
-                 <div class="embed-card">
+            <div class="embed-card">
                 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQHGbzFkxp0/" data-instgrm-version="14" style="width: 100%;"></blockquote>
             </div>
         </div>
@@ -120,10 +120,10 @@
         <div class="section-title">פודקאסטים</div>
         <div class="podcasts-grid">
             <div class="spotify-box">
-                <iframe style="border-radius:12px" src="<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/1kxhRMAlLLO8BGItE2oLD8/video?utm_source=generator" width="624" height="351" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/4" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
             <div class="spotify-box">
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/YOUR_SECOND_EPISODE_ID" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/5" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -139,7 +139,7 @@
                 </div>
             </a>
 
-            <a href="YOUR_SPORT5_LINK" target="_blank" class="article-card">
+            <a href="https://www.sport5.co.il/" target="_blank" class="article-card">
                 <div class="outlet-logo"><img src="https://upload.wikimedia.org/wikipedia/he/thumb/6/6e/Sport_5_logo.svg/1200px-Sport_5_logo.svg.png" alt="ספורט 5"></div>
                 <div class="article-text">
                     <h4>ניתוח מיוחד: היתרונות של לואיזוס במערך החדש</h4>
@@ -169,7 +169,7 @@
             <a href="https://www.tiktok.com/@azranmor"><i class="fab fa-tiktok"></i></a>
             <a href="https://whatsapp.com/channel/0029VbBiFme2UPBIGn82mC3Z"><i class="fab fa-whatsapp"></i></a>
         </div>
-        <p>© 2026  עזרן | כל הזכויות שמורות</p>
+        <p>© 2026 עזרן | כל הזכויות שמורות</p>
     </footer>
 
     <script async src="//www.instagram.com/embed.js"></script>
