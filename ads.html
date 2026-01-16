@@ -3,101 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>עזרן | Media Kit 2026</title>
+    <title>עזרן | שיתופי פעולה ותוכן</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-red: #e61e2a;
-            --dark-bg: #050505;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --gold: #d4af37;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.04);
             --white: #ffffff;
-            --text-gray: #999;
-            --accent-gradient: linear-gradient(135deg, #e61e2a 0%, #ff4d4d 100%);
+            --text-gray: #a0a0a0;
+            --border-color: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Assistant', sans-serif; }
         body { background-color: var(--dark-bg); color: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-        /* Logo & Nav */
-        header { padding: 40px 8%; display: flex; justify-content: space-between; align-items: center; }
-        .logo-brand { font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; color: var(--white); border-right: 5px solid var(--primary-red); padding-right: 15px; }
+        /* Header & Logo Section */
+        header { 
+            padding: 40px 10%; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            gap: 20px;
+        }
+
+        .logo-container {
+            width: 150px;
+            height: 150px;
+            background: var(--card-bg);
+            border-radius: 50%; /* לוגו עגול ויוקרתי */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .logo-container:hover { border-color: var(--primary-red); }
+
+        .logo-container img { max-width: 80%; max-height: 80%; object-fit: contain; }
+
+        .logo-text { font-size: 2rem; font-weight: 800; letter-spacing: 2px; }
+
+        /* Follower Bar */
+        .follower-bar { 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+            margin: 20px 0 60px; 
+            flex-wrap: wrap; 
+        }
+        .f-item { 
+            background: var(--card-bg); 
+            padding: 10px 25px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .f-item span { display: block; font-size: 1.3rem; font-weight: 800; color: var(--white); }
+        .f-item label { font-size: 0.8rem; color: var(--text-gray); font-weight: 600; }
 
         /* Hero */
-        .hero { padding: 60px 8% 100px; text-align: center; }
-        .hero h1 { font-size: 5.5rem; font-weight: 900; line-height: 0.9; margin-bottom: 25px; letter-spacing: -4px; }
+        .hero { padding: 20px 10% 80px; text-align: center; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
         .hero h1 span { color: var(--primary-red); }
-        .hero p { font-size: 1.6rem; color: var(--text-gray); max-width: 900px; margin: 0 auto; }
+        .hero p { font-size: 1.3rem; color: var(--text-gray); max-width: 800px; margin: 0 auto; }
 
-        /* Follower Count Bar */
-        .follower-bar { display: flex; justify-content: center; gap: 40px; margin-bottom: 80px; flex-wrap: wrap; }
-        .f-item { text-align: center; background: var(--card-bg); padding: 15px 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.05); }
-        .f-item span { display: block; font-size: 1.5rem; font-weight: 800; }
-        .f-item label { font-size: 0.8rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px; }
+        /* Main Stats */
+        .main-stats { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 20px; 
+            padding: 0 10%; 
+        }
+        .stat-box { 
+            background: var(--card-bg); 
+            padding: 40px 20px; 
+            border-radius: 20px; 
+            border: 1px solid var(--border-color); 
+            text-align: center;
+            transition: 0.3s;
+        }
+        .stat-box:hover { border-color: var(--primary-red); transform: translateY(-5px); }
+        .stat-box h2 { font-size: 3rem; font-weight: 800; color: var(--white); margin-bottom: 5px; }
+        .stat-box .title { font-size: 1.1rem; font-weight: 700; color: var(--primary-red); }
+        .stat-box .desc { font-size: 0.9rem; color: var(--text-gray); margin-top: 5px; }
 
-        /* Main Stats Grid */
-        .main-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 0 8%; }
-        .stat-box { background: var(--card-bg); padding: 50px 30px; border-radius: 35px; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; position: relative; overflow: hidden; }
-        .stat-box:hover { transform: translateY(-10px); border-color: var(--primary-red); box-shadow: 0 20px 40px rgba(230,30,42,0.1); }
-        .stat-box h2 { font-size: 4.5rem; font-weight: 900; line-height: 1; margin-bottom: 10px; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .stat-box .title { font-size: 1.3rem; font-weight: 800; color: var(--white); }
-        .stat-box .desc { color: var(--text-gray); font-size: 1rem; margin-top: 5px; }
+        /* Marketer Insights */
+        .insights-section { padding: 100px 10%; background: rgba(255,255,255,0.01); }
+        .insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .insights-text h3 { font-size: 2.5rem; margin-bottom: 20px; }
+        .tags-container { display: flex; flex-wrap: wrap; gap: 12px; }
+        .tag { background: var(--card-bg); border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 10px; font-size: 1rem; font-weight: 600; }
+        .tag b { color: var(--primary-red); margin-right: 5px; }
 
-        /* Marketer Insights Section */
-        .insights { padding: 100px 8%; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .insights-text h3 { font-size: 3rem; font-weight: 800; margin-bottom: 20px; }
-        .insight-tags { display: flex; flex-wrap: wrap; gap: 15px; }
-        .tag { background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 12px; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); }
-        .tag b { color: var(--primary-red); }
+        /* Influencer Index Fix */
+        .index-box { 
+            background: #151515; 
+            padding: 40px; 
+            border-radius: 20px; 
+            border-right: 4px solid var(--primary-red);
+            text-align: center;
+        }
+        .index-box h2 { font-size: 3.5rem; color: var(--white); font-weight: 800; margin-bottom: 5px; }
+        .index-box p { color: var(--text-gray); font-size: 1.1rem; font-weight: 600; }
 
-        /* Pricing Section */
-        .pricing { padding: 80px 8%; background: #080808; }
-        .pricing-header { text-align: center; margin-bottom: 60px; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .p-card { background: var(--dark-bg); padding: 50px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; }
-        .p-card.hot { border: 2px solid var(--primary-red); transform: scale(1.05); box-shadow: 0 0 50px rgba(230,30,42,0.15); }
-        .p-card h4 { font-size: 2rem; margin-bottom: 20px; }
-        .p-card .price { font-size: 4rem; font-weight: 900; margin-bottom: 30px; }
-        .p-card .price span { font-size: 1.2rem; color: var(--text-gray); }
-        .p-list { list-style: none; margin-bottom: 40px; flex-grow: 1; }
-        .p-list li { margin-bottom: 15px; color: var(--text-gray); font-weight: 600; display: flex; align-items: center; }
-        .p-list li::before { content: "✔"; color: var(--primary-red); margin-left: 10px; font-weight: 900; }
+        /* Pricing Area */
+        .section-title { text-align: center; font-size: 2.5rem; margin: 80px 0 40px; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 0 10% 80px; }
+        .p-card { background: var(--card-bg); padding: 45px 35px; border-radius: 24px; border: 1px solid var(--border-color); display: flex; flex-direction: column; }
+        .p-card.featured { border: 2px solid var(--primary-red); background: rgba(230,30,42,0.02); }
         
-        .p-btn { background: var(--white); color: var(--dark-bg); text-decoration: none; padding: 20px; border-radius: 20px; text-align: center; font-weight: 900; font-size: 1.2rem; transition: 0.3s; }
-        .p-card.hot .p-btn { background: var(--primary-red); color: var(--white); }
-        .p-btn:hover { letter-spacing: 1px; }
+        .p-card h4 { font-size: 1.8rem; margin-bottom: 15px; }
+        
+        /* Pricing Text Fix */
+        .price-wrap { display: flex; align-items: baseline; gap: 8px; margin-bottom: 30px; }
+        .price-wrap .amount { font-size: 3rem; font-weight: 800; }
+        .price-wrap .unit { font-size: 1rem; color: var(--text-gray); font-weight: 600; }
 
-        /* Footer & Contact */
-        .footer-cta { padding: 100px 8%; text-align: center; }
-        .f-btns { display: flex; justify-content: center; gap: 20px; margin-top: 40px; flex-wrap: wrap; }
-        .btn-l { padding: 20px 50px; border-radius: 20px; font-size: 1.4rem; font-weight: 900; text-decoration: none; transition: 0.3s; }
-        .btn-l.wa { background: #25d366; color: white; }
-        .btn-l.mail { border: 2px solid var(--white); color: white; }
-        .btn-l:hover { transform: scale(1.05); }
+        .p-list { list-style: none; margin-bottom: 40px; flex-grow: 1; }
+        .p-list li { margin-bottom: 12px; color: var(--text-gray); font-weight: 400; display: flex; align-items: center; }
+        .p-list li::before { content: "•"; color: var(--primary-red); margin-left: 10px; font-weight: 900; }
+        
+        .p-btn { background: var(--white); color: var(--dark-bg); text-decoration: none; padding: 18px; border-radius: 15px; text-align: center; font-weight: 800; transition: 0.3s; }
+        .p-card.featured .p-btn { background: var(--primary-red); color: var(--white); }
+        .p-btn:hover { transform: scale(1.02); }
+
+        /* Contact */
+        .contact-footer { padding: 80px 10%; text-align: center; border-top: 1px solid var(--border-color); }
+        .f-links { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
+        .f-btn { padding: 15px 40px; border-radius: 12px; font-size: 1.1rem; font-weight: 800; text-decoration: none; transition: 0.3s; }
+        .f-btn.wa { background: #25d366; color: white; }
+        .f-btn.mail { border: 1px solid var(--white); color: white; }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .insights { grid-template-columns: 1fr; }
-            .p-card.hot { transform: scale(1); }
+            .hero h1 { font-size: 2.5rem; }
+            .insights-grid { grid-template-columns: 1fr; }
+            header { padding: 20px 5%; }
+            .pricing-grid { padding: 0 5% 40px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo-brand">AZRAN</div>
-        <div class="tag">MEDIA KIT 2026</div>
+        <div class="logo-container">
+            <img src="https://azran.cc/logo.png" alt="עזרן לוגו">
+        </div>
+        <div class="logo-text">AZRAN</div>
+        
+        <div class="follower-bar">
+            <div class="f-item"><span>5.8K</span><label>Twitter X</label></div>
+            <div class="f-item"><span>3.7K</span><label>Instagram</label></div>
+            <div class="f-item"><span>3.5K</span><label>TikTok</label></div>
+            <div class="f-item"><span>650+</span><label>WhatsApp</label></div>
+        </div>
     </header>
 
     <section class="hero">
-        <div class="follower-bar">
-            <div class="f-item"><span>5,800</span><label>Twitter X</label></div>
-            <div class="f-item"><span>3,700</span><label>Instagram</label></div>
-            <div class="f-item"><span>3,500</span><label>TikTok</label></div>
-            <div class="f-item"><span>650+</span><label>WhatsApp VIP</label></div>
-        </div>
-        <h1>הכי רלוונטי <span>.</span><br>הכי משפיע <span>.</span></h1>
-        <p>מעל 2 מיליון חשיפות חודשיות בלב ליבו של הכדורגל הישראלי. אני לא יוצר תוכן - אני מייצר את דעת הקהל.</p>
+        <h1>הבית של קהילת הכדורגל <span>.</span></h1>
+        <p>ניתוח מקצועי, חיבור רגשי וחשיפה רחבה לקהל אוהדים אקטיבי. אנחנו לא רק מדברים על המשחק, אנחנו חיים אותו.</p>
     </section>
 
     <section class="main-stats">
@@ -109,94 +175,99 @@
         <div class="stat-box">
             <h2>110K+</h2>
             <div class="title">חשבונות ייחודיים</div>
-            <div class="desc">Reach אורגני טהור מדי חודש</div>
+            <div class="desc">Reach ממוצע בחודש</div>
         </div>
         <div class="stat-box">
             <h2>31.3K</h2>
-            <div class="title">צפיות לרילס</div>
-            <div class="desc">ממוצע צפייה לסרטון סיכום</div>
+            <div class="title">צפיות ממוצעות</div>
+            <div class="desc">לסרטון סיכום משחק</div>
         </div>
         <div class="stat-box">
             <h2>10.9%</h2>
             <div class="title">מעורבות שיא</div>
-            <div class="desc">Engagement Rate מהגבוהים בשוק</div>
+            <div class="desc">Engagement Rate אותנטי</div>
         </div>
     </section>
 
-    <section class="insights">
-        <div class="insights-text">
-            <h3>מה שמעניין משווקים</h3>
-            <p style="color: var(--text-gray); margin-bottom: 30px; font-size: 1.2rem;">הנתונים שמוכיחים שהמותג עזרן הוא השקעה בטוחה עם ROI גבוה.</p>
-            <div class="insight-tags">
-                <div class="tag">ממוצע צופים בסטורי: <b>1,200+</b></div>
-                <div class="tag">קהל יעד: <b>92% גברים</b></div>
-                <div class="tag">טווח גילאים: <b>18-44</b></div>
-                <div class="tag">יחס שיתוף ויראלי: <b>1:8</b></div>
-                <div class="tag">זמן שהייה ממוצע: <b>160 שניות</b></div>
-                <div class="tag"><b>High Intent Audience</b></div>
+    <section class="insights-section">
+        <div class="insights-grid">
+            <div class="insights-text">
+                <h3>נתונים שמעניינים משווקים</h3>
+                <div class="tags-container">
+                    <div class="tag">ממוצע צופים בסטורי: <b>1,200+</b></div>
+                    <div class="tag">פילוח קהל: <b>92% גברים</b></div>
+                    <div class="tag">טווח גילאים מרכזי: <b>18-44</b></div>
+                    <div class="tag">יחס שיתופים: <b>גבוה פי 3 מהממוצע</b></div>
+                    <div class="tag">זמן צפייה ממוצע: <b>160 שניות</b></div>
+                    <div class="tag"><b>קהל High-Intent</b></div>
+                </div>
             </div>
-        </div>
-        <div class="stat-box" style="background: var(--accent-gradient); color: white;">
-            <h2 style="color: white; font-size: 3.5rem;">TOP 1%</h2>
-            <div class="title" style="color: white;">דירוג משפיענים</div>
-            <div class="desc" style="color: rgba(255,255,255,0.8);">במדד חשיפה מול עוקבים בישראל</div>
-        </div>
-    </section>
-
-    <section class="pricing">
-        <div class="pricing-header">
-            <h2>חבילות שיתוף פעולה</h2>
-        </div>
-        <div class="pricing-grid">
-            <div class="p-card">
-                <h4>Single Action</h4>
-                <div class="price">₪450 <span>/ סטורי</span></div>
-                <ul class="p-list">
-                    <li>סטורי מצולם (60 שניות)</li>
-                    <li>לינק ישיר להנעה לפעולה</li>
-                    <li>חשיפה מיידית לקהל חם</li>
-                    <li>מעטפת גרפית מותאמת</li>
-                </ul>
-                <a href="https://wa.me/972502026661" class="p-btn">הזמנה מהירה</a>
-            </div>
-
-            <div class="p-card hot">
-                <h4>Match Day Elite</h4>
-                <div class="price">₪1,500 <span>/ למשחק</span></div>
-                <ul class="p-list">
-                    <li>חסות פרימיום בסיכום המשחק</li>
-                    <li>לוגו מותג רץ לאורך כל הסרטון</li>
-                    <li>3 סטוריז (חימום, יום משחק, סיכום)</li>
-                    <li>הודעה ייעודית בקהילת הווטסאפ</li>
-                </ul>
-                <a href="https://wa.me/972502026661" class="p-btn">החבילה המבוקשת</a>
-            </div>
-
-            <div class="p-card">
-                <h4>Brand Partner</h4>
-                <div class="price">₪4,800 <span>/ לחודש</span></div>
-                <ul class="p-list">
-                    <li>שותפות מלאה ב-4 משחקי החודש</li>
-                    <li>בלעדיות קטגורית (מותג יחיד)</li>
-                    <li>לינק קבוע ב-Bio ובאתר</li>
-                    <li>נוכחות קבועה בכל נכסי הדיגיטל</li>
-                </ul>
-                <a href="https://wa.me/972502026661" class="p-btn">ליווי אסטרטגי</a>
+            <div class="index-box">
+                <h2>TOP 1%</h2>
+                <p>במדד מעורבות בישראל (נישת ספורט)</p>
             </div>
         </div>
     </section>
 
-    <section class="footer-cta">
-        <h2>מוכנים להשתלט על המגרש?</h2>
-        <p>צרו קשר עכשיו לתיאום קמפיין מנצח.</p>
-        <div class="f-btns">
-            <a href="https://wa.me/972502026661" class="btn-l wa">WhatsApp</a>
-            <a href="mailto:office@azran.cc" class="btn-l mail">office@azran.cc</a>
+    <h2 class="section-title">אפשרויות שיתוף פעולה</h2>
+
+    <div class="pricing-grid">
+        <div class="p-card">
+            <h4>Standard Action</h4>
+            <div class="price-wrap">
+                <div class="amount">₪450</div>
+                <div class="unit">/ סטורי</div>
+            </div>
+            <ul class="p-list">
+                <li>סטורי מצולם (סקירת מוצר/שירות)</li>
+                <li>לינק ישיר להנעה לפעולה</li>
+                <li>חשיפה מיידית לקהל מטורגט</li>
+                <li>דוחות חשיפה מלאים בסיום</li>
+            </ul>
+            <a href="https://wa.me/972502026661" class="p-btn">ליצירת קשר</a>
+        </div>
+
+        <div class="p-card featured">
+            <h4>Match Day Elite</h4>
+            <div class="price-wrap">
+                <div class="amount">₪1,500</div>
+                <div class="unit">/ למשחק</div>
+            </div>
+            <ul class="p-list">
+                <li>חסות פרימיום בסיכום המשחק</li>
+                <li>לוגו מותג רץ לאורך כל הסרטון</li>
+                <li>מעטפת 3 סטוריז (חימום, יום משחק, סיכום)</li>
+                <li>אזכור ייעודי בקהילת הווטסאפ</li>
+            </ul>
+            <a href="https://wa.me/972502026661" class="p-btn">סגירת חבילה</a>
+        </div>
+
+        <div class="p-card">
+            <h4>Brand Partner</h4>
+            <div class="price-wrap">
+                <div class="amount">₪4,800</div>
+                <div class="unit">/ לחודש</div>
+            </div>
+            <ul class="p-list">
+                <li>ליווי צמוד לאורך 4 משחקי החודש</li>
+                <li>בלעדיות קטגורית למותג אחד בלבד</li>
+                <li>לינק קבוע ב-Bio ובאתר</li>
+                <li>נוכחות מלאה בכל נכסי הדיגיטל</li>
+            </ul>
+            <a href="https://wa.me/972502026661" class="p-btn">לשותפות אסטרטגית</a>
+        </div>
+    </div>
+
+    <section class="contact-footer">
+        <h2>בואו נבקיע יחד</h2>
+        <div class="f-links">
+            <a href="https://wa.me/972502026661" class="f-btn wa">WhatsApp</a>
+            <a href="mailto:office@azran.cc" class="f-btn mail">office@azran.cc</a>
         </div>
     </section>
 
     <footer>
-        <p>© 2026 המותג עזרן | All Data Verified by Official Platform Insights</p>
+        <p>© 2026 המותג עזרן | כל הנתונים מבוססים על דוחות אנליטיקס רשמיים</p>
     </footer>
 
 </body>
