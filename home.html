@@ -26,7 +26,7 @@
             backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--border-color);
             padding: 15px 10%; display: flex; justify-content: space-between; align-items: center;
         }
-        .nav-logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; color: var(--white); text-decoration: none; }
+        .nav-logo { font-size: 1.5rem; font-weight: 900; color: var(--white); text-decoration: none; }
         .nav-logo span { color: var(--primary-red); }
         .nav-links { display: flex; gap: 20px; }
         .nav-links a { color: var(--text-gray); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
@@ -34,50 +34,44 @@
         .ads-btn { background: var(--primary-red); color: white !important; padding: 5px 15px; border-radius: 8px; }
 
         /* Hero Section */
-        .hero { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%; background: radial-gradient(circle at center, rgba(230, 30, 42, 0.1) 0%, transparent 70%); }
-        .hero h1 { font-size: 4.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
+        .hero { 
+            height: 60vh; display: flex; flex-direction: column; justify-content: center; 
+            align-items: center; text-align: center; padding: 0 10%; 
+            background: radial-gradient(circle at center, rgba(230, 30, 42, 0.1) 0%, transparent 70%); 
+        }
+        .hero-logo { max-width: 250px; height: auto; margin-bottom: 25px; }
         .hero p { font-size: 1.5rem; color: var(--text-gray); max-width: 700px; font-weight: 300; }
 
         /* Section Styling */
-        section { padding: 80px 10%; }
-        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 40px; border-right: 5px solid var(--primary-red); padding-right: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .view-all { font-size: 1rem; color: var(--primary-red); text-decoration: none; font-weight: 700; }
+        section { padding: 60px 10%; }
+        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 40px; border-right: 5px solid var(--primary-red); padding-right: 15px; }
 
-        /* Twitter Feed Container */
-        .twitter-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            height: 600px; /* גובה מקסימלי לפיד */
-            overflow-y: auto;
+        /* Content Grid (Embeds) */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .embed-card { background: var(--card-bg); border-radius: 20px; padding: 15px; border: 1px solid var(--border-color); display: flex; justify-content: center; }
+
+        /* Podcasts Grid */
+        .podcasts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
+        .spotify-box { border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); }
+
+        /* Articles Styling */
+        .articles-list { display: flex; flex-direction: column; gap: 20px; }
+        .article-card { 
+            display: flex; align-items: center; background: var(--card-bg); padding: 25px; 
+            border-radius: 20px; border: 1px solid var(--border-color); text-decoration: none; color: white; transition: 0.3s; 
         }
+        .article-card:hover { border-color: var(--gold); transform: translateX(-5px); }
+        .outlet-logo { width: 70px; height: 70px; background: white; border-radius: 12px; display: flex; justify-content: center; align-items: center; padding: 8px; margin-left: 20px; flex-shrink: 0; }
+        .outlet-logo img { max-width: 100%; height: auto; }
+        .article-text h4 { font-size: 1.4rem; margin-bottom: 5px; font-weight: 800; }
+        .article-text p { font-size: 1rem; color: var(--text-gray); }
 
-        /* Content Grids */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        /* Twitter Timeline Box */
+        .twitter-wrapper { max-width: 900px; margin: 0 auto; background: var(--card-bg); border-radius: 20px; padding: 20px; border: 1px solid var(--border-color); height: 600px; overflow-y: auto; }
 
-        /* Video Card */
-        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; transition: 0.3s; position: relative; }
-        .card:hover { transform: translateY(-10px); border-color: var(--primary-red); }
-        .card-img { width: 100%; height: 250px; background: #151515; position: relative; }
-        .card-img i { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; opacity: 0.5; color: var(--primary-red); }
-        .card-content { padding: 20px; }
-        .card-content h4 { font-size: 1.1rem; margin-bottom: 10px; }
-        .card-tag { font-size: 0.8rem; color: var(--primary-red); font-weight: 800; text-transform: uppercase; }
-
-        /* Article / Podcast List */
-        .list-item { display: flex; align-items: center; gap: 20px; background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid var(--border-color); text-decoration: none; color: white; margin-bottom: 15px; transition: 0.3s; }
-        .list-item:hover { background: rgba(255,255,255,0.08); border-color: var(--gold); }
-        .list-icon { width: 50px; height: 50px; background: rgba(230, 30, 42, 0.1); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; color: var(--primary-red); }
-        .list-text h4 { font-size: 1.2rem; }
-        .list-text p { font-size: 0.9rem; color: var(--text-gray); }
-
-        /* WhatsApp Banner */
-        .wa-banner { background: linear-gradient(90deg, #25D366, #128C7E); padding: 40px; border-radius: 25px; text-align: center; color: white; margin: 40px 10%; }
-        .wa-banner h2 { font-size: 2.5rem; margin-bottom: 10px; }
-        .wa-btn { background: white; color: #128C7E; padding: 12px 30px; border-radius: 12px; text-decoration: none; font-weight: 800; display: inline-block; margin-top: 15px; }
+        /* WhatsApp VIP */
+        .wa-banner { background: linear-gradient(90deg, #25D366, #128C7E); padding: 50px; border-radius: 30px; text-align: center; margin: 40px 10%; }
+        .wa-btn { background: white; color: #128C7E; padding: 15px 40px; border-radius: 12px; text-decoration: none; font-weight: 800; display: inline-block; margin-top: 20px; }
 
         footer { padding: 60px 10%; text-align: center; border-top: 1px solid var(--border-color); color: var(--text-gray); }
         .social-icons { display: flex; justify-content: center; gap: 25px; margin-bottom: 20px; font-size: 1.5rem; }
@@ -85,9 +79,10 @@
         .social-icons a:hover { color: var(--primary-red); }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
+            .hero-logo { max-width: 180px; }
             section { padding: 40px 5%; }
             .nav-links { display: none; }
+            .podcasts-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -97,90 +92,76 @@
         <a href="#" class="nav-logo">AZRAN<span>.</span>CC</a>
         <div class="nav-links">
             <a href="#videos">סרטונים</a>
-            <a href="#tweets">ציוצים</a>
-            <a href="#writing">טורים ופודקאסטים</a>
+            <a href="#podcasts">פודקאסטים</a>
+            <a href="#articles">כתבות</a>
+            <a href="#tweets">X Live</a>
             <a href="ads.html" class="ads-btn">למפרסמים</a>
         </div>
     </nav>
 
     <section class="hero">
-        <h1>הכל קורה במגרש <span>.</span></h1>
-        <p>ניתוחי עומק, סיכומי משחקים וכל מה שקורה בלב הכדורגל הישראלי – מרוכז במקום אחד.</p>
+        <img src="assets/images/logo.png" alt="עזרן לוגו" class="hero-logo">
+        <p>ניתוחי עומק, סיכומי משחקים וכל מה שקורה בלב הכדורגל הישראלי.</p>
     </section>
 
     <section id="videos">
-        <div class="section-title">
-            סרטונים אחרונים
-            <a href="https://instagram.com/morazran" class="view-all">לכל הסרטונים ></a>
-        </div>
+        <div class="section-title">הסרטונים האחרונים</div>
         <div class="grid">
-            <div class="card">
-                <div class="card-img"><i class="fas fa-play-circle"></i></div>
-                <div class="card-content">
-                    <div class="card-tag">סיכום משחק</div>
-                    <h4>הפועל תל אביב נגד מכבי חיפה - הניתוח המלא</h4>
-                </div>
+            <div class="embed-card">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DShLV_akxlG/" data-instgrm-version="14" style="width: 100%;"></blockquote>
             </div>
-            <div class="card">
-                <div class="card-img"><i class="fas fa-play-circle"></i></div>
-                <div class="card-content">
-                    <div class="card-tag">טקטיקה</div>
-                    <h4>איך ברדה שינה את המערך ב-10 דקות?</h4>
-                </div>
+            <div class="embed-card">
+                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@morazran/video/YOUR_VIDEO_ID" data-video-id="YOUR_VIDEO_ID" style="width: 100%;">
+                    <section></section>
+                </blockquote>
             </div>
-            <div class="card">
-                <div class="card-img"><i class="fas fa-play-circle"></i></div>
-                <div class="card-content">
-                    <div class="card-tag">דעה</div>
-                    <h4>הגיע הזמן לדבר על הצעירים של הפועל</h4>
-                </div>
+        </div>
+    </section>
+
+    <section id="podcasts" style="background: rgba(255,255,255,0.01);">
+        <div class="section-title">פודקאסטים</div>
+        <div class="podcasts-grid">
+            <div class="spotify-box">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/YOUR_EPISODE_ID" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
+            <div class="spotify-box">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/YOUR_SECOND_EPISODE_ID" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="articles">
+        <div class="section-title">טורים וכתבות</div>
+        <div class="articles-list">
+            <a href="YOUR_WALLA_LINK" target="_blank" class="article-card">
+                <div class="outlet-logo"><img src="https://upload.wikimedia.org/wikipedia/he/thumb/d/d4/Walla%21_logo.svg/1200px-Walla%21_logo.svg.png" alt="וואלה"></div>
+                <div class="article-text">
+                    <h4>המהפכה של ברדה: האם הפועל ת"א בדרך לאליפות?</h4>
+                    <p>וואלה! ספורט | ינואר 2026</p>
+                </div>
+            </a>
+
+            <a href="YOUR_SPORT5_LINK" target="_blank" class="article-card">
+                <div class="outlet-logo"><img src="https://upload.wikimedia.org/wikipedia/he/thumb/6/6e/Sport_5_logo.svg/1200px-Sport_5_logo.svg.png" alt="ספורט 5"></div>
+                <div class="article-text">
+                    <h4>ניתוח מיוחד: היתרונות של לואיזוס במערך החדש</h4>
+                    <p>ערוץ הספורט | דצמבר 2025</p>
+                </div>
+            </a>
         </div>
     </section>
 
     <section id="tweets" style="background: rgba(255,255,255,0.01);">
-        <div class="section-title">
-            עדכונים חיים מהשטח
-            <a href="https://twitter.com/AzranMor" class="view-all">עקבו ב-X ></a>
-        </div>
-        <div class="twitter-container">
+        <div class="section-title">עדכונים חיים מ-X</div>
+        <div class="twitter-wrapper">
             <a class="twitter-timeline" data-theme="dark" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/AzranMor?ref_src=twsrc%5Etfw">Tweets by AzranMor</a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
-    </section>
-
-    <section id="writing">
-        <div class="section-title">טורים ופודקאסטים</div>
-        
-        <a href="#" class="list-item">
-            <div class="list-icon"><i class="fas fa-pen-nib"></i></div>
-            <div class="list-text">
-                <h4>המהפכה האדומה: למה הפועל בדרך הנכונה</h4>
-                <p>פורסם ב-ספורט 5 | ינואר 2026</p>
-            </div>
-        </a>
-
-        <a href="#" class="list-item">
-            <div class="list-icon"><i class="fas fa-microphone"></i></div>
-            <div class="list-text">
-                <h4>פודקאסט "הפודיום" - אירוח מיוחד</h4>
-                <p>על עתיד הכדורגל הישראלי ומעמד האוהד | שעה ו-20 דקות</p>
-            </div>
-        </a>
-
-        <a href="#" class="list-item">
-            <div class="list-icon"><i class="fas fa-newspaper"></i></div>
-            <div class="list-text">
-                <h4>סיכום הסיבוב הראשון - טור דעה אישי</h4>
-                <p>פורסם ב-ONE | דצמבר 2025</p>
-            </div>
-        </a>
     </section>
 
     <div class="wa-banner">
-        <h2>הקהילה של עזרן בוואטסאפ</h2>
-        <p>עדכונים בזמן אמת, סיכומים בלעדיים ודיונים שקורים רק שם.</p>
-        <a href="https://wa.me/972502026661" class="wa-btn">הצטרפות ל-VIP (חינם)</a>
+        <h2>הצטרפו לקהילת ה-VIP</h2>
+        <p>כל העדכונים והניתוחים ישירות לוואטסאפ שלכם.</p>
+        <a href="https://wa.me/972502026661" class="wa-btn">הצטרפות חינם</a>
     </div>
 
     <footer>
@@ -192,6 +173,10 @@
         </div>
         <p>© 2026 המותג עזרן | כל הזכויות שמורות</p>
     </footer>
+
+    <script async src="//www.instagram.com/embed.js"></script>
+    <script async src="https://www.tiktok.com/embed.js"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
 </html>
