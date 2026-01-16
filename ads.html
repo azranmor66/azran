@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>עזרן | פרסום ושיתופי פעולה</title>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <title>עזרן | Media Kit & Advertising</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-red: #e61e2a;
-            --dark-bg: #0f0f0f;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --gold: #d4af37;
+            --dark-bg: #0a0a0a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --gold: #c5a059;
             --white: #ffffff;
-            --text-gray: #b0b0b0;
+            --text-gray: #a0a0a0;
+            --gradient: linear-gradient(135deg, #e61e2a 0%, #90131a 100%);
         }
 
         * {
@@ -29,294 +30,304 @@
             overflow-x: hidden;
         }
 
-        /* Hero Section */
-        .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(15,15,15,1)), 
-                        url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80'); /* רקע כדורגל יוקרתי */
-            background-size: cover;
-            background-position: center;
+        /* Header & Logo */
+        header {
+            padding: 40px 10%;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+
+        .logo-placeholder {
+            width: 180px;
+            height: 80px;
+            border: 2px dashed rgba(255,255,255,0.1); /* מקום להעלאת לוגו */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--white);
+            position: relative;
+        }
+
+        .logo-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 10% 120px;
             text-align: center;
-            padding: 20px;
+            background: radial-gradient(circle at top, rgba(230, 30, 42, 0.1) 0%, transparent 70%);
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            line-height: 1.1;
             letter-spacing: -2px;
         }
 
         .hero h1 span {
-            color: var(--primary-red);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--text-gray);
-            max-width: 700px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        /* Stats Grid */
-        .stats-container {
+        /* Explosive Stats */
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 50px 10%;
-            margin-top: -100px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 0 10%;
+            margin-top: -60px;
         }
 
         .stat-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 40px 20px;
+            border-radius: 24px;
             text-align: center;
-            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .stat-card:hover {
-            transform: translateY(-10px);
+            transform: scale(1.05);
             border-color: var(--primary-red);
+            background: rgba(230, 30, 42, 0.05);
         }
 
         .stat-card h2 {
-            font-size: 2.5rem;
-            color: var(--primary-red);
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--white);
             margin-bottom: 5px;
         }
 
-        .stat-card p {
-            font-size: 1rem;
-            color: var(--text-gray);
+        .stat-card .label {
+            font-size: 1.1rem;
+            color: var(--primary-red);
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Pricing Section */
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin: 80px 0 40px;
+        .stat-card .desc {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-top: 5px;
         }
+
+        /* Pricing Area */
+        .section-header {
+            text-align: center;
+            margin: 100px 0 60px;
+        }
+
+        .section-header h2 { font-size: 3rem; font-weight: 800; }
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
-            padding: 0 10% 80px;
+            padding: 0 10% 100px;
         }
 
         .price-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 40px;
+            background: var(--glass-bg);
+            border-radius: 30px;
+            padding: 50px 40px;
+            border: 1px solid rgba(255,255,255,0.05);
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .price-card.featured {
-            border: 2px solid var(--primary-red);
             position: relative;
         }
 
-        .featured-tag {
+        .price-card.exclusive {
+            border: 2px solid var(--primary-red);
+            box-shadow: 0 0 30px rgba(230, 30, 42, 0.2);
+        }
+
+        .exclusive-badge {
             position: absolute;
             top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 40px;
             background: var(--primary-red);
-            padding: 5px 20px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
             font-weight: 800;
         }
 
-        .price-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+        .price-card h3 { font-size: 2rem; margin-bottom: 15px; }
+        .price-card .amount { font-size: 3.5rem; font-weight: 800; margin-bottom: 30px; }
+        .price-card .amount span { font-size: 1.2rem; color: var(--text-gray); }
+
+        .features { list-style: none; margin-bottom: 40px; flex-grow: 1; }
+        .features li { margin-bottom: 15px; color: var(--text-gray); display: flex; align-items: center; }
+        .features li::before { content: "●"; color: var(--primary-red); margin-left: 12px; font-size: 0.8rem; }
+
+        .cta {
+            background: var(--white);
+            color: var(--dark-bg);
+            text-decoration: none;
+            padding: 18px;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            transition: all 0.3s;
         }
 
-        .price-card .price {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 20px;
+        .price-card.exclusive .cta {
+            background: var(--primary-red);
             color: var(--white);
         }
 
-        .price-card .price span {
-            font-size: 1rem;
-            color: var(--text-gray);
-        }
-
-        .price-features {
-            list-style: none;
-            margin-bottom: 30px;
-            flex-grow: 1;
-        }
-
-        .price-features li {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            color: var(--text-gray);
-        }
-
-        .price-features li::before {
-            content: "✓";
-            color: var(--primary-red);
-            margin-left: 10px;
-            font-weight: 800;
-        }
-
-        .cta-button {
-            background: var(--primary-red);
-            color: white;
-            text-decoration: none;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: 800;
-            transition: opacity 0.3s;
-        }
-
-        .cta-button:hover {
-            opacity: 0.9;
-        }
+        .cta:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
         /* Contact Section */
         .contact {
-            background: #151515;
-            padding: 80px 10%;
+            background: linear-gradient(to top, #111, var(--dark-bg));
+            padding: 100px 10%;
             text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        .contact h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
+        .contact h2 { font-size: 3.5rem; margin-bottom: 30px; }
 
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            background: rgba(255,255,255,0.05);
-            padding: 20px 40px;
-            border-radius: 15px;
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 50px;
+            border-radius: 20px;
             text-decoration: none;
-            color: white;
-            font-weight: 700;
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin: 10px;
             transition: 0.3s;
         }
 
-        .contact-item:hover {
-            background: var(--primary-red);
-        }
+        .wa { background: #25d366; color: white; }
+        .mail { background: var(--glass-bg); color: white; border: 1px solid rgba(255,255,255,0.1); }
 
-        footer {
-            padding: 40px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--text-gray);
-        }
+        .wa:hover, .mail:hover { transform: scale(1.05); }
 
-        /* Responsive */
+        footer { padding: 60px; text-align: center; color: var(--text-gray); border-top: 1px solid rgba(255,255,255,0.05); }
+
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .stats-container { margin-top: 0; padding: 20px; }
-            .pricing-grid { padding: 0 20px 40px; }
+            .hero h1 { font-size: 3rem; }
+            .stats-grid { margin-top: 0; padding: 20px; }
+            .pricing-grid { padding: 0 20px 60px; }
         }
     </style>
 </head>
 <body>
 
+    <header>
+        <div class="logo-placeholder">
+            <img src="https://via.placeholder.com/180x80?text=AZRAN+LOGO" alt="Logo">
+        </div>
+    </header>
+
     <section class="hero">
-        <h1>עזרן <span>.</span></h1>
-        <p>הבית של אוהדי הכדורגל בישראל. מעל למיליון חשיפות חודשיות עם הקהל הכי מעורב ברשת.</p>
+        <h1>המותג <span>עזרן.</span></h1>
+        <p>מעטפת התוכן החזקה ביותר בספורט הישראלי. אנחנו לא רק מדווחים - אנחנו מייצרים את השיח הבא.</p>
     </section>
 
-    <section class="stats-container">
+    <section class="stats-grid">
         <div class="stat-card">
-            <h2>31.3K</h2>
-            <p>ממוצע צפיות לרילס</p>
+            <h2>1.2M+</h2>
+            <div class="label">חשיפות בחודש</div>
+            <div class="desc">ממוצע מצטבר רב-פלטפורמי</div>
         </div>
         <div class="stat-card">
-            <h2>42.4K</h2>
-            <p>חשיפות יומיות בטוויטר</p>
+            <h2>110K+</h2>
+            <div class="label">חשבונות ייחודיים</div>
+            <div class="desc">חשיפה ריאלית (Reach) בחודש</div>
+        </div>
+        <div class="stat-card">
+            <h2>31K+</h2>
+            <div class="label">צפיות ממוצעות</div>
+            <div class="desc) לכל סרטון סיכום משחק</div>
         </div>
         <div class="stat-card">
             <h2>10.9%</h2>
-            <p>מעורבות (Engagement)</p>
-        </div>
-        <div class="stat-card">
-            <h2>650+</h2>
-            <p>חברים בקהילת הווטסאפ</p>
+            <div class="label">מעורבות שיא</div>
+            <div class="desc">Engagement Rate הגבוה בנישה</div>
         </div>
     </section>
 
-    <h2 class="section-title">חבילות פרסום ושיתופי פעולה</h2>
-    
+    <div class="section-header">
+        <h2>אפשרויות שיתוף פעולה</h2>
+    </div>
+
     <div class="pricing-grid">
         <div class="price-card">
-            <h3>Boost נקודתי</h3>
-            <div class="price">₪450 <span>/ לסטורי</span></div>
-            <ul class="price-features">
-                <li>סטורי מצולם (Talking Head)</li>
-                <li>לינק ישיר להנעה לפעולה</li>
-                <li>חשיפה לקהל אוהדים מטורגט</li>
-                <li>דוח ביצועים בסיום הקידום</li>
+            <h3>Standard Boost</h3>
+            <div class="amount">₪450 <span>/ סטורי</span></div>
+            <ul class="features">
+                <li>סטורי מצולם (סקירת מוצר/שירות)</li>
+                <li>לינק ישיר וקבוע למשך 24 שעות</li>
+                <li>הנעה לפעולה ממוקדת קהל</li>
+                <li>דוחות חשיפה מלאים בסיום</li>
             </ul>
-            <a href="https://wa.me/0502026661" class="cta-button">בואו נדבר</a>
+            <a href="https://wa.me/972502026661" class="cta">בואו נצא לדרך</a>
         </div>
 
-        <div class="price-card featured">
-            <div class="featured-tag">הכי פופולרי</div>
-            <h3>חבילת Match Day</h3>
-            <div class="price">₪1,800 <span>/ למשחק</span></div>
-            <ul class="price-features">
-                <li>חסות בתוך סרטון סיכום המשחק</li>
-                <li>לוגו רץ (Watermark) לאורך הסרטון</li>
-                <li>מעטפת 3 סטוריז (לפני, ביום ואחרי)</li>
-                <li>הפצה ב-Instagram וב-TikTok</li>
+        <div class="price-card exclusive">
+            <div class="exclusive-badge">הבחירה המנצחת</div>
+            <h3>Match Day Package</h3>
+            <div class="amount">₪1,500 <span>/ למשחק</span></div>
+            <ul class="features">
+                <li>חסות פרימיום בסיכום המשחק (IG+TT)</li>
+                <li>לוגו מותג רץ (Watermark) לאורך הסרטון</li>
+                <li>מעטפת 3 סטוריז (חימום, יום משחק, סיכום)</li>
+                <li>הפצה מאסיבית בקהילת הווטסאפ</li>
             </ul>
-            <a href="https://wa.me/0502026661" class="cta-button">להזמנת חבילה</a>
+            <a href="https://wa.me/972502026661" class="cta">להזמנה מיידית</a>
         </div>
 
         <div class="price-card">
-            <h3>שותף חודשי</h3>
-            <div class="price">₪4,800 <span>/ לחודש</span></div>
-            <ul class="price-features">
-                <li>ליווי צמוד ל-4 משחקים בחודש</li>
-                <li>בלעדיות קטגורית למותג</li>
-                <li>לינק קבוע ב-Bio ובאתר</li>
-                <li>2 הודעות ייעודיות בקהילת הווטסאפ</li>
+            <h3>Monthly Partner</h3>
+            <div class="amount">₪4,800 <span>/ לחודש</span></div>
+            <ul class="features">
+                <li>ליווי צמוד לאורך 4 משחקי החודש</li>
+                <li>בלעדיות קטגורית מוחלטת</li>
+                <li>לינק קבוע ב-Bio ובאתר הבית</li>
+                <li>חשיפה קבועה בכל נכסי הדיגיטל</li>
             </ul>
-            <a href="https://wa.me/0502026661" class="cta-button">לשותפות אסטרטגית</a>
+            <a href="https://wa.me/972502026661" class="cta">לשיחת ייעוץ</a>
         </div>
     </div>
 
     <section class="contact">
-        <h2>מוכנים להבקיע?</h2>
-        <p>צרו קשר עוד היום לבניית חבילה מותאמת אישית למותג שלכם.</p>
+        <h2>מוכנים להוביל את המגרש?</h2>
+        <p>הצטרפו למותגים שכבר נהנים מחשיפה איכותית לקהל הספורט הגדול בישראל.</p>
         <div class="contact-links">
-            <a href="https://wa.me/YOUR_NUMBER" class="contact-item">WhatsApp</a>
-            <a href="mailto:your-email@example.com" class="contact-item">Email</a>
-            <a href="https://azran.cc" class="contact-item">חזרה לאתר</a>
+            <a href="https://wa.me/972502026661" class="contact-btn wa">WhatsApp Me</a>
+            <a href="mailto:office@azran.cc" class="contact-btn mail">office@azran.cc</a>
         </div>
     </section>
 
     <footer>
-        <p>© 2026 המותג עזרן | כל הזכויות שמורות</p>
+        <p>© 2026 המותג עזרן | פלטפורמת תוכן וקריאייטיב ספורט</p>
     </footer>
 
 </body>
