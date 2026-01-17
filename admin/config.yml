@@ -1,0 +1,18 @@
+backend:
+  name: git-gateway
+  branch: main # או master, תלוי בשם הענף שלך
+
+media_folder: "assets/images/blog" # איפה ישמרו התמונות של הבלוג
+public_folder: "/assets/images/blog"
+
+collections:
+  - name: "blog"
+    label: "פוסטים לבלוג"
+    folder: "_posts" # כאן ישמרו הקבצים של המאמרים
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "כותרת", name: "title", widget: "string"}
+      - {label: "תאריך פרסום", name: "date", widget: "datetime"}
+      - {label: "תקציר (לדף הבית)", name: "summary", widget: "text"}
+      - {label: "גוף המאמר", name: "body", widget: "markdown"}
