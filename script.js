@@ -10,6 +10,20 @@ const treeConfig = {
             icon: "message-circle", 
             visible: true 
         },
+          { 
+            label: "לאתר הרשמי", 
+            url: "home.html", 
+            icon: "globe", 
+            visible: true, 
+            highlight: true 
+        },
+         { 
+            label: "שיתופי פעולה", 
+            url: "ads.html", 
+            icon: "globe", 
+            visible: true, 
+            highlight: true 
+        },
         { 
             label: "אינסטגרם", 
             url: "https://www.instagram.com/morazran/", 
@@ -34,13 +48,7 @@ const treeConfig = {
             icon: "youtube", 
             visible: false 
         },
-         { 
-            label: "לאתר הרשמי & שיתופי פעולה", 
-            url: "home.html", 
-            icon: "globe", 
-            visible: true, 
-            highlight: true 
-        },
+       
         { 
             label: "ספוטיפיי", 
             url: "https://open.spotify.com/show/4N3nNHjjF0Qi4u7zoAAjjr", // עדכן לינק
