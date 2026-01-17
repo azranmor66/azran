@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עזרן | כתבה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body { background-color: #121212; color: #f5f5f5; font-family: 'Assistant', sans-serif; }
+        .prose { color: #ccc; text-align: right; line-height: 1.8; }
+        .prose h1, .prose h2 { color: #fff; margin-top: 2rem; }
+        .article-container { max-width: 800px; margin: 100px auto; padding: 20px; }
+    </style>
+</head>
+<body>
+    <nav class="fixed top-0 w-full bg-[#121212]/90 backdrop-blur-md p-4 border-b border-white/10 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="font-black text-xl text-white">AZRAN<span>.</span>CC</a>
+            <a href="index.html" class="text-sm text-gray-400">חזרה לדף הבית</a>
+        </div>
+    </nav>
+
+    <article class="article-container">
+        <header class="mb-10">
+            <span id="post-date" class="text-red-600 font-bold text-sm uppercase"></span>
+            <h1 id="post-title" class="text-4xl md:text-5xl font-black mt-2 leading-tight"></h1>
+        </header>
+        <div id="post-content" class="prose prose-invert max-w-none">
+            </div>
+    </article>
+
+    <script>
+        async function loadFullPost() {
+            const params = new URLSearchParams(window.location.search);
+            const postId = params.get('id');
+            const repo = 'azranmor66/azran'; // ודא שזה שם ה-Repo שלך
+
+            if (!postId) { window.location.href = 'index.html'; return; }
+
+            try {
+                const response = await fetch(`https://api.github.com/repos/${repo}/contents/_posts/${postId}`);
+                const data = await response.json();
+                const text = atob(data.content);
+                const parts = decodeURIComponent(escape(text)).split('---');
+                const metadata = jsyaml.load(parts[1]);
+                const body = parts[2];
+
+                document.title = `${metadata.title} | עזרן`;
+                document.getElementById('post-title').innerText = metadata.title;
+                document.getElementById('post-date').innerText = new Date(metadata.date).toLocaleDateString('he-IL');
+                document.getElementById('post-content').innerHTML = marked.parse(body);
+            } catch (e) {
+                document.getElementById('post-content').innerHTML = '<p>הכתבה לא נמצאה.</p>';
+            }
+        }
+        loadFullPost();
+    </script>
+</body>
+</html>
