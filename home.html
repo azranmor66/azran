@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>עזרן | הבית לכל התוכן</title>
+    <title>עזרן | הבית של אוהדי הפועל תל אביב</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,7 +14,6 @@
             --white: #ffffff;
             --text-gray: #b0b0b0;
             --border-color: rgba(255, 255, 255, 0.08);
-            --gold: #c5a059;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Assistant', sans-serif; scroll-behavior: smooth; }
@@ -31,20 +30,19 @@
         .nav-links a { color: var(--text-gray); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
         .ads-btn { background: var(--primary-red); color: white !important; padding: 5px 15px; border-radius: 8px; }
 
-        /* Hero Section */
+        /* Hero */
         .hero { 
-            height: 60vh; display: flex; flex-direction: column; justify-content: center; 
+            height: 50vh; display: flex; flex-direction: column; justify-content: center; 
             align-items: center; text-align: center; padding: 0 10%; 
             background: radial-gradient(circle at center, rgba(230, 30, 42, 0.1) 0%, transparent 70%); 
         }
         .hero-logo { max-width: 250px; height: auto; margin-bottom: 25px; }
         .hero p { font-size: 1.5rem; color: var(--text-gray); max-width: 700px; font-weight: 300; }
 
-        /* Section Styling */
         section { padding: 60px 10%; }
         .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 40px; border-right: 5px solid var(--primary-red); padding-right: 15px; }
 
-        /* Video Grid - FIXED HEIGHT FIX */
+        /* Video Grid - FIXED HEIGHT */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
@@ -58,36 +56,42 @@
             border: 1px solid var(--border-color); 
             display: flex; 
             justify-content: center; 
-            height: 600px !important; /* כופה גובה אחיד על הסרטונים */
+            height: 650px !important; 
             overflow: hidden;
         }
 
-        /* Podcasts Grid */
-        .podcasts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
-        .spotify-box { 
-            border-radius: 15px; 
-            overflow: hidden; 
-            border: 1px solid var(--border-color); 
-            background: #000;
-            min-height: 232px;
+        /* Podcasts Section */
+        .podcasts-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+            gap: 20px; 
+            justify-content: center;
+        }
+        .spotify-container {
+            width: 100%;
+            max-width: 624px;
+            margin: 0 auto;
         }
 
-        /* Articles Styling */
+        /* Articles Styling - RED HOVER UPDATE */
         .articles-list { display: flex; flex-direction: column; gap: 20px; }
         .article-card { 
             display: flex; align-items: center; background: var(--card-bg); padding: 25px; 
             border-radius: 20px; border: 1px solid var(--border-color); text-decoration: none; color: white; transition: 0.3s; 
         }
-        .article-card:hover { border-color: var(--gold); transform: translateX(-5px); }
+        /* כאן בוצע השינוי מזהב לאדום יוקרתי */
+        .article-card:hover { 
+            border-color: var(--primary-red); 
+            transform: translateX(-5px); 
+            background: rgba(230, 30, 42, 0.05);
+        }
         .outlet-logo { width: 70px; height: 70px; background: white; border-radius: 12px; display: flex; justify-content: center; align-items: center; padding: 8px; margin-left: 20px; flex-shrink: 0; }
         .outlet-logo img { max-width: 100%; height: auto; }
         .article-text h4 { font-size: 1.4rem; margin-bottom: 5px; font-weight: 800; }
-        .article-text p { font-size: 1rem; color: var(--text-gray); }
 
-        /* Twitter Timeline Box */
-        .twitter-wrapper { max-width: 900px; margin: 0 auto; background: var(--card-bg); border-radius: 20px; padding: 20px; border: 1px solid var(--border-color); height: 600px; overflow-y: auto; }
+        /* Twitter Timeline */
+        .twitter-wrapper { max-width: 900px; margin: 0 auto; background: var(--card-bg); border-radius: 20px; padding: 20px; border: 1px solid var(--border-color); height: 700px; overflow-y: auto; }
 
-        /* WhatsApp VIP */
         .wa-banner { background: linear-gradient(90deg, #25D366, #128C7E); padding: 50px; border-radius: 30px; text-align: center; margin: 40px 10%; }
         .wa-btn { background: white; color: #128C7E; padding: 15px 40px; border-radius: 12px; text-decoration: none; font-weight: 800; display: inline-block; margin-top: 20px; }
 
@@ -99,7 +103,7 @@
             .hero-logo { max-width: 180px; }
             section { padding: 40px 5%; }
             .nav-links { display: none; }
-            .embed-card { height: 500px !important; }
+            .embed-card { height: 550px !important; }
         }
     </style>
 </head>
@@ -117,7 +121,7 @@
     </nav>
 
     <section class="hero">
-        <img src="assets/images/logo.png" alt="עזרן לוגו" class="hero-logo">
+        <img src="assets/images/logo.png" alt="עזרן" class="hero-logo">
         <p>ניתוחי עומק, סיכומי משחקים וכל מה שקורה בלב של אוהדי הפועל תל אביב.</p>
     </section>
 
@@ -136,11 +140,8 @@
     <section id="podcasts" style="background: rgba(255,255,255,0.01);">
         <div class="section-title">פודקאסטים</div>
         <div class="podcasts-grid">
-            <div class="spotify-box">
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/YOUR_EPISODE_ID2" width="100%" height="232" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div>
-            <div class="spotify-box">
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/YOUR_EPISODE_ID3" width="100%" height="232" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <div class="spotify-container">
+                <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/1kxhRMAlLLO8BGItE2oLD8/video?utm_source=generator" width="100%" height="351" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -149,7 +150,7 @@
         <div class="section-title">טורים וכתבות</div>
         <div class="articles-list">
             <a href="https://sports.walla.co.il/item/3809215" target="_blank" class="article-card">
-                <div class="outlet-logo"><img src="https://upload.wikimedia.org/wikipedia/he/thumb/d/d4/Walla%21_logo.svg/1200px-Walla%21_logo.svg.png" alt="וואלה"></div>
+                <div class="outlet-logo"><img src="assets/images/walla.png" alt="וואלה"></div>
                 <div class="article-text">
                     <h4>הפועל תל אביב התחפשה לבני ריינה: המפלה האדומה בדרבי לא תישכח</h4>
                     <p>וואלה! ספורט | ינואר 2026</p>
