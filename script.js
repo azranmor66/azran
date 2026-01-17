@@ -15,7 +15,7 @@ const treeConfig = {
             url: "home.html", 
             icon: "globe", 
             visible: true, 
-            highlight: true 
+            highlight: false 
         },
          { 
             label: "שיתופי פעולה", 
