@@ -6,7 +6,6 @@
     <title>עזרן | הפועל על פי עזרן</title>
     
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETHSZD36Z6"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -21,86 +20,81 @@
     <style>
         :root {
             --primary-red: #e61e2a;
-            --dark-bg: #121212; /* שחור פחם רך ונעים (Material Dark) */
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --white: #ffffff;
+            --dark-bg: #121212;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --border-color: rgba(255, 255, 255, 0.08);
             --text-gray: #a0a0a0;
-            --border-color: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Assistant', sans-serif; scroll-behavior: smooth; }
-        
-        body { 
-            background-color: var(--dark-bg); 
-            color: var(--white); 
-            line-height: 1.6; 
-            overflow-x: hidden;
-            /* הוספת טקסטורה עדינה מאוד כדי שלא ירגיש "ריק" */
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(230, 30, 42, 0.04) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(230, 30, 42, 0.04) 0%, transparent 40%);
-        }
+        body { background-color: var(--dark-bg); color: #fff; line-height: 1.6; overflow-x: hidden; }
 
         /* Navigation */
         nav {
-            position: fixed; top: 0; width: 100%; background: rgba(18, 18, 18, 0.8);
-            backdrop-filter: blur(15px); z-index: 1000; border-bottom: 1px solid var(--border-color);
-            padding: 15px 10%; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; top: 0; width: 100%; background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border-color);
+            padding: 12px 8%; display: flex; justify-content: space-between; align-items: center;
         }
-        .nav-logo { font-size: 1.5rem; font-weight: 900; color: var(--white); text-decoration: none; letter-spacing: 1px; }
+        .nav-logo { font-size: 1.6rem; font-weight: 900; letter-spacing: -1px; text-decoration: none; color: #fff; }
         .nav-logo span { color: var(--primary-red); }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: var(--text-gray); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--white); }
-        .ads-btn { background: var(--primary-red); color: white !important; padding: 6px 18px; border-radius: 8px; font-weight: 800; }
 
-        /* Hero */
-        .hero { 
-            height: 45vh; display: flex; flex-direction: column; justify-content: center; 
-            align-items: center; text-align: center; padding: 0 10%; 
-            background: radial-gradient(circle at center, rgba(230, 30, 42, 0.08) 0%, transparent 70%); 
+        /* Modern Grid Layout */
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px 40px; }
+        
+        .main-grid { 
+            display: grid; 
+            grid-template-columns: 2fr 1fr; 
+            gap: 25px; 
+            margin-bottom: 50px;
         }
-        .hero-logo { max-width: 220px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
-        .hero p { font-size: 1.3rem; color: var(--text-gray); max-width: 600px; font-weight: 400; }
 
-        section { padding: 50px 10%; }
-        .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 35px; border-right: 4px solid var(--primary-red); padding-right: 15px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Blog Articles list */
-        .articles-list { display: flex; flex-direction: column; gap: 15px; }
-        .article-card { 
-            display: flex; align-items: center; background: var(--card-bg); padding: 20px; 
-            border-radius: 15px; border: 1px solid var(--border-color); text-decoration: none; color: white; transition: 0.3s ease; 
+        /* Featured Article */
+        #featured-post-container { grid-column: 1 / 2; }
+        .featured-card {
+            background: linear-gradient(to bottom, rgba(230, 30, 42, 0.1), transparent), var(--card-bg);
+            border-radius: 24px; padding: 40px; border: 1px solid var(--border-color);
+            height: 100%; display: flex; flex-direction: column; justify-content: flex-end;
+            transition: 0.4s; position: relative; overflow: hidden;
         }
-        .article-card:hover { 
-            border-color: rgba(230, 30, 42, 0.4); 
-            transform: translateX(-5px); 
-            background: rgba(255, 255, 255, 0.06);
+        .featured-card::before {
+            content: "LATEST"; position: absolute; top: 20px; right: 20px;
+            background: var(--primary-red); color: #fff; font-weight: 900; font-size: 0.7rem;
+            padding: 4px 12px; border-radius: 20px;
         }
-        .outlet-logo { width: 60px; height: 60px; background: #fff; border-radius: 10px; display: flex; justify-content: center; align-items: center; padding: 6px; margin-left: 18px; flex-shrink: 0; }
-        .outlet-logo img { max-width: 100%; height: auto; }
-        .article-text h4 { font-size: 1.25rem; margin-bottom: 4px; font-weight: 800; line-height: 1.3; }
-        .article-text p { color: var(--text-gray); font-size: 0.95rem; }
-        .article-date { color: var(--primary-red); font-weight: 800; font-size: 0.75rem; margin-bottom: 4px; display: block; }
 
-        /* Videos Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .embed-card { background: var(--card-bg); border-radius: 20px; padding: 12px; border: 1px solid var(--border-color); height: 600px; overflow: hidden; }
+        /* Sidebar Blog List */
+        .sidebar-posts { display: flex; flex-direction: column; gap: 20px; }
+        .side-card {
+            background: var(--card-bg); border-radius: 18px; padding: 20px;
+            border: 1px solid var(--border-color); transition: 0.3s;
+        }
+        .side-card:hover, .featured-card:hover { border-color: var(--primary-red); transform: translateY(-4px); }
 
-        .wa-banner { background: linear-gradient(135deg, #128C7E, #075E54); padding: 40px; border-radius: 25px; text-align: center; margin: 30px 10%; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .wa-btn { background: #fff; color: #075E54; padding: 12px 35px; border-radius: 10px; text-decoration: none; font-weight: 800; display: inline-block; margin-top: 15px; transition: 0.3s; }
-        .wa-btn:hover { transform: scale(1.05); }
+        /* Video/Media Grid */
+        .section-header { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; }
+        .section-header h2 { font-size: 1.8rem; font-weight: 800; }
+        .line { flex: 1; height: 1px; background: var(--border-color); }
 
-        footer { padding: 40px 10%; text-align: center; border-top: 1px solid var(--border-color); color: #666; font-size: 0.85rem; }
-        .social-icons { display: flex; justify-content: center; gap: 20px; margin-bottom: 15px; }
-        .social-icons a { color: #888; font-size: 1.3rem; transition: 0.3s; }
-        .social-icons a:hover { color: var(--primary-red); }
+        .media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .media-tile { background: var(--card-bg); border-radius: 20px; padding: 15px; border: 1px solid var(--border-color); height: 500px; }
 
-        @media (max-width: 768px) {
-            .hero-logo { max-width: 160px; }
-            section { padding: 40px 6%; }
-            .nav-links { display: none; }
-            .embed-card { height: 500px; }
+        /* Typography */
+        h1 { font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 15px; }
+        .meta { color: var(--primary-red); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        p.summary { color: var(--text-gray); font-size: 1.1rem; }
+
+        .wa-footer-banner {
+            background: linear-gradient(90deg, #128C7E, #075E54);
+            border-radius: 24px; padding: 40px; text-align: center; margin-top: 60px;
+        }
+        .wa-btn {
+            background: #fff; color: #075E54; padding: 12px 40px; border-radius: 12px;
+            text-decoration: none; font-weight: 800; display: inline-block; margin-top: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -108,79 +102,63 @@
 
     <nav>
         <a href="#" class="nav-logo">AZRAN<span>.</span>CC</a>
-        <div class="nav-links">
-            <a href="#blog">בלוג</a>
-            <a href="#videos">סרטונים</a>
-            <a href="#articles">בתקשורת</a>
-            <a href="ads.html" class="ads-btn">שת"פ</a>
+        <div style="display: flex; gap: 20px;">
+            <a href="https://instagram.com/morazran" style="color: #fff;"><i class="fab fa-instagram"></i></a>
+            <a href="https://tiktok.com/@azranmor" style="color: #fff;"><i class="fab fa-tiktok"></i></a>
         </div>
     </nav>
 
-    <section class="hero">
-        <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png" alt="Azran Logo" class="hero-logo">
-        <p>הקול של אוהדי הפועל תל אביב.</p>
-    </section>
+    <div class="container">
+        
+        <header style="margin-bottom: 60px; text-align: center;">
+            <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png" 
+                 style="width: 120px; margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(230,30,42,0.2));">
+            <h2 style="font-weight: 900; font-size: 2.5rem;">הפועל על פי עזרן</h2>
+            <p style="color: var(--text-gray);">ניתוחי עומק, קהילה וכל מה שקורה בלב של אוהדי הפועל תל אביב.</p>
+        </header>
 
-    <section id="blog">
-        <div class="section-title">עזרן כותב</div>
-        <div id="dynamic-blog-container" class="articles-list">
-            <p style="text-align: center; color: var(--text-gray); font-style: italic;">מעדכן ניתוחים אחרונים...</p>
+        <div class="section-header">
+            <h2>מבט לעומק</h2>
+            <div class="line"></div>
         </div>
-    </section>
 
-    <section id="videos">
-        <div class="section-title">Reels & Media</div>
-        <div class="grid">
-            <div class="embed-card">
-                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DThrTyHEz9L/" data-instgrm-version="14" style="width: 100%;"></blockquote>
+        <div class="main-grid">
+            <div id="featured-post-container"></div>
+            
+            <div id="side-posts-container" class="sidebar-posts"></div>
+        </div>
+
+        <div class="section-header">
+            <h2>REELS & MEDIA</h2>
+            <div class="line"></div>
+        </div>
+        
+        <div class="media-grid">
+            <div class="media-tile">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DThrTyHEz9L/" data-instgrm-version="14"></blockquote>
             </div>
-            <div class="embed-card">
-                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQHGbzFkxp0/" data-instgrm-version="14" style="width: 100%;"></blockquote>
+            <div class="media-tile">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQHGbzFkxp0/" data-instgrm-version="14"></blockquote>
             </div>
         </div>
-    </section>
 
-    <section id="articles">
-        <div class="section-title">מהתקשורת</div>
-        <div class="articles-list">
-            <a href="https://sports.walla.co.il/item/3809215" target="_blank" class="article-card">
-                <div class="outlet-logo"><img src="assets/images/walla.png" alt="וואלה"></div>
-                <div class="article-text">
-                    <h4>הפועל תל אביב התחפשה לבני ריינה: המפלה בדרבי</h4>
-                    <p>וואלה! ספורט | ינואר 2026</p>
-                </div>
-            </a>
-            <a href="https://www.sport5.co.il/articles.aspx?FolderID=64&docID=428664" target="_blank" class="article-card">
-                <div class="outlet-logo"><img src="assets/images/sport5.png" alt="ספורט 5"></div>
-                <div class="article-text">
-                    <h4>מאחורי "מייצגים את הפועל ולא את ישראל"</h4>
-                    <p>ערוץ הספורט | פברואר 2023</p>
-                </div>
-            </a>
+        <div class="wa-footer-banner">
+            <h2 style="font-weight: 900;">הצטרפו לקהילת הווטסאפ</h2>
+            <p>כל הניתוחים והעדכונים ישירות לנייד שלכם.</p>
+            <a href="https://whatsapp.com/channel/0029VbBiFme2UPBIGn82mC3Z" class="wa-btn">להצטרפות לערוץ</a>
         </div>
-    </section>
 
-    <div class="wa-banner">
-        <h2 style="font-size: 1.8rem; margin-bottom: 10px;">קהילת ״הפועל על פי עזרן״</h2>
-        <p>הצטרפו לערוץ הווטסאפ הרשמי</p>
-        <a href="https://whatsapp.com/channel/0029VbBiFme2UPBIGn82mC3Z" class="wa-btn">הצטרפות</a>
     </div>
 
-    <footer>
-        <div class="social-icons">
-            <a href="https://twitter.com/AzranMor"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/morazran"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@azranmor"><i class="fab fa-tiktok"></i></a>
-            <a href="https://whatsapp.com/channel/0029VbBiFme2UPBIGn82mC3Z"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        <p>© 2026 עזרן | כל הזכויות שמורות</p>
+    <footer style="padding: 40px; text-align: center; color: #444; font-size: 0.8rem;">
+        © 2026 עזרן | כל הזכויות שמורות
     </footer>
 
     <script async src="//www.instagram.com/embed.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     
     <script>
-        // ניהול Identity ל-CMS
+        // CMS Auth Redirect
         if (window.netlifyIdentity) {
             window.netlifyIdentity.on("init", user => {
                 if (!user) {
@@ -189,43 +167,53 @@
             });
         }
 
-        // שאיבת המאמרים מ-GitHub
-        async function fetchBlogPosts() {
-            const container = document.getElementById('dynamic-blog-container');
+        // Fetch & Build Magazine Grid
+        async function buildMagazine() {
+            const featuredContainer = document.getElementById('featured-post-container');
+            const sideContainer = document.getElementById('side-posts-container');
             const repo = 'azranmor66/azran'; 
             
             try {
                 const response = await fetch(`https://api.github.com/repos/${repo}/contents/_posts`);
                 const files = await response.json();
-                if (!Array.isArray(files)) throw new Error();
-                
-                container.innerHTML = ''; 
+                const posts = files.reverse();
 
-                for (const file of files.reverse().slice(0, 3)) {
-                    const contentResponse = await fetch(file.download_url);
-                    const rawText = await contentResponse.text();
-                    const parts = rawText.split('---');
-                    if (parts.length < 3) continue;
-                    
-                    const metadata = jsyaml.load(parts[1]);
-                    
-                    const postHTML = `
-                        <div class="article-card">
-                            <div class="outlet-logo"><img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png" alt="עזרן"></div>
-                            <div class="article-text">
-                                <span class="article-date">${new Date(metadata.date).toLocaleDateString('he-IL')}</span>
-                                <h4>${metadata.title}</h4>
-                                <p>${metadata.summary || ''}</p>
-                            </div>
+                // 1. Featured Post (הראשון ברשימה)
+                const featuredFile = posts[0];
+                const featRes = await fetch(featuredFile.download_url);
+                const featText = await featRes.text();
+                const featParts = featText.split('---');
+                const featMeta = jsyaml.load(featParts[1]);
+
+                featuredContainer.innerHTML = `
+                    <div class="featured-card">
+                        <span class="meta">${new Date(featMeta.date).toLocaleDateString('he-IL')}</span>
+                        <h1>${featMeta.title}</h1>
+                        <p class="summary">${featMeta.summary || ''}</p>
+                        <a href="/admin" style="color: var(--primary-red); font-weight: 800; text-decoration: none; margin-top: 20px; display: block;">קרא עוד ←</a>
+                    </div>
+                `;
+
+                // 2. Side Posts (הבאים בתור)
+                sideContainer.innerHTML = '';
+                for (const file of posts.slice(1, 4)) {
+                    const res = await fetch(file.download_url);
+                    const text = await res.text();
+                    const parts = text.split('---');
+                    const meta = jsyaml.load(parts[1]);
+
+                    sideContainer.innerHTML += `
+                        <div class="side-card">
+                            <span class="meta" style="font-size: 0.7rem;">${new Date(meta.date).toLocaleDateString('he-IL')}</span>
+                            <h3 style="font-weight: 800;">${meta.title}</h3>
                         </div>
                     `;
-                    container.innerHTML += postHTML;
                 }
             } catch (e) {
-                container.innerHTML = '<p style="text-align: center; color: var(--text-gray);">ניתוחי עומק חדשים בקרוב...</p>';
+                console.error("Error loading magazine", e);
             }
         }
-        fetchBlogPosts();
+        buildMagazine();
     </script>
 </body>
 </html>
