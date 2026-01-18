@@ -1,18 +1,20 @@
 backend:
   name: git-gateway
-  branch: main # או master, תלוי בשם הענף שלך
+  branch: main
 
-media_folder: "assets/images/blog" # איפה ישמרו התמונות של הבלוג
+display_url: https://azran.cc
+media_folder: "assets/images/blog"
 public_folder: "/assets/images/blog"
 
 collections:
   - name: "blog"
     label: "פוסטים לבלוג"
-    folder: "_posts" # כאן ישמרו הקבצים של המאמרים
+    folder: "_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "כותרת", name: "title", widget: "string"}
       - {label: "תאריך פרסום", name: "date", widget: "datetime"}
+      - {label: "תמונה ראשית", name: "thumbnail", widget: "image"}
       - {label: "תקציר (לדף הבית)", name: "summary", widget: "text"}
       - {label: "גוף המאמר", name: "body", widget: "markdown"}
