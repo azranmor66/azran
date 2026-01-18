@@ -10,25 +10,27 @@
     <style>
         body { background-color: #121212; color: #f5f5f5; font-family: 'Assistant', sans-serif; line-height: 1.8; }
         .container { max-width: 800px; margin: 120px auto 60px; padding: 0 20px; }
-        .prose h1, .prose h2, .prose h3 { color: #fff; margin: 1.5rem 0 1rem; font-weight: 800; }
+        .main-img { width: 100%; border-radius: 20px; margin-bottom: 30px; max-height: 450px; object-fit: cover; }
+        .prose h1, .prose h2 { color: #fff; margin-top: 2rem; font-weight: 800; }
         .prose p { margin-bottom: 1.5rem; color: #ccc; font-size: 1.15rem; text-align: justify; }
         nav { position: fixed; top: 0; width: 100%; background: rgba(18,18,18,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 15px 8%; z-index: 100; }
-        .comments-section { margin-top: 60px; border-top: 1px solid #333; padding-top: 40px; }
+        .comments { margin-top: 60px; border-top: 1px solid #333; padding-top: 40px; }
     </style>
 </head>
 <body>
     <nav><a href="index.html" style="color: #fff; text-decoration: none; font-weight: 900; font-size: 1.5rem;">AZRAN<span>.</span>CC</a></nav>
 
     <div class="container">
-        <header style="margin-bottom: 40px; border-bottom: 1px solid #333; padding-bottom: 30px;">
+        <header style="margin-bottom: 40px;">
+            <img id="post-img" class="main-img" src="" style="display:none;">
             <span id="date" style="color: #e61e2a; font-weight: 800; font-size: 0.9rem;"></span>
             <h1 id="title" style="font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-top: 10px;"></h1>
         </header>
         
         <div id="content" class="prose">טוען כתבה...</div>
 
-        <div class="comments-section">
-            <h3 style="margin-bottom: 30px; font-weight: 800;">תגובות והערות</h3>
+        <div class="comments">
+            <h3 style="margin-bottom: 30px; font-weight: 800;">תגובות האוהדים</h3>
             <div id="disqus_thread"></div>
         </div>
     </div>
@@ -36,36 +38,35 @@
     <script>
         async function loadPost() {
             const id = new URLSearchParams(window.location.search).get('id');
-            const repo = 'azranmor66/azran'; 
-            if (!id) { window.location.href = 'index.html'; return; }
+            const repo = 'azranmor66/azran';
             try {
                 const res = await fetch(`https://api.github.com/repos/${repo}/contents/_posts/${id}`);
                 const data = await res.json();
                 const raw = decodeURIComponent(escape(atob(data.content)));
                 const parts = raw.split('---');
                 const meta = jsyaml.load(parts[1]);
+                
                 document.getElementById('title').innerText = meta.title;
                 document.getElementById('date').innerText = new Date(meta.date).toLocaleDateString('he-IL');
+                if(meta.thumbnail) {
+                    const img = document.getElementById('post-img');
+                    img.src = meta.thumbnail;
+                    img.style.display = 'block';
+                }
                 document.getElementById('content').innerHTML = marked.parse(parts[2]);
-                
-                // טעינת Disqus לאחר שהמאמר מוכן
                 initDisqus(id);
             } catch (e) { document.getElementById('content').innerHTML = "שגיאה בטעינת המאמר."; }
         }
 
         function initDisqus(pageId) {
-            var disqus_config = function () {
-                this.page.url = window.location.href;  
-                this.page.identifier = pageId; 
-            };
+            var disqus_config = function () { this.page.url = window.location.href; this.page.identifier = pageId; };
             (function() { 
                 var d = document, s = d.createElement('script');
-                s.src = 'https://azran-cc.disqus.com/embed.js'; // כאן נכניס את ה-Shortname שלך
+                s.src = 'https://azran-cc.disqus.com/embed.js'; 
                 s.setAttribute('data-timestamp', +new Date());
                 (d.head || d.body).appendChild(s);
             })();
         }
-
         loadPost();
     </script>
 </body>
