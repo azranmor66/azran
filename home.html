@@ -20,7 +20,7 @@
     <style>
         :root {
             --primary-red: #e61e2a;
-            --dark-bg: #121212; /* שחור-פחם רך ויוקרתי */
+            --dark-bg: #121212;
             --card-bg: rgba(255, 255, 255, 0.05);
             --border-color: rgba(255, 255, 255, 0.1);
             --text-gray: #a0a0a0;
@@ -51,25 +51,61 @@
         /* Magazine Grid */
         .magazine-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-bottom: 60px; }
         
+        /* Featured Card with Dynamic Background */
         .featured-card {
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent), var(--card-bg);
-            border-radius: 24px; padding: 50px; border: 1px solid var(--border-color);
-            min-height: 450px; display: flex; flex-direction: column; justify-content: flex-end;
-            transition: 0.4s; text-decoration: none; color: #fff;
+            background-size: cover;
+            background-position: center;
+            border-radius: 24px; 
+            border: 1px solid var(--border-color);
+            min-height: 450px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-end;
+            transition: 0.4s; 
+            text-decoration: none; 
+            color: #fff;
+            position: relative;
+            overflow: hidden;
         }
+        .featured-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, transparent 80%);
+            z-index: 1;
+        }
+        .featured-content { position: relative; z-index: 2; padding: 50px; }
         .featured-card:hover { border-color: var(--primary-red); transform: translateY(-5px); }
 
         .side-news { display: flex; flex-direction: column; gap: 20px; }
+        
         .small-card { 
-            background: var(--card-bg); border-radius: 18px; padding: 22px; 
-            border: 1px solid var(--border-color); transition: 0.3s; text-decoration: none; color: #fff;
+            background: var(--card-bg); 
+            border-radius: 18px; 
+            padding: 15px; 
+            border: 1px solid var(--border-color); 
+            transition: 0.3s; 
+            text-decoration: none; 
+            color: #fff;
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
         .small-card:hover { border-color: var(--primary-red); background: rgba(255,255,255,0.08); }
+        
+        .thumb-container {
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .thumb-container img { width: 100%; height: 100%; object-fit: cover; }
 
         .section-title { font-size: 1.8rem; font-weight: 800; margin: 50px 0 30px; display: flex; align-items: center; gap: 15px; }
         .section-title::after { content: ""; flex: 1; height: 1px; background: var(--border-color); }
 
-        /* Media & Videos */
         .video-flex { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; }
         .video-item { flex: 0 0 320px; background: #000; border-radius: 20px; border: 1px solid var(--border-color); overflow: hidden; }
 
@@ -88,7 +124,10 @@
         }
         .wa-btn { background: #fff; color: #075E54; padding: 12px 40px; border-radius: 12px; text-decoration: none; font-weight: 800; display: inline-block; margin-top: 20px; }
 
-        @media (max-width: 850px) { .magazine-grid, .podcasts-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 850px) { 
+            .magazine-grid, .podcasts-grid { grid-template-columns: 1fr; } 
+            .featured-content { padding: 30px; }
+        }
     </style>
 </head>
 <body>
@@ -164,28 +203,41 @@
                 const files = await res.json();
                 const posts = files.reverse();
 
-                // Featured Post
+                // Featured Post - Using Thumbnail as Background
                 const featRes = await fetch(posts[0].download_url);
                 const featText = await featRes.text();
                 const featMeta = jsyaml.load(featText.split('---')[1]);
+                
+                const featImg = featMeta.thumbnail || 'https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png';
+
                 document.getElementById('featured-target').innerHTML = `
-                    <a href="article.html?id=${posts[0].name}" class="featured-card">
-                        <span style="color: var(--primary-red); font-weight: 800; font-size: 0.8rem;">LATEST</span>
-                        <h1 style="font-size: 2.8rem; font-weight: 900; margin: 10px 0;">${featMeta.title}</h1>
-                        <p style="color: #ccc;">${featMeta.summary || ''}</p>
+                    <a href="article.html?id=${posts[0].name}" class="featured-card" style="background-image: url('${featImg}')">
+                        <div class="featured-content">
+                            <span style="color: var(--primary-red); font-weight: 800; font-size: 0.8rem;">LATEST</span>
+                            <h1 style="font-size: 2.8rem; font-weight: 900; margin: 10px 0;">${featMeta.title}</h1>
+                            <p style="color: #ccc;">${featMeta.summary || ''}</p>
+                        </div>
                     </a>`;
 
-                // Side Posts
+                // Side Posts - Including Thumbnails
                 const sideTarget = document.getElementById('side-target');
                 sideTarget.innerHTML = '';
                 for (const file of posts.slice(1, 4)) {
                     const sRes = await fetch(file.download_url);
                     const sText = await sRes.text();
                     const sMeta = jsyaml.load(sText.split('---')[1]);
+                    
+                    const sImg = sMeta.thumbnail || 'https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png';
+
                     sideTarget.innerHTML += `
                         <a href="article.html?id=${file.name}" class="small-card">
-                            <span style="color: var(--primary-red); font-weight: 800; font-size: 0.7rem;">${new Date(sMeta.date).toLocaleDateString('he-IL')}</span>
-                            <h4 style="font-weight: 800; margin-top: 5px;">${sMeta.title}</h4>
+                            <div class="thumb-container">
+                                <img src="${sImg}" alt="${sMeta.title}">
+                            </div>
+                            <div>
+                                <span style="color: var(--primary-red); font-weight: 800; font-size: 0.7rem;">${new Date(sMeta.date).toLocaleDateString('he-IL')}</span>
+                                <h4 style="font-weight: 800; margin-top: 5px;">${sMeta.title}</h4>
+                            </div>
                         </a>`;
                 }
             } catch (e) { console.error(e); }
