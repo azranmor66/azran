@@ -10,14 +10,13 @@ const treeConfig = {
             icon: "message-circle", 
             visible: true 
         },
-                  { 
+         { 
             label: "לתמיכה בפעילות", 
             url: "https://buymeacoffee.com/azran", 
             icon: "globe", 
             visible: true, 
-            highlight: false 
+            highlight: true 
         },
-
           { 
             label: "לאתר הרשמי", 
             url: "home.html", 
