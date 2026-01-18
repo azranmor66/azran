@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>עזרן | הפועל על פי עזרן - ניתוחים, דעות וקהילת הפועל תל אביב</title>
-    <meta name="description" content="הבית של אוהדי הפועל תל אביב. מור עזרן מגיש ניתוחי עומק, סיכומי משחקים, פודקאסטים ועדכונים חמים על הפועל תל אביב. הצטרפו לקהילה האדומה.">
-    <meta name="keywords" content="עזרן, מור עזרן, הפועל תל אביב, הפועל, כדורגל ישראלי, ניתוח כדורגל, רק הפועל">
+    <title>עזרן | הפועל על פי עזרן - מגזין האוהדים הרשמי</title>
+    <meta name="description" content="ניתוחי עומק, פודקאסטים וקהילה אדומה תחת המותג 'הפועל על פי עזרן'. הבית של אוהדי הפועל תל אביב.">
+    <meta name="keywords" content="מור עזרן, עזרן, הפועל תל אביב, כדורגל, ניתוח כדורגל, רק הפועל">
     <link rel="canonical" href="https://azran.cc/">
-    
-    <meta property="og:title" content="עזרן | הפועל על פי עזרן">
-    <meta property="og:description" content="ניתוחי עומק וקהילה של אוהדי הפועל תל אביב.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png">
-    <meta property="og:url" content="https://azran.cc/">
     
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETHSZD36Z6"></script>
@@ -22,163 +17,212 @@
       gtag('js', new Date()); gtag('config', 'G-ETHSZD36Z6');
     </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root { --primary-red: #e61e2a; --dark-bg: #121212; --card-bg: rgba(255, 255, 255, 0.05); --border-color: rgba(255, 255, 255, 0.1); --text-gray: #a0a0a0; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Assistant', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--dark-bg); color: #fff; line-height: 1.6; background-image: radial-gradient(circle at 10% 20%, rgba(230, 30, 42, 0.05) 0%, transparent 40%); background-attachment: fixed; }
+        :root {
+            --hapoel-red: #e61e2a;
+            --charcoal: #121212;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-muted: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Assistant', sans-serif; }
+        body { background-color: var(--charcoal); color: #fff; line-height: 1.5; overflow-x: hidden; }
         
-        nav { position: fixed; top: 0; width: 100%; background: rgba(18, 18, 18, 0.85); backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border-color); padding: 12px 8%; display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { font-size: 1.6rem; font-weight: 900; color: #fff; text-decoration: none; }
-        .nav-links a { color: var(--text-gray); text-decoration: none; font-weight: 600; margin: 0 15px; font-size: 0.95rem; }
+        /* Background Dynamics */
+        body::before {
+            content: ""; position: fixed; inset: 0;
+            background: radial-gradient(circle at 15% 15%, rgba(230, 30, 42, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 85% 85%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+            z-index: -1;
+        }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px 40px; }
+        /* Nav */
+        nav {
+            position: fixed; top: 0; width: 100%; background: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(25px); z-index: 1000; border-bottom: 1px solid var(--border);
+            padding: 15px 8%; display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo { font-size: 1.8rem; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: -1px; }
+        .nav-logo span { color: var(--hapoel-red); }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 120px 20px 40px; }
+
+        /* HERO STORY SECTION (Inspired by Players' Tribune) */
+        .hero-magazine { 
+            display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; margin-bottom: 80px; 
+        }
         
-        /* Magazine Grid */
-        .magazine-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-bottom: 60px; }
-        .featured-card { background-size: cover; background-position: center; border-radius: 24px; border: 1px solid var(--border-color); min-height: 450px; display: flex; flex-direction: column; justify-content: flex-end; text-decoration: none; color: #fff; position: relative; overflow: hidden; transition: 0.4s; }
-        .featured-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, transparent 80%); z-index: 1; }
-        .featured-content { position: relative; z-index: 2; padding: 40px; }
-        .featured-card:hover { border-color: var(--primary-red); transform: translateY(-5px); }
+        #featured-story-target { grid-column: 1 / 2; }
+        .hero-card {
+            background-size: cover; background-position: center; border-radius: 30px;
+            min-height: 550px; display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 50px; text-decoration: none; color: #fff; position: relative;
+            overflow: hidden; border: 1px solid var(--border); transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .hero-card::after {
+            content: ""; position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.4) 50%, transparent 100%);
+        }
+        .hero-card:hover { transform: scale(1.01); border-color: var(--hapoel-red); }
+        .hero-content { position: relative; z-index: 2; }
+        .hero-tag { background: var(--hapoel-red); color: #fff; padding: 4px 12px; border-radius: 50px; font-weight: 900; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 15px; display: inline-block; }
 
-        .side-news { display: flex; flex-direction: column; gap: 20px; }
-        .small-card { background: var(--card-bg); border-radius: 18px; padding: 15px; border: 1px solid var(--border-color); transition: 0.3s; text-decoration: none; color: #fff; display: flex; gap: 15px; align-items: center; }
-        .small-card:hover { border-color: var(--primary-red); background: rgba(255,255,255,0.08); }
-        .thumb { width: 80px; height: 80px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
+        /* SIDEBAR FEED */
+        .side-feed { display: flex; flex-direction: column; gap: 20px; }
+        .feed-card {
+            background: var(--glass); border-radius: 20px; padding: 15px;
+            border: 1px solid var(--border); display: flex; gap: 15px; align-items: center;
+            text-decoration: none; color: #fff; transition: 0.3s;
+        }
+        .feed-card:hover { background: rgba(255,255,255,0.07); border-color: var(--hapoel-red); }
+        .feed-img { width: 100px; height: 100px; border-radius: 12px; object-fit: cover; }
 
-        .section-title { font-size: 1.8rem; font-weight: 800; margin: 50px 0 30px; display: flex; align-items: center; gap: 15px; }
-        .section-title::after { content: ""; flex: 1; height: 1px; background: var(--border-color); }
+        /* SECTION TITLES */
+        .section-header { font-size: 2.2rem; font-weight: 900; margin-bottom: 40px; display: flex; align-items: center; gap: 20px; }
+        .section-header::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 
-        .video-flex { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; }
-        .video-item { flex: 0 0 320px; background: #000; border-radius: 20px; border: 1px solid var(--border-color); overflow: hidden; }
-
-        .podcasts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .media-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .media-card { background: #fff; color: #000; border-radius: 15px; padding: 20px; display: flex; align-items: center; gap: 15px; text-decoration: none; transition: 0.3s; }
-        .twitter-wrapper { background: var(--card-bg); border-radius: 20px; padding: 20px; border: 1px solid var(--border-color); height: 600px; overflow-y: auto; }
-
-        .wa-banner { background: linear-gradient(135deg, #128C7E, #075E54); padding: 50px; border-radius: 30px; text-align: center; margin-top: 60px; }
-        .wa-btn { background: #fff; color: #075E54; padding: 12px 40px; border-radius: 12px; text-decoration: none; font-weight: 800; display: inline-block; margin-top: 20px; }
-
-        footer { padding: 40px; text-align: center; color: #666; border-top: 1px solid var(--border-color); }
-        footer a { color: #888; text-decoration: none; margin: 0 10px; font-size: 0.8rem; }
+        /* MULTIMEDIA ZONE (Inspired by GaryVee) */
+        .multimedia-row { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 80px; }
+        .content-box { background: var(--glass); border-radius: 30px; padding: 25px; border: 1px solid var(--border); }
         
-        @media (max-width: 850px) { .magazine-grid, .podcasts-grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
+        /* REELS CAROUSEL */
+        .reels-container { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
+        .reel-item { flex: 0 0 280px; height: 480px; background: #000; border-radius: 20px; overflow: hidden; }
+
+        /* WHATSAPP CTA */
+        .community-banner {
+            background: linear-gradient(135deg, #128C7E, #075E54);
+            border-radius: 40px; padding: 60px; text-align: center; margin-top: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .wa-btn {
+            background: #fff; color: #075E54; padding: 15px 50px; border-radius: 15px;
+            text-decoration: none; font-weight: 900; font-size: 1.2rem; display: inline-block; margin-top: 25px; transition: 0.3s;
+        }
+        .wa-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        /* FOOTER */
+        footer { padding: 60px; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); }
+        footer a { color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.85rem; }
+
+        @media (max-width: 1000px) {
+            .hero-magazine, .multimedia-row { grid-template-columns: 1fr; }
+            .hero-card { min-height: 400px; padding: 30px; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="/" class="nav-logo" aria-label="דף הבית עזרן">AZRAN<span>.</span>CC</a>
-        <div class="nav-links">
-            <a href="#blog">בלוג</a>
-            <a href="#podcasts">פודקאסטים</a>
-            <a href="#articles">תקשורת</a>
-            <a href="#tweets">X Live</a>
+        <a href="/" class="nav-logo">AZRAN<span>.</span>CC</a>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <a href="https://instagram.com/morazran" style="color:#fff; font-size:1.2rem;"><i class="fab fa-instagram"></i></a>
+            <a href="https://tiktok.com/@azranmor" style="color:#fff; font-size:1.2rem;"><i class="fab fa-tiktok"></i></a>
         </div>
     </nav>
 
     <div class="container">
-        <header style="text-align: center; margin-bottom: 60px;">
-            <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png" alt="לוגו עזרן" style="width: 120px; margin-bottom: 20px;">
-            <h1 style="font-weight: 900; font-size: 2.5rem;">הפועל על פי עזרן</h1>
-            <p style="color: var(--text-gray);">ניתוחי עומק וקהילת הפועל תל אביב</p>
-        </header>
-
-        <div id="blog" class="section-title">מבט לעומק</div>
-        <div class="magazine-grid">
-            <div id="featured-target"></div>
-            <div class="side-news" id="side-target"></div>
+        
+        <div class="hero-magazine">
+            <div id="featured-story-target">
+                </div>
+            
+            <div class="side-feed">
+                <h3 style="font-weight: 900; color: var(--hapoel-red); margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px;">עוד ניתוחים</h3>
+                <div id="side-feed-target">
+                    </div>
+            </div>
         </div>
 
-        <div id="podcasts" class="section-title">פודקאסטים</div>
-        <div class="podcasts-grid">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/59C1L2Rj8H6S8w8H1Z8m0u" width="100%" height="200" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/15vG1wF9pD6xR7N5pB9Jp7" width="100%" height="200" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+        <div class="section-header">MOMENTS & VOICES</div>
+        <div class="multimedia-row">
+            <div class="content-box">
+                <h3 style="margin-bottom: 20px; font-weight: 800;"><i class="fab fa-instagram" style="color: var(--hapoel-red); margin-left: 10px;"></i> REELS</h3>
+                <div class="reels-container">
+                    <div class="reel-item"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DThrTyHEz9L/" data-instgrm-version="14"></blockquote></div>
+                    <div class="reel-item"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQHGbzFkxp0/" data-instgrm-version="14"></blockquote></div>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h3 style="margin-bottom: 20px; font-weight: 800;"><i class="fab fa-spotify" style="color: #1DB954; margin-left: 10px;"></i> PODCASTS</h3>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <iframe style="border-radius:12px" src="http://googleusercontent.com/spotify.com/6" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+                    <iframe style="border-radius:12px" src="http://googleusercontent.com/spotify.com/7" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
         </div>
 
-        <div id="articles" class="section-title">בתקשורת הארצית</div>
-        <div class="media-list">
-            <a href="https://sports.walla.co.il/item/3809215" target="_blank" class="media-card">
-                <img src="https://upload.wikimedia.org/wikipedia/he/thumb/4/4a/Walla_logo_2020.svg/1200px-Walla_logo_2020.svg.png" alt="וואלה" style="width: 50px;">
-                <div><h4 style="font-weight: 800;">המפלה בדרבי לא תישכח</h4><p style="font-size: 0.8rem; color: #666;">וואלה! ספורט</p></div>
-            </a>
-            <a href="https://www.sport5.co.il/articles.aspx?FolderID=64&docID=428664" target="_blank" class="media-card">
-                <img src="https://upload.wikimedia.org/wikipedia/he/thumb/0/07/Sport5_logo.svg/1200px-Sport5_logo.svg.png" alt="ספורט 5" style="width: 50px;">
-                <div><h4 style="font-weight: 800;">מייצגים את הפועל</h4><p style="font-size: 0.8rem; color: #666;">ערוץ הספורט</p></div>
-            </a>
+        <div class="community-banner">
+            <h2 style="font-size: 2.5rem; font-weight: 900;">הפועל על פי עזרן בווטסאפ</h2>
+            <p style="font-size: 1.2rem; opacity: 0.9;">הצטרפו לקהילה האדומה וקבלו ניתוחים ישירות לנייד.</p>
+            <a href="https://whatsapp.com/channel/0029VbBiFme2UPBIGn82mC3Z" class="wa-btn">להצטרפות לערוץ הווטסאפ</a>
         </div>
 
-        <div class="section-title">REELS</div>
-        <div class="video-flex">
-            <div class="video-item"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DThrTyHEz9L/" data-instgrm-version="14"></blockquote></div>
-            <div class="video-item"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQHGbzFkxp0/" data-instgrm-version="14"></blockquote></div>
-        </div>
-
-        <div id="tweets" class="section-title">עדכונים חיים מ-X</div>
-        <div class="twitter-wrapper">
-            <a class="twitter-timeline" data-theme="dark" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/AzranMor">Tweets by AzranMor</a>
-        </div>
-
-        <div class="wa-banner">
-            <h2 style="font-weight: 900;">הצטרפו לקהילת הווטסאפ</h2>
-            <p>ניתוחי עומק ועדכונים חיים ישירות לנייד שלכם.</p>
-            <a href="https://whatsapp.com/channel/0029VbBiFme2UPBIGn82mC3Z" class="wa-btn">להצטרפות לערוץ</a>
-        </div>
     </div>
 
     <footer>
         <p>© 2026 עזרן | כל הזכויות שמורות</p>
-        <div style="margin-top: 15px;">
-            <a href="/accessibility.html">הצהרת נגישות</a> | 
-            <a href="/privacy.html">מדיניות פרטיות</a> | 
-            <a href="/terms.html">תקנון האתר</a>
+        <div style="margin-top: 20px;">
+            <a href="/accessibility.html">נגישות</a>
+            <a href="/privacy.html">פרטיות</a>
+            <a href="/terms.html">תקנון</a>
         </div>
     </footer>
 
     <script async src="//www.instagram.com/embed.js"></script>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     
     <script>(function(){var s = document.createElement("script");s.onload = function(){window.enableAdapter.init({position: "right"});};s.src = "https://cdn.enable.co.il/adapter/adapter.js";document.head.appendChild(s);})();</script>
 
     <script>
-        async function loadContent() {
+        async function fetchMagazine() {
             const repo = 'azranmor66/azran';
             try {
                 const res = await fetch(`https://api.github.com/repos/${repo}/contents/_posts`);
                 const files = await res.json();
                 const posts = files.reverse();
 
+                // 1. Featured Story
                 const fRes = await fetch(posts[0].download_url);
                 const fText = await fRes.text();
                 const fMeta = jsyaml.load(fText.split('---')[1]);
-                document.getElementById('featured-target').innerHTML = `
-                    <a href="article.html?id=${posts[0].name}" class="featured-card" style="background-image: url('${fMeta.thumbnail || ''}')">
-                        <div class="featured-content">
-                            <span style="color: var(--primary-red); font-weight: 800; font-size: 0.8rem;">LATEST</span>
-                            <h2 style="font-size: 2.5rem; font-weight: 900;">${fMeta.title}</h2>
-                            <p>${fMeta.summary || ''}</p>
+                const fImg = fMeta.thumbnail || 'https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png';
+                
+                document.getElementById('featured-story-target').innerHTML = `
+                    <a href="article.html?id=${posts[0].name}" class="hero-card" style="background-image: url('${fImg}')">
+                        <div class="hero-content">
+                            <span class="hero-tag">Story of the week</span>
+                            <h1 style="font-size: 3.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 15px;">${fMeta.title}</h1>
+                            <p style="font-size: 1.2rem; color: #ccc; max-width: 600px;">${fMeta.summary || ''}</p>
                         </div>
                     </a>`;
 
-                const sTarget = document.getElementById('side-target');
-                sTarget.innerHTML = '';
+                // 2. Sidebar Feed
+                const sideTarget = document.getElementById('side-feed-target');
+                sideTarget.innerHTML = '';
                 for (const file of posts.slice(1, 4)) {
                     const res = await fetch(file.download_url);
                     const text = await res.text();
                     const meta = jsyaml.load(text.split('---')[1]);
-                    sTarget.innerHTML += `
-                        <a href="article.html?id=${file.name}" class="small-card">
-                            <img src="${meta.thumbnail || 'https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png'}" class="thumb" alt="">
-                            <div><h3 style="font-weight: 800; font-size: 1.1rem;">${meta.title}</h3></div>
+                    const sImg = meta.thumbnail || 'https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png';
+                    
+                    sideTarget.innerHTML += `
+                        <a href="article.html?id=${file.name}" class="feed-card">
+                            <img src="${sImg}" class="feed-img" alt="">
+                            <div>
+                                <span style="color: var(--hapoel-red); font-weight: 800; font-size: 0.7rem;">${new Date(meta.date).toLocaleDateString('he-IL')}</span>
+                                <h4 style="font-weight: 800; line-height: 1.2;">${meta.title}</h4>
+                            </div>
                         </a>`;
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) { console.error("Magazine Error", e); }
         }
-        loadContent();
+        fetchMagazine();
     </script>
 </body>
 </html>
