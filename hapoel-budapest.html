@@ -4,906 +4,716 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>הפועל בבודפשט | חבילות טיסה 2026</title>
-    <meta name="description" content="חבילות טיסה + מלון + הסעות למשחק הפועל תל אביב בבודפשט, יולי 2026. שלוש חבילות לבחירה.">
+    <meta name="description" content="חבילות טיסה + מלון + הסעות למשחק הפועל תל אביב בבודפשט, יולי 2026.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root {
-            --accent: #e61e2a;
-            --accent-dark: #b01520;
-            --bg: #0a0a0a;
-            --focus-color: #60a5fa;
-        }
+        :root { --red: #e61e2a; --red-dark: #b01520; --bg: #080808; --focus: #60a5fa; }
         *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
+        html { scroll-behavior: smooth; }
 
-        body {
-            background: var(--bg);
-            font-family: 'Heebo', sans-serif;
-            color: #fff;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+        body { background: var(--bg); font-family: 'Heebo', sans-serif; color: #fff; overflow-x: hidden; }
 
-        /* ====== SKIP LINK (נגישות) ====== */
-        .skip-link {
-            position: absolute;
-            top: -100%;
-            right: 0;
-            background: #fff;
-            color: #000;
-            padding: 0.75rem 1.5rem;
-            font-weight: 700;
-            font-size: 1rem;
-            z-index: 9999;
-            border-radius: 0 0 0.5rem 0;
-            text-decoration: none;
-            transition: top 0.2s;
-        }
+        /* ── SKIP / A11Y ── */
+        .skip-link { position: absolute; top: -200%; right: 0; background: #fff; color: #000; padding: .7rem 1.4rem; font-weight: 700; z-index: 9999; border-radius: 0 0 .5rem 0; text-decoration: none; }
         .skip-link:focus { top: 0; }
+        :focus-visible { outline: 3px solid var(--focus) !important; outline-offset: 3px !important; }
 
-        /* ====== FOCUS STYLES (נגישות) ====== */
-        :focus-visible {
-            outline: 3px solid var(--focus-color) !important;
-            outline-offset: 3px !important;
+        /* ── TYPOGRAPHY ── */
+        .eyebrow { font-size: .65rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--red); }
+        .display { font-size: clamp(2.2rem, 7vw, 3.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -.02em; }
+        .price-xl { font-size: clamp(2rem, 6vw, 2.8rem); font-weight: 900; line-height: 1; }
+
+        /* ── DIVIDER ── */
+        .rule { height: 1px; background: linear-gradient(90deg, transparent, rgba(230,30,42,.35), transparent); }
+        .rule-soft { height: 1px; background: rgba(255,255,255,.06); }
+
+        /* ── PACKAGE CARDS ── */
+        .pkg-card { background: #0f0f0f; border: 1px solid rgba(255,255,255,.07); border-radius: 1.25rem; cursor: pointer; transition: border-color .3s, transform .3s, box-shadow .3s; position: relative; overflow: hidden; }
+        .pkg-card:hover { border-color: rgba(230,30,42,.4); transform: translateY(-3px); box-shadow: 0 14px 40px rgba(230,30,42,.1); }
+        .pkg-card.soldout { opacity: .5; cursor: not-allowed; }
+        .pkg-card.soldout:hover { transform: none; box-shadow: none; border-color: rgba(255,255,255,.07); }
+
+        /* ── BUTTONS ── */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; font-family: 'Heebo', sans-serif; font-weight: 800; border: none; cursor: pointer; transition: all .22s; min-height: 48px; border-radius: 999px; }
+        .btn-primary { background: var(--red); color: #fff; font-size: 1rem; padding: .85rem 2rem; box-shadow: 0 4px 16px rgba(230,30,42,.3); }
+        .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,30,42,.45); }
+        .btn-primary:disabled { background: #333; box-shadow: none; cursor: not-allowed; transform: none; }
+        .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,.15); color: #bbb; font-size: .9rem; padding: .8rem 1.5rem; }
+        .btn-ghost:hover { border-color: rgba(255,255,255,.4); color: #fff; }
+        .btn-text { background: none; border: none; color: #888; font-size: .8rem; font-family: 'Heebo', sans-serif; cursor: pointer; padding: .4rem; text-decoration: underline; min-height: 44px; }
+        .btn-text:hover { color: #ccc; }
+
+        /* ── INPUTS ── */
+        .field { background: #0d0d0d; border: 1px solid rgba(255,255,255,.1); color: #fff; width: 100%; padding: .85rem 1rem; border-radius: .6rem; outline: none; font-family: 'Heebo', sans-serif; font-size: 1rem; transition: border-color .2s, box-shadow .2s; min-height: 48px; }
+        .field:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(230,30,42,.12); }
+        .field::placeholder { color: #444; }
+        .field.error { border-color: #f87171; }
+        .err { color: #f87171; font-size: .75rem; margin-top: .25rem; display: none; }
+        .err.on { display: block; }
+        select.field option { background: #1a1a1a; }
+
+        /* ── MODALS ── */
+        .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.9); z-index: 300; align-items: flex-end; justify-content: center; }
+        @media (min-width: 640px) { .overlay { align-items: center; padding: 1rem; } }
+        .overlay.open { display: flex; }
+        .sheet { background: #0f0f0f; width: 100%; border-radius: 1.5rem 1.5rem 0 0; max-height: 95vh; overflow-y: auto; position: relative; border: 1px solid rgba(255,255,255,.08); border-bottom: none; }
+        @media (min-width: 640px) { .sheet { border-radius: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.08); max-width: 700px; max-height: 90vh; } }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .overlay.open .sheet { animation: slideUp .28s ease-out; }
+
+        /* drag handle for mobile sheet */
+        .drag-handle { width: 40px; height: 4px; background: rgba(255,255,255,.15); border-radius: 2px; margin: .75rem auto .5rem; }
+
+        /* ── HOTEL IMAGE GALLERY ── */
+        .gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 4px; border-radius: 1rem; overflow: hidden; }
+        .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gallery-main { grid-row: span 2; height: 260px; }
+        .gallery-side { height: 128px; }
+        @media (max-width: 480px) {
+            .gallery { grid-template-columns: 1fr; }
+            .gallery-main { height: 200px; grid-row: span 1; }
+            .gallery-side { height: 130px; }
         }
 
-        /* ====== HERO ====== */
-        .hero-bg {
-            background:
-                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(230,30,42,0.22) 0%, transparent 60%),
-                radial-gradient(ellipse at bottom left, rgba(230,30,42,0.07) 0%, transparent 50%),
-                #0a0a0a;
-        }
+        /* ── INFO PILL (subtle) ── */
+        .info-pill { display: inline-flex; align-items: center; gap: .4rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: .5rem; padding: .45rem .75rem; font-size: .8rem; color: #aaa; }
+        .info-pill strong { color: #ddd; }
 
-        /* ====== PACKAGE CARDS ====== */
-        .pkg-card {
-            background: linear-gradient(145deg, #141414 0%, #0e0e0e 100%);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 1.25rem;
-            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        .pkg-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(145deg, rgba(230,30,42,0.07) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-            border-radius: inherit;
-        }
-        .pkg-card:hover { border-color: rgba(230,30,42,0.45); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(230,30,42,0.12); }
-        .pkg-card:hover::after { opacity: 1; }
-        .pkg-card:focus-within { border-color: var(--focus-color); }
-        .pkg-card.soldout { opacity: 0.55; cursor: not-allowed; }
-        .pkg-card.soldout:hover { transform: none; box-shadow: none; border-color: rgba(255,255,255,0.07); }
+        /* ── TERMS ITEMS ── */
+        .term { display: flex; gap: .65rem; color: #aaa; font-size: .875rem; line-height: 1.7; padding: .6rem 0; border-bottom: 1px solid rgba(255,255,255,.04); }
+        .term:last-child { border-bottom: none; }
+        .term::before { content: '•'; color: var(--red); flex-shrink: 0; line-height: 1.7; }
 
-        /* ====== BADGES ====== */
-        .badge-red { background: var(--accent); color: #fff; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; padding: 0.2rem 0.65rem; border-radius: 999px; }
-        .badge-outline { border: 1px solid rgba(230,30,42,0.5); color: #e61e2a; font-size: 0.68rem; font-weight: 700; padding: 0.18rem 0.55rem; border-radius: 999px; }
-        .badge-yellow { background: rgba(234,179,8,0.15); border: 1px solid rgba(234,179,8,0.35); color: #eab308; font-size: 0.68rem; font-weight: 800; padding: 0.2rem 0.65rem; border-radius: 999px; }
-        .badge-green { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: #4ade80; font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 999px; }
+        /* ── CHECKBOX ── */
+        .checkbox-row { display: flex; align-items: flex-start; gap: .75rem; padding: 1rem; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); border-radius: .75rem; }
+        .checkbox-row input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--red); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+        .checkbox-row label { font-size: .875rem; color: #ccc; cursor: pointer; line-height: 1.5; }
 
-        /* ====== INFO ROWS ====== */
-        .info-row { display: flex; align-items: flex-start; gap: 0.6rem; color: #ccc; font-size: 0.875rem; line-height: 1.5; }
-        .info-row svg { color: var(--accent); flex-shrink: 0; margin-top: 2px; }
-
-        /* ====== DIVIDER ====== */
-        .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(230,30,42,0.35), transparent); }
-
-        /* ====== SECTION LABEL ====== */
-        .section-label { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
-
-        /* ====== BUTTONS ====== */
-        .btn-primary {
-            background: var(--accent);
-            color: #fff;
-            font-weight: 800;
-            font-size: 1rem;
-            padding: 0.9rem 2rem;
-            border-radius: 999px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Heebo', sans-serif;
-            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 18px rgba(230,30,42,0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            min-height: 48px;
-            min-width: 120px;
-            justify-content: center;
-            text-align: center;
-        }
-        .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(230,30,42,0.45); }
-        .btn-primary:disabled { background: #444; box-shadow: none; cursor: not-allowed; transform: none; }
-        .btn-ghost {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.18);
-            color: #ccc;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 0.8rem 1.5rem;
-            border-radius: 999px;
-            cursor: pointer;
-            font-family: 'Heebo', sans-serif;
-            transition: all 0.2s;
-            min-height: 48px;
-        }
-        .btn-ghost:hover { border-color: #fff; color: #fff; }
-
-        /* ====== INPUT FIELDS ====== */
-        .input-field {
-            background: #0d0d0d;
-            border: 1px solid rgba(255,255,255,0.12);
-            color: #fff;
-            width: 100%;
-            padding: 0.85rem 1rem;
-            border-radius: 0.6rem;
-            outline: none;
-            font-family: 'Heebo', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            min-height: 48px;
-        }
-        .input-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(230,30,42,0.14); }
-        .input-field::placeholder { color: #444; }
-        .input-field.error { border-color: #f87171; }
-        select.input-field option { background: #1a1a1a; }
-        .error-msg { color: #f87171; font-size: 0.78rem; margin-top: 0.3rem; display: none; }
-        .error-msg.show { display: block; }
-
-        /* ====== TERMS ====== */
-        .terms-item {
-            display: flex;
-            gap: 0.7rem;
-            color: #aaa;
-            font-size: 0.875rem;
-            line-height: 1.65;
-            padding: 0.65rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-        }
-        .terms-item:last-child { border-bottom: none; }
-        .terms-item::before { content: '•'; color: var(--accent); flex-shrink: 0; font-size: 1rem; line-height: 1.65; }
-
-        /* ====== OVERLAY MODALS ====== */
-        .overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.88);
-            z-index: 200;
-            align-items: flex-end;
-            justify-content: center;
-            padding: 0;
-        }
-        @media (min-width: 640px) {
-            .overlay { align-items: center; padding: 1rem; }
-        }
-        .overlay.show { display: flex; }
-        .modal-panel {
-            background: #111;
-            border: 1px solid rgba(255,255,255,0.08);
-            width: 100%;
-            max-width: 680px;
-            max-height: 92vh;
-            overflow-y: auto;
-            border-radius: 1.5rem 1.5rem 0 0;
-            position: relative;
-        }
-        @media (min-width: 640px) {
-            .modal-panel { border-radius: 1.5rem; }
-        }
-        @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .overlay.show .modal-panel { animation: slideUp 0.3s ease-out; }
-
-        /* ====== DESTINATION INFO TILES ====== */
-        .dest-tile {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 1rem;
-            padding: 1rem;
-            text-align: center;
-            flex: 1;
-            min-width: 0;
-        }
-        .dest-tile .icon { font-size: 1.75rem; margin-bottom: 0.4rem; line-height: 1; }
-        .dest-tile .label { font-size: 0.7rem; color: #888; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
-        .dest-tile .value { font-size: 0.9rem; font-weight: 700; color: #fff; margin-top: 0.2rem; line-height: 1.3; }
-
-        /* ====== WEATHER BAR ====== */
-        .weather-bar {
-            background: linear-gradient(135deg, rgba(251,191,36,0.08) 0%, rgba(251,146,60,0.06) 100%);
-            border: 1px solid rgba(251,191,36,0.15);
-            border-radius: 0.75rem;
-            padding: 0.75rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        /* ====== HOTEL CARD ====== */
-        .hotel-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 1rem;
-            padding: 1rem;
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
-        /* ====== SUCCESS ====== */
+        /* ── TOAST ── */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-in { animation: fadeUp 0.5s ease-out forwards; }
-
-        /* ====== PRICE ====== */
-        .price-big { font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 900; line-height: 1; }
-
-        /* ====== FORM SECTION ====== */
-        .form-section { background: linear-gradient(160deg, #0f0f0f 0%, #111 100%); border: 1px solid rgba(255,255,255,0.06); }
-
-        /* ====== ACCESSIBILITY BAR ====== */
-        .a11y-bar { background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0.5rem 1rem; display: flex; justify-content: flex-end; align-items: center; gap: 1rem; font-size: 0.78rem; color: #888; }
-        .a11y-bar a { color: #888; text-decoration: underline; }
-        .a11y-bar a:hover, .a11y-bar a:focus { color: #fff; }
-
-        /* ====== MOBILE TOUCH ====== */
-        button, a, [role="button"] { min-height: 44px; min-width: 44px; }
-
-        /* ====== PRINT ====== */
-        @media print { .overlay, .a11y-bar { display: none !important; } }
-
-        /* ====== HIGH CONTRAST ====== */
-        @media (forced-colors: active) {
-            .pkg-card { border: 2px solid ButtonText; }
-            .btn-primary { border: 2px solid ButtonText; }
-        }
+        .anim { animation: fadeUp .4s ease-out forwards; }
     </style>
 </head>
-
 <body>
 
-<!-- ====== SKIP NAVIGATION (נגישות — חוק שוויון זכויות לאנשים עם מוגבלות) ====== -->
-<a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
+<!-- SKIP LINK -->
+<a href="#main" class="skip-link">דלג לתוכן הראשי</a>
 
-<!-- ====== ACCESSIBILITY BAR ====== -->
-<div class="a11y-bar" role="navigation" aria-label="נגישות">
-    <a href="accessibility.html" aria-label="הצהרת נגישות האתר">הצהרת נגישות</a>
-    <span aria-hidden="true">|</span>
-    <a href="index.html" aria-label="חזרה לדף הראשי">דף הבית</a>
-</div>
+<!-- A11Y BAR -->
+<nav aria-label="ניגישות ודפדוף" style="background:rgba(255,255,255,.025);border-bottom:1px solid rgba(255,255,255,.05);padding:.45rem 1rem;display:flex;justify-content:flex-end;gap:1rem;font-size:.75rem;">
+    <a href="accessibility.html" style="color:#666;text-decoration:underline;" class="hover:text-gray-400">הצהרת נגישות</a>
+    <span aria-hidden="true" style="color:#333">|</span>
+    <a href="index.html" style="color:#666;text-decoration:underline;" class="hover:text-gray-400">דף הבית</a>
+</nav>
 
-<!-- ====== HEADER / HERO ====== -->
-<header class="hero-bg pt-10 pb-14 px-4" role="banner">
-    <div class="max-w-xl mx-auto text-center">
+<!-- ═══════════════════════════════
+     HERO
+═══════════════════════════════ -->
+<header style="background: radial-gradient(ellipse 100% 60% at 50% -5%, rgba(230,30,42,.2) 0%, transparent 65%), #080808; padding: clamp(3rem,8vw,5rem) 1rem clamp(3.5rem,9vw,6rem);" role="banner">
+    <div style="max-width:580px; margin:0 auto; text-align:center;">
 
-        <div class="flex justify-center mb-7">
-            <div class="relative">
-                <div class="absolute -inset-3 bg-gradient-to-r from-red-700 to-red-900 rounded-2xl blur-xl opacity-25 pointer-events-none" aria-hidden="true"></div>
-                <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/LogoAzranJosepwhite.png"
-                     alt="לוגו עזרן — הפועל תל אביב"
-                     class="relative object-contain"
-                     style="height: clamp(80px, 18vw, 130px); width: auto; max-width: 280px;"
-                     onerror="this.src='https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png'; this.style.borderRadius='50%'; this.style.height='100px'; this.style.width='100px'; this.style.objectFit='cover';">
-            </div>
+        <!-- LOGO — width-based for landscape logos -->
+        <div style="display:flex;justify-content:center;margin-bottom:2rem;">
+            <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/LogoAzranJosepwhite.png"
+                 alt="לוגו עזרן — הפועל תל אביב"
+                 style="width: clamp(200px, 52vw, 320px); height: auto; object-fit: contain; display: block;"
+                 onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png'; this.style.cssText='width:100px;height:100px;border-radius:50%;object-fit:cover;'">
         </div>
 
-        <div class="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full bg-white/[0.05] border border-white/10" aria-hidden="true">
-            <span class="section-label">הפועל תל אביב | אירופה 2026</span>
-        </div>
+        <p class="eyebrow" style="margin-bottom:.9rem;">הפועל תל אביב · אירופה 2026</p>
 
-        <h1 class="font-black leading-tight mb-4" style="font-size: clamp(2rem, 8vw, 3rem);">
-            הפועל <span class="text-[#e61e2a]">בבודפשט</span> 🔴
+        <h1 class="display" style="margin-bottom:1.2rem;">
+            הפועל<br><span style="color:var(--red);">בבודפשט</span>
         </h1>
-        <p class="text-gray-400 text-lg max-w-sm mx-auto leading-relaxed">
-            חבילות טיסה + מלון + הסעות למשחק.<br>
-            שלוש אפשרויות — כל תקציב, חוויה אחת.
+
+        <p style="color:#777;font-size:1.05rem;line-height:1.7;max-width:360px;margin:0 auto 2rem;">
+            חבילות טיסה ישירה, מלון בוטיק ארמון במרכז העיר,<br>והסעות למשחק. הכל כלול.
         </p>
 
-        <div class="flex items-center justify-center gap-4 mt-6 flex-wrap text-sm text-gray-400" role="list" aria-label="פרטי הטיול">
-            <div class="flex items-center gap-1.5" role="listitem">
-                <i data-lucide="map-pin" class="w-4 h-4 text-red-500" aria-hidden="true"></i>
-                <span>בודפשט, הונגריה</span>
-            </div>
-            <span aria-hidden="true" class="text-gray-700">|</span>
-            <div class="flex items-center gap-1.5" role="listitem">
-                <i data-lucide="calendar" class="w-4 h-4 text-red-500" aria-hidden="true"></i>
-                <span>יולי 2026</span>
-            </div>
-            <span aria-hidden="true" class="text-gray-700">|</span>
-            <div class="flex items-center gap-1.5" role="listitem">
-                <i data-lucide="plane" class="w-4 h-4 text-red-500" aria-hidden="true"></i>
-                <span>טיסות ישירות</span>
-            </div>
+        <!-- Inline meta — subtle -->
+        <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap;margin-bottom:2.5rem;" role="list" aria-label="פרטי הטיול">
+            <span class="info-pill" role="listitem"><i data-lucide="map-pin" style="width:13px;height:13px;color:var(--red)" aria-hidden="true"></i> בודפשט, הונגריה</span>
+            <span class="info-pill" role="listitem"><i data-lucide="calendar" style="width:13px;height:13px;color:var(--red)" aria-hidden="true"></i> יולי 2026</span>
+            <span class="info-pill" role="listitem"><i data-lucide="plane" style="width:13px;height:13px;color:var(--red)" aria-hidden="true"></i> טיסות ישירות</span>
         </div>
 
-        <div class="mt-7">
-            <a href="#packages" class="btn-primary text-sm">
-                <i data-lucide="chevron-down" class="w-4 h-4" aria-hidden="true"></i>
-                לחבילות
-            </a>
-        </div>
+        <a href="#packages" class="btn btn-primary" style="font-size:.95rem;padding:.8rem 1.8rem;">
+            <i data-lucide="chevron-down" style="width:16px;height:16px;" aria-hidden="true"></i>
+            ראה חבילות
+        </a>
     </div>
 </header>
 
-<!-- ====== MAIN ====== -->
-<main id="main-content">
+<!-- ═══════════════════════════════
+     MAIN
+═══════════════════════════════ -->
+<main id="main">
 
-    <!-- PACKAGES -->
-    <section aria-labelledby="packages-heading" id="packages" class="max-w-xl mx-auto px-4 py-12">
-        <div class="text-center mb-8">
-            <p class="section-label mb-2" aria-hidden="true">בחר את החבילה שלך</p>
-            <h2 id="packages-heading" class="text-3xl font-black">חבילות לבחירה</h2>
-        </div>
-        <div id="package-cards" class="space-y-4" role="list" aria-label="רשימת חבילות טיסה"></div>
-    </section>
+<!-- PACKAGES -->
+<section id="packages" aria-labelledby="pkg-heading" style="max-width:620px;margin:0 auto;padding:4rem 1rem;">
+    <div style="margin-bottom:2.5rem;">
+        <p class="eyebrow" style="margin-bottom:.5rem;" aria-hidden="true">בחר את החבילה שלך</p>
+        <h2 id="pkg-heading" style="font-size:clamp(1.6rem,5vw,2rem);font-weight:900;margin:0;" class="packages-count-target">חבילות לבחירה</h2>
+    </div>
+    <div id="package-cards" style="display:flex;flex-direction:column;gap:1rem;" role="list" aria-label="חבילות טיסה"></div>
+</section>
 
-    <!-- TERMS -->
-    <section aria-labelledby="terms-heading" class="max-w-xl mx-auto px-4 pb-16">
-        <div class="divider mb-10" aria-hidden="true"></div>
-        <div class="text-center mb-6">
-            <p class="section-label mb-2" aria-hidden="true">תנאים ואותיות קטנות</p>
-            <h2 id="terms-heading" class="text-2xl font-black">מה חשוב לדעת</h2>
-        </div>
-        <div class="bg-[#0d0d0d] rounded-2xl border border-white/[0.06] p-5">
-            <ul class="space-y-0" aria-label="תנאים כלליים">
-                <li class="terms-item">כרטיס למשחק <strong class="text-white">אינו</strong> כלול בחבילה. רכישת כרטיסים דרך מועדון הפועל תל אביב בלבד — עקבו אחרי הפרסומים הרשמיים.</li>
-                <li class="terms-item">החבילות אינן כוללות העברות שדה תעופה ↔ מלון, אך ניתן להוסיף לפי בקשה.</li>
-                <li class="terms-item">העברות מלון ↔ אצטדיון אינן כלולות. ניתן להוסיף — בהמשך יפורסמו חבילות הכוללות העברות.</li>
-                <li class="terms-item">ניתן לשנות את החבילה: הוספה/הורדת יום, החלפת מלון, שינוי שעת טיסה.</li>
-                <li class="terms-item"><strong class="text-white">ביטול טיסות:</strong> הטיסות לא ניתנות לביטול.</li>
-                <li class="terms-item"><strong class="text-white">ביטול מלון:</strong> ניתן לביטול עד לתאריך הרשום בכל חבילה.</li>
-                <li class="terms-item"><strong class="text-red-400">המחיר תקף לרגע ההצעה בלבד!</strong> המחירים עשויים להשתנות בהתאם לביקוש ולזמינות.</li>
-            </ul>
-        </div>
-    </section>
+<!-- TERMS SUMMARY (collapsed, on page) -->
+<section aria-labelledby="terms-heading" style="max-width:620px;margin:0 auto;padding:0 1rem 5rem;">
+    <div class="rule" style="margin-bottom:2.5rem;" aria-hidden="true"></div>
+    <h2 id="terms-heading" style="font-size:1.3rem;font-weight:900;margin-bottom:1.25rem;">תנאים ואותיות קטנות</h2>
+    <div style="background:#0b0b0b;border:1px solid rgba(255,255,255,.06);border-radius:1rem;padding:1.25rem 1.5rem;">
+        <ul style="padding:0;margin:0;list-style:none;">
+            <li class="term">כרטיס למשחק <strong style="color:#fff;">אינו</strong> כלול בחבילה. רכישה דרך מועדון הפועל תל אביב בלבד.</li>
+            <li class="term">אין העברות שדה תעופה ↔ מלון כברירת מחדל — ניתן להוסיף לפי בקשה.</li>
+            <li class="term">העברות מלון ↔ אצטדיון ניתנות להוספה; בהמשך תפורסמנה חבילות כוללות.</li>
+            <li class="term">ניתן לשנות חבילה: ימים, מלון, שעות טיסה — הכל בהתאמה אישית.</li>
+            <li class="term"><strong style="color:#fff;">טיסות:</strong> לא ניתנות לביטול.</li>
+            <li class="term"><strong style="color:#fff;">מלון:</strong> ניתן לביטול עד לתאריך הרשום בכל חבילה.</li>
+            <li class="term" style="color:#f87171;"><strong>המחיר תקף לרגע ההצעה בלבד</strong> — עשוי להשתנות לפי ביקוש וזמינות.</li>
+        </ul>
+    </div>
+</section>
 
 </main>
 
-<!-- ====== FOOTER ====== -->
-<footer class="text-center text-gray-600 text-xs pb-10 px-4" role="contentinfo">
-    <div class="divider max-w-xl mx-auto mb-6" aria-hidden="true"></div>
-    <p>עזרן — הפועל על פי עזרן | © 2026 מור עזרן</p>
-    <p class="mt-2 space-x-3 space-x-reverse">
-        <a href="index.html" class="hover:text-gray-400 underline">דף הראשי</a>
-        <span aria-hidden="true">|</span>
-        <a href="accessibility.html" class="hover:text-gray-400 underline">הצהרת נגישות</a>
+<!-- FOOTER -->
+<footer role="contentinfo" style="border-top:1px solid rgba(255,255,255,.05);padding:2rem 1rem;text-align:center;color:#444;font-size:.75rem;">
+    <p>עזרן — הפועל על פי עזרן · מור עזרן · © 2026</p>
+    <p style="margin-top:.5rem;">
+        <a href="index.html" style="color:#555;text-decoration:underline;">דף הבית</a>
+        &nbsp;·&nbsp;
+        <a href="accessibility.html" style="color:#555;text-decoration:underline;">הצהרת נגישות</a>
     </p>
-    <p class="mt-3 text-gray-800 text-xs" dir="ltr" lang="en">
-        This site conforms to Israeli Web Accessibility Standard (IS 5568) — WCAG 2.0 Level AA
-    </p>
+    <p style="margin-top:.75rem;color:#333;font-size:.68rem;" dir="ltr" lang="en">Conforms to Israeli Web Accessibility Standard IS 5568 (WCAG 2.0 AA)</p>
 </footer>
 
 
-<!-- ============================================================
-     MODAL 1: PACKAGE DETAIL (לחיצה על חבילה)
-============================================================ -->
-<div class="overlay" id="pkg-detail-overlay" role="dialog" aria-modal="true" aria-labelledby="pkg-detail-title">
-    <div class="modal-panel" id="pkg-detail-panel">
-        <!-- Close -->
-        <div class="flex items-center justify-between p-5 pb-0">
-            <div></div>
-            <button onclick="closePkgDetail()" aria-label="סגור חלון פרטי חבילה"
-                    class="w-9 h-9 rounded-full bg-white/[0.06] hover:bg-white/10 flex items-center justify-center transition">
-                <i data-lucide="x" class="w-4 h-4" aria-hidden="true"></i>
-            </button>
-        </div>
+<!-- ═══════════════════════════════════════
+     MODAL 1 · PACKAGE DETAIL
+═══════════════════════════════════════ -->
+<div class="overlay" id="ov-detail" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+  <div class="sheet" style="max-width:700px;" id="detail-sheet">
+    <div class="drag-handle" aria-hidden="true"></div>
 
-        <!-- DESTINATION VISUAL -->
-        <div class="px-5 pb-5">
-            <div class="rounded-2xl overflow-hidden mb-5 relative"
-                 style="background: linear-gradient(135deg, #1a0a0a 0%, #0a0a1a 50%, #0a1a0a 100%); min-height: 160px;">
-                <div class="absolute inset-0 flex items-center justify-center" aria-hidden="true">
-                    <div class="text-center opacity-20">
-                        <div style="font-size: 5rem; line-height:1;">🏰</div>
-                    </div>
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div class="relative z-10 p-5 flex items-end h-full" style="min-height: 160px;">
-                    <div>
-                        <p class="section-label mb-1" aria-hidden="true">היעד שלך</p>
-                        <h3 id="pkg-detail-title" class="text-2xl font-black">בודפשט, הונגריה</h3>
-                        <p class="text-gray-300 text-sm mt-0.5">עיר הדנובה — אחת היפות באירופה 🇭🇺</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PKG HEADER -->
-            <div class="flex items-start justify-between mb-4 flex-wrap gap-3">
-                <div id="pd-pkg-name-block"></div>
-                <div class="text-left">
-                    <div class="price-big" id="pd-price"></div>
-                    <div class="text-gray-500 text-xs">לאדם, הרכב זוגי</div>
-                </div>
-            </div>
-
-            <!-- DESTINATION TILES -->
-            <div class="flex gap-3 mb-5 overflow-x-auto pb-1" role="list" aria-label="מידע על היעד">
-                <div class="dest-tile" role="listitem">
-                    <div class="icon" aria-hidden="true">☀️</div>
-                    <div class="label">מזג אוויר</div>
-                    <div class="value">25–30°C<br>שמשי</div>
-                </div>
-                <div class="dest-tile" role="listitem">
-                    <div class="icon" aria-hidden="true">✈️</div>
-                    <div class="label" id="pd-tile-flight-label">טיסה</div>
-                    <div class="value" id="pd-tile-flight"></div>
-                </div>
-                <div class="dest-tile" role="listitem">
-                    <div class="icon" aria-hidden="true">🌙</div>
-                    <div class="label">לילות</div>
-                    <div class="value" id="pd-tile-nights"></div>
-                </div>
-                <div class="dest-tile" role="listitem">
-                    <div class="icon" aria-hidden="true">⚽</div>
-                    <div class="label">המשחק</div>
-                    <div class="value">יולי 2026<br>בודפשט</div>
-                </div>
-            </div>
-
-            <!-- WEATHER INFO -->
-            <div class="weather-bar mb-5" role="note" aria-label="מידע מזג אוויר">
-                <span class="text-2xl" aria-hidden="true">🌤️</span>
-                <div>
-                    <p class="font-bold text-sm text-yellow-300">מזג אוויר בודפשט — יולי</p>
-                    <p class="text-xs text-gray-400 mt-0.5">יולי הוא החודש החם ביותר: 25–30°C ביום, ערבים נעימים בסביבות 18°C. נדיר שיורד גשם — מושלם לטיול ברחובות, ל"כיכרות" ולתרבות הלילה.</p>
-                </div>
-            </div>
-
-            <!-- HOTEL CARD -->
-            <div class="hotel-card mb-5">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-900/50 to-amber-800/20 flex items-center justify-center flex-shrink-0 text-xl" aria-hidden="true">🏨</div>
-                <div>
-                    <p class="font-black text-base">Eurostars Palazzo Zichy</p>
-                    <div class="flex items-center gap-1 mt-0.5 mb-1" aria-label="דירוג 4 כוכבים">
-                        <span class="text-yellow-400 text-xs">★★★★</span>
-                        <span class="text-gray-500 text-xs">4 כוכבים | בוטיק-פאלאס</span>
-                    </div>
-                    <p class="text-gray-400 text-xs leading-relaxed">ממוקם במרכז בודפשט בארמון מאה ה-19, 200 מטר ממוזיאוני האמנות הלאומיים. עיצוב מלכותי, שירות יוצא מהכלל, ולחדרי Deluxe יש תקרות גבוהות ואווירה ייחודית שלא תמצאו בשרשראות גדולות.</p>
-                    <div id="pd-hotel-basis" class="mt-1.5 text-xs text-green-400 font-semibold"></div>
-                </div>
-            </div>
-
-            <!-- BUDAPEST HIGHLIGHTS -->
-            <div class="mb-5">
-                <p class="text-xs font-black text-gray-500 uppercase tracking-widest mb-3">מה לעשות בבודפשט</p>
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="bg-white/[0.03] rounded-xl p-3 border border-white/[0.05]">
-                        <p class="text-base mb-1" aria-hidden="true">🛁</p>
-                        <p class="text-xs font-bold text-white">מרחצאות מפורסמים</p>
-                        <p class="text-xs text-gray-500 mt-0.5">Szechenyi & Gellert — ניסיון ייחודי</p>
-                    </div>
-                    <div class="bg-white/[0.03] rounded-xl p-3 border border-white/[0.05]">
-                        <p class="text-base mb-1" aria-hidden="true">🍺</p>
-                        <p class="text-xs font-bold text-white">Ruin Bars</p>
-                        <p class="text-xs text-gray-500 mt-0.5">ברים ייחודיים בחצרות בניינים עתיקים</p>
-                    </div>
-                    <div class="bg-white/[0.03] rounded-xl p-3 border border-white/[0.05]">
-                        <p class="text-base mb-1" aria-hidden="true">🌉</p>
-                        <p class="text-xs font-bold text-white">גשר השלשלאות</p>
-                        <p class="text-xs text-gray-500 mt-0.5">סמל בודפשט — נוף עוצר נשימה</p>
-                    </div>
-                    <div class="bg-white/[0.03] rounded-xl p-3 border border-white/[0.05]">
-                        <p class="text-base mb-1" aria-hidden="true">🏰</p>
-                        <p class="text-xs font-bold text-white">מבצר בודה</p>
-                        <p class="text-xs text-gray-500 mt-0.5">פנורמה מדהימה על הדנובה</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FLIGHT DETAILS -->
-            <div class="bg-white/[0.03] rounded-xl border border-white/[0.05] p-4 mb-5">
-                <p class="text-xs font-black text-gray-500 uppercase tracking-widest mb-3">פרטי הטיסה</p>
-                <div class="space-y-2.5">
-                    <div class="info-row">
-                        <i data-lucide="plane-takeoff" class="w-4 h-4" aria-hidden="true"></i>
-                        <span id="pd-flight-line"></span>
-                    </div>
-                    <div class="info-row">
-                        <i data-lucide="briefcase" class="w-4 h-4" aria-hidden="true"></i>
-                        <span id="pd-luggage"></span>
-                    </div>
-                    <div class="info-row">
-                        <i data-lucide="bus" class="w-4 h-4" aria-hidden="true"></i>
-                        <span id="pd-shuttle"></span>
-                    </div>
-                    <div class="info-row">
-                        <i data-lucide="shield-check" class="w-4 h-4" aria-hidden="true"></i>
-                        <span id="pd-cancel"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA -->
-            <div class="flex gap-3 flex-wrap">
-                <button id="pd-book-btn" onclick="openContactModal()" aria-label="הזמן חבילה זו — פתח טופס יצירת קשר"
-                        class="btn-primary flex-1 text-base">
-                    <i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>
-                    הזמן עכשיו
-                </button>
-                <button onclick="closePkgDetail()" class="btn-ghost px-5">
-                    חזור
-                </button>
-            </div>
-
-            <p class="text-center text-gray-700 text-xs mt-3">הזמנה אינה מחייבת — נחזור אליך לאישור סופי</p>
-        </div>
-    </div>
-</div>
-
-
-<!-- ============================================================
-     MODAL 2: CONTACT FORM
-============================================================ -->
-<div class="overlay" id="contact-overlay" role="dialog" aria-modal="true" aria-labelledby="contact-form-title">
-    <div class="modal-panel" style="max-width:560px;">
-        <div class="p-5 pb-4 flex items-center justify-between border-b border-white/[0.06]">
-            <div>
-                <h2 id="contact-form-title" class="text-lg font-black">השאר פרטים</h2>
-                <p class="text-gray-500 text-xs mt-0.5">ניצור איתך קשר לאישור הזמנה 🔴</p>
-            </div>
-            <button onclick="closeContactModal()" aria-label="סגור טופס יצירת קשר"
-                    class="w-9 h-9 rounded-full bg-white/[0.06] hover:bg-white/10 flex items-center justify-center transition">
-                <i data-lucide="x" class="w-4 h-4" aria-hidden="true"></i>
-            </button>
-        </div>
-
-        <div class="p-5">
-            <form id="lead-form" novalidate aria-label="טופס הרשמה לחבילת טיסה">
-                <div class="space-y-3.5">
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        <div>
-                            <label for="nameHe" class="block text-xs font-bold text-gray-400 mb-1.5">שם מלא בעברית <span aria-hidden="true">*</span><span class="sr-only">(שדה חובה)</span></label>
-                            <input type="text" name="nameHe" id="nameHe" class="input-field" placeholder="ישראל ישראלי"
-                                   required autocomplete="name" aria-required="true" aria-describedby="err-nameHe">
-                            <p class="error-msg" id="err-nameHe" role="alert" aria-live="polite">שדה חובה</p>
-                        </div>
-                        <div>
-                            <label for="nameEn" class="block text-xs font-bold text-gray-400 mb-1.5">שם מלא באנגלית <span aria-hidden="true">*</span><span class="sr-only">(שדה חובה)</span></label>
-                            <input type="text" name="nameEn" id="nameEn" class="input-field" placeholder="Israel Israeli"
-                                   required autocomplete="name" lang="en" aria-required="true" aria-describedby="err-nameEn">
-                            <p class="error-msg" id="err-nameEn" role="alert" aria-live="polite">שדה חובה</p>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        <div>
-                            <label for="idNumber" class="block text-xs font-bold text-gray-400 mb-1.5">תעודת זהות <span aria-hidden="true">*</span><span class="sr-only">(שדה חובה)</span></label>
-                            <input type="text" name="idNumber" id="idNumber" class="input-field" placeholder="000000000"
-                                   maxlength="9" inputmode="numeric" pattern="[0-9]{9}" required aria-required="true" aria-describedby="err-idNumber">
-                            <p class="error-msg" id="err-idNumber" role="alert" aria-live="polite">שדה חובה</p>
-                        </div>
-                        <div>
-                            <label for="phone" class="block text-xs font-bold text-gray-400 mb-1.5">טלפון נייד <span aria-hidden="true">*</span><span class="sr-only">(שדה חובה)</span></label>
-                            <input type="tel" name="phone" id="phone" class="input-field" placeholder="050-0000000"
-                                   inputmode="tel" autocomplete="tel" required aria-required="true" aria-describedby="err-phone">
-                            <p class="error-msg" id="err-phone" role="alert" aria-live="polite">שדה חובה</p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="email" class="block text-xs font-bold text-gray-400 mb-1.5">אימייל <span aria-hidden="true">*</span><span class="sr-only">(שדה חובה)</span></label>
-                        <input type="email" name="email" id="email" class="input-field" placeholder="israel@gmail.com"
-                               autocomplete="email" required aria-required="true" aria-describedby="err-email">
-                        <p class="error-msg" id="err-email" role="alert" aria-live="polite">נא להזין כתובת מייל תקינה</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        <div>
-                            <label for="passengers" class="block text-xs font-bold text-gray-400 mb-1.5">כמות נוסעים <span aria-hidden="true">*</span><span class="sr-only">(שדה חובה)</span></label>
-                            <select name="passengers" id="passengers" class="input-field" required aria-required="true" aria-describedby="err-passengers">
-                                <option value="" disabled selected>בחר כמות</option>
-                                <option value="1">1 נוסע</option>
-                                <option value="2">2 נוסעים</option>
-                                <option value="3">3 נוסעים</option>
-                                <option value="4">4 נוסעים</option>
-                                <option value="5">5 נוסעים</option>
-                                <option value="6+">6+ נוסעים</option>
-                            </select>
-                            <p class="error-msg" id="err-passengers" role="alert" aria-live="polite">שדה חובה</p>
-                        </div>
-                        <div>
-                            <label for="packageType" class="block text-xs font-bold text-gray-400 mb-1.5">סוג חבילה <span aria-hidden="true">*</span><span class="sr-only">(שדה חובה)</span></label>
-                            <select name="packageType" id="packageType" class="input-field" required aria-required="true" aria-describedby="err-packageType">
-                                <option value="" disabled selected>בחר חבילה</option>
-                            </select>
-                            <p class="error-msg" id="err-packageType" role="alert" aria-live="polite">שדה חובה</p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="notes" class="block text-xs font-bold text-gray-400 mb-1.5">הערות / בקשות מיוחדות</label>
-                        <textarea name="notes" id="notes" class="input-field resize-none" rows="2"
-                                  placeholder="כל בקשה מיוחדת, שאלה, או מידע נוסף..."
-                                  aria-label="הערות ובקשות מיוחדות (לא חובה)"></textarea>
-                    </div>
-
-                </div>
-
-                <p class="text-xs text-gray-600 text-center mt-4 leading-relaxed">
-                    הפנייה אינה מחייבת הזמנה. מחירים כפופים לזמינות בזמן האישור.
-                </p>
-
-                <div class="mt-4 flex gap-3 flex-wrap">
-                    <button type="submit" id="submit-btn" class="btn-primary flex-1" aria-label="שלח טופס">
-                        <span id="btn-text">שלח ואחכה לחזרה</span>
-                        <span id="btn-loader" class="hidden" aria-live="polite">שולח...</span>
-                    </button>
-                    <button type="button" onclick="closeContactModal()" class="btn-ghost px-5">ביטול</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<!-- ============================================================
-     SUCCESS OVERLAY
-============================================================ -->
-<div class="overlay" id="success-overlay" role="alertdialog" aria-modal="true" aria-labelledby="success-title" aria-describedby="success-desc">
-    <div class="modal-panel max-w-sm text-center p-8 animate-in" style="border-radius:1.5rem;">
-        <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
-            <i data-lucide="check-circle-2" class="w-8 h-8 text-green-400"></i>
-        </div>
-        <h3 id="success-title" class="text-2xl font-black mb-2">הטופס נשלח!</h3>
-        <p id="success-desc" class="text-gray-400 text-sm leading-relaxed mb-6">קיבלנו את הפרטים שלך ונחזור אליך בהקדם לאישור הזמנה. 🔴</p>
-        <button onclick="closeSuccess()" class="btn-primary w-full" aria-label="סגור הודעת אישור">
-            סגור
+    <!-- Close -->
+    <div style="display:flex;justify-content:flex-end;padding:.25rem 1.25rem 0;">
+        <button onclick="closeDetail()" aria-label="סגור פרטי חבילה"
+                style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#888;">
+            <i data-lucide="x" style="width:15px;height:15px;" aria-hidden="true"></i>
         </button>
     </div>
+
+    <div style="padding:0 1.25rem 2rem;">
+
+        <!-- ── GALLERY ── -->
+        <div class="gallery" style="margin-bottom:1.5rem;" role="img" aria-label="תמונות בודפשט">
+            <img class="gallery-main"
+                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/View_from_Gell%C3%A9rt_Hill_to_the_Danube%2C_Hungary_-_Budapest_%2828493220635%29.jpg/1280px-View_from_Gell%C3%A9rt_Hill_to_the_Danube%2C_Hungary_-_Budapest_%2828493220635%29.jpg"
+                 alt="נוף בודפשט מגבעת גֶּלֶרְט — הדנובה, הפרלמנט, גשר השלשלאות"
+                 loading="lazy"
+                 onerror="this.style.background='linear-gradient(135deg,#1a0a0a,#0a0a1a)';this.alt='';">
+            <img class="gallery-side"
+                 src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Szechenyi_Baths_and_Pool_Budapest_8.JPG"
+                 alt="מרחצאות שצ'ני בודפשט"
+                 loading="lazy"
+                 onerror="this.style.background='#111';this.alt='';">
+            <img class="gallery-side"
+                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/20190503_Hungarian_Parliament_Building_1814_2263_DxO.jpg/1280px-20190503_Hungarian_Parliament_Building_1814_2263_DxO.jpg"
+                 alt="בית הפרלמנט ההונגרי"
+                 loading="lazy"
+                 onerror="this.style.background='#111';this.alt='';">
+        </div>
+
+        <!-- ── PKG HEADER ── -->
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+            <div>
+                <p class="eyebrow" id="d-pkg-num" style="margin-bottom:.3rem;"></p>
+                <h3 id="detail-title" style="font-size:clamp(1.4rem,5vw,1.9rem);font-weight:900;margin:0 0 .35rem;line-height:1.15;" id="d-name"></h3>
+                <p id="d-dates" style="color:#666;font-size:.875rem;margin:0;"></p>
+            </div>
+            <div style="text-align:left;flex-shrink:0;">
+                <div class="price-xl" id="d-price"></div>
+                <div style="font-size:.75rem;color:#555;margin-top:.1rem;">לאדם · הרכב זוגי</div>
+            </div>
+        </div>
+
+        <div class="rule-soft" style="margin-bottom:1.5rem;" aria-hidden="true"></div>
+
+        <!-- ── DESTINATION — editorial style ── -->
+        <div style="margin-bottom:1.75rem;">
+            <h4 style="font-size:1rem;font-weight:800;margin:0 0 .75rem;color:#ddd;">
+                בודפשט — <span style="color:#888;font-weight:400;font-size:.9rem;">עיר הדנובה</span>
+            </h4>
+            <p style="color:#888;font-size:.875rem;line-height:1.75;margin:0 0 .75rem;">
+                בודפשט היא אחת הערים המרשימות באירופה — שתי ערים היסטוריות (בודה ופשט) המאוחדות על ידי הדנובה. בחודש יולי אתה מקבל עד 16 שעות אור ביום, טמפרטורות של 25–30°C, וערבים נעימים בסביבות 18°C — תנאים מושלמים לתרבות, לרחובות ולחיי הלילה הייחודיים של העיר.
+            </p>
+            <!-- subtle weather callout -->
+            <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.12);border-radius:.6rem;padding:.45rem .85rem;font-size:.78rem;color:#999;">
+                <span aria-hidden="true">☀️</span>
+                <span>יולי: 25–30°C · עד 16 שעות שמש · מזג אוויר קיצי</span>
+            </div>
+        </div>
+
+        <!-- ── FLIGHT DETAILS ── -->
+        <div style="background:#0b0b0b;border:1px solid rgba(255,255,255,.06);border-radius:.875rem;padding:1rem 1.25rem;margin-bottom:1.5rem;">
+            <p style="font-size:.65rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#555;margin:0 0 .85rem;">פרטי הטיסה</p>
+            <div style="display:flex;flex-direction:column;gap:.65rem;" id="d-flight-details"></div>
+        </div>
+
+        <!-- ── HOTEL ── -->
+        <div style="margin-bottom:1.75rem;">
+            <h4 style="font-size:1rem;font-weight:800;margin:0 0 .75rem;color:#ddd;">
+                Eurostars Palazzo Zichy
+                <span style="font-size:.75rem;color:#666;font-weight:400;margin-right:.5rem;">· ארמון מאה ה-19</span>
+            </h4>
+
+            <p style="color:#888;font-size:.875rem;line-height:1.75;margin:0 0 1rem;">
+                המלון שוכן בארמון ניאו-בארוק שנבנה עבור הרוזן נאנדור זיכי במאה ה-19, במרחק הליכה מהמוזיאון הלאומי ההונגרי ובית הכנסת הגדול. הכניסה מסוגרת בכיפת זכוכית מפוארת, וחדרי ה-Deluxe נהנים מתקרות גבוהות ועיצוב אריסטוקרטי. 80 חדרים, ספא עם סאונה וטיפולים, חדר כושר, ו-Wi-Fi מהיר. ארוחת הבוקר הבופה מוגשת בחדר אלגנטי עם מגוון רחב — כולל מנות ביצים, גבינות, פירות ואפילו שמפניה.
+            </p>
+
+            <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+                <span class="info-pill">★★★★ בוטיק</span>
+                <span class="info-pill">📍 מרכז בודפשט</span>
+                <span class="info-pill">🛁 ספא + סאונה</span>
+                <span class="info-pill">🍳 ארוחת בוקר כלולה</span>
+                <span class="info-pill">📶 Wi-Fi חינם</span>
+            </div>
+
+            <p id="d-hotel-basis" style="margin:.85rem 0 0;font-size:.8rem;color:#4ade80;font-weight:600;"></p>
+        </div>
+
+        <!-- ── WHAT TO DO (minimal, sidebar-like) ── -->
+        <details style="margin-bottom:1.75rem;">
+            <summary style="cursor:pointer;font-size:.8rem;font-weight:700;color:#666;list-style:none;display:flex;align-items:center;gap:.4rem;padding:.35rem 0;">
+                <i data-lucide="map" style="width:14px;height:14px;" aria-hidden="true"></i>
+                מה לעשות בבודפשט
+                <i data-lucide="chevron-down" style="width:13px;height:13px;" aria-hidden="true"></i>
+            </summary>
+            <div style="margin-top:.85rem;display:grid;grid-template-columns:1fr 1fr;gap:.6rem;font-size:.8rem;color:#888;line-height:1.6;">
+                <div style="padding:.65rem;background:rgba(255,255,255,.025);border-radius:.6rem;border:1px solid rgba(255,255,255,.05);">
+                    <strong style="color:#bbb;display:block;margin-bottom:.2rem;">🛁 מרחצאות תרמיים</strong>
+                    שצ'ני, גֶּלֶרְט, לוקאץ' — חוויה הונגרית אותנטית
+                </div>
+                <div style="padding:.65rem;background:rgba(255,255,255,.025);border-radius:.6rem;border:1px solid rgba(255,255,255,.05);">
+                    <strong style="color:#bbb;display:block;margin-bottom:.2rem;">🍺 Ruin Bars</strong>
+                    סצ'מפלה קרט ואינסטנט — ברים ייחודיים בחצרות עתיקות
+                </div>
+                <div style="padding:.65rem;background:rgba(255,255,255,.025);border-radius:.6rem;border:1px solid rgba(255,255,255,.05);">
+                    <strong style="color:#bbb;display:block;margin-bottom:.2rem;">🌉 גשר השלשלאות</strong>
+                    הסמל של בודפשט — פנורמה על הדנובה
+                </div>
+                <div style="padding:.65rem;background:rgba(255,255,255,.025);border-radius:.6rem;border:1px solid rgba(255,255,255,.05);">
+                    <strong style="color:#bbb;display:block;margin-bottom:.2rem;">🏰 מבצר בודה</strong>
+                    נוף של 360° על כל העיר מגבעת הטירה
+                </div>
+            </div>
+        </details>
+
+        <!-- ── CTA ── -->
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+            <button id="d-book-btn" onclick="openContact()" aria-label="פתח טופס הזמנה"
+                    class="btn btn-primary" style="flex:1;font-size:1rem;">
+                <i data-lucide="send" style="width:16px;height:16px;" aria-hidden="true"></i>
+                הזמן עכשיו
+            </button>
+            <button onclick="closeDetail()" class="btn btn-ghost">חזור</button>
+        </div>
+        <p style="text-align:center;color:#444;font-size:.73rem;margin-top:.6rem;">הזמנה אינה מחייבת — נחזור אליך לאישור</p>
+        <p style="text-align:center;color:#333;font-size:.65rem;margin-top:.3rem;">
+            תמונות: ויקיפדיה — CC BY-SA · Gabriel Rinaldi, Modfos
+        </p>
+    </div>
+  </div>
 </div>
 
 
-<!-- ============================================================
+<!-- ═══════════════════════════════════════
+     MODAL 2 · CONTACT FORM
+═══════════════════════════════════════ -->
+<div class="overlay" id="ov-contact" role="dialog" aria-modal="true" aria-labelledby="form-title">
+  <div class="sheet" style="max-width:560px;">
+    <div class="drag-handle" aria-hidden="true"></div>
+
+    <div style="padding:0 1.25rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);">
+        <div>
+            <h2 id="form-title" style="font-size:1.15rem;font-weight:900;margin:0;">השאר פרטים</h2>
+            <p style="color:#555;font-size:.78rem;margin:.2rem 0 0;">ניצור איתך קשר לאישור הזמנה 🔴</p>
+        </div>
+        <button onclick="closeContact()" aria-label="סגור טופס"
+                style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#888;flex-shrink:0;">
+            <i data-lucide="x" style="width:15px;height:15px;" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div style="padding:1.25rem;">
+        <form id="lead-form" novalidate aria-label="טופס הרשמה לחבילת טיסה">
+            <div style="display:flex;flex-direction:column;gap:.85rem;">
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+                    <div>
+                        <label for="nameHe" style="font-size:.72rem;font-weight:700;color:#666;display:block;margin-bottom:.4rem;">שם בעברית <span aria-hidden="true">*</span><span class="sr-only">(חובה)</span></label>
+                        <input type="text" id="nameHe" name="nameHe" class="field" placeholder="ישראל ישראלי" required autocomplete="name" aria-required="true" aria-describedby="e-nameHe">
+                        <p id="e-nameHe" class="err" role="alert">שדה חובה</p>
+                    </div>
+                    <div>
+                        <label for="nameEn" style="font-size:.72rem;font-weight:700;color:#666;display:block;margin-bottom:.4rem;" lang="he">שם באנגלית <span aria-hidden="true">*</span><span class="sr-only">(חובה)</span></label>
+                        <input type="text" id="nameEn" name="nameEn" class="field" placeholder="Israel Israeli" required autocomplete="name" lang="en" aria-required="true" aria-describedby="e-nameEn">
+                        <p id="e-nameEn" class="err" role="alert">שדה חובה</p>
+                    </div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+                    <div>
+                        <label for="idNumber" style="font-size:.72rem;font-weight:700;color:#666;display:block;margin-bottom:.4rem;">תעודת זהות <span aria-hidden="true">*</span><span class="sr-only">(חובה)</span></label>
+                        <input type="text" id="idNumber" name="idNumber" class="field" placeholder="000000000" maxlength="9" inputmode="numeric" required aria-required="true" aria-describedby="e-idNumber">
+                        <p id="e-idNumber" class="err" role="alert">שדה חובה</p>
+                    </div>
+                    <div>
+                        <label for="phone" style="font-size:.72rem;font-weight:700;color:#666;display:block;margin-bottom:.4rem;">טלפון <span aria-hidden="true">*</span><span class="sr-only">(חובה)</span></label>
+                        <input type="tel" id="phone" name="phone" class="field" placeholder="050-0000000" inputmode="tel" autocomplete="tel" required aria-required="true" aria-describedby="e-phone">
+                        <p id="e-phone" class="err" role="alert">שדה חובה</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email" style="font-size:.72rem;font-weight:700;color:#666;display:block;margin-bottom:.4rem;">אימייל <span aria-hidden="true">*</span><span class="sr-only">(חובה)</span></label>
+                    <input type="email" id="email" name="email" class="field" placeholder="israel@gmail.com" autocomplete="email" required aria-required="true" aria-describedby="e-email">
+                    <p id="e-email" class="err" role="alert">נא להזין אימייל תקין</p>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+                    <div>
+                        <label for="passengers" style="font-size:.72rem;font-weight:700;color:#666;display:block;margin-bottom:.4rem;">נוסעים <span aria-hidden="true">*</span><span class="sr-only">(חובה)</span></label>
+                        <select id="passengers" name="passengers" class="field" required aria-required="true" aria-describedby="e-passengers">
+                            <option value="" disabled selected>בחר</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6+">6+</option>
+                        </select>
+                        <p id="e-passengers" class="err" role="alert">שדה חובה</p>
+                    </div>
+                    <div>
+                        <label for="packageType" style="font-size:.72rem;font-weight:700;color:#666;display:block;margin-bottom:.4rem;">חבילה <span aria-hidden="true">*</span><span class="sr-only">(חובה)</span></label>
+                        <select id="packageType" name="packageType" class="field" required aria-required="true" aria-describedby="e-packageType">
+                            <option value="" disabled selected>בחר</option>
+                        </select>
+                        <p id="e-packageType" class="err" role="alert">שדה חובה</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="notes" style="font-size:.72rem;font-weight:700;color:#666;display:block;margin-bottom:.4rem;">הערות</label>
+                    <textarea id="notes" name="notes" class="field" rows="2" style="resize:none;min-height:auto;" placeholder="בקשות מיוחדות, שאלות..."></textarea>
+                </div>
+            </div>
+
+            <div style="display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1.25rem;">
+                <button type="submit" id="submit-btn" class="btn btn-primary" style="flex:1;">
+                    <span id="btn-text">שלח ואחכה לחזרה</span>
+                    <span id="btn-loader" style="display:none;" aria-live="polite">שולח...</span>
+                </button>
+                <button type="button" onclick="closeContact()" class="btn btn-ghost" style="padding:.8rem 1.2rem;">ביטול</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     MODAL 3 · TERMS CONFIRMATION (before submit)
+═══════════════════════════════════════ -->
+<div class="overlay" id="ov-terms" role="dialog" aria-modal="true" aria-labelledby="terms-confirm-title">
+  <div class="sheet" style="max-width:520px;">
+    <div class="drag-handle" aria-hidden="true"></div>
+    <div style="padding:0 1.25rem 1.5rem;">
+        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1.25rem;">
+            <i data-lucide="file-text" style="width:18px;height:18px;color:var(--red);flex-shrink:0;" aria-hidden="true"></i>
+            <h3 id="terms-confirm-title" style="font-size:1.05rem;font-weight:900;margin:0;">אישור תנאי ההזמנה</h3>
+        </div>
+
+        <p style="color:#777;font-size:.82rem;margin-bottom:1rem;">לפני שליחת הטופס, נא לקרוא ולאשר את התנאים הבאים:</p>
+
+        <div style="background:#0b0b0b;border:1px solid rgba(255,255,255,.06);border-radius:.875rem;padding:1rem 1.25rem;max-height:260px;overflow-y:auto;margin-bottom:1.25rem;" role="region" aria-label="תנאי ההזמנה">
+            <ul style="padding:0;margin:0;list-style:none;">
+                <li class="term" style="font-size:.82rem;">כרטיס למשחק <strong style="color:#fff;">אינו</strong> כלול. רכישה דרך מועדון הפועל תל אביב בלבד.</li>
+                <li class="term" style="font-size:.82rem;">העברות שדה תעופה ↔ מלון אינן כלולות כברירת מחדל.</li>
+                <li class="term" style="font-size:.82rem;">העברות מלון ↔ אצטדיון ניתנות להוספה בתשלום.</li>
+                <li class="term" style="font-size:.82rem;">ניתן לשנות את החבילה לפי בקשה.</li>
+                <li class="term" style="font-size:.82rem;"><strong style="color:#fff;">הטיסות לא ניתנות לביטול</strong> לאחר אישור הזמנה.</li>
+                <li class="term" style="font-size:.82rem;">המלון ניתן לביטול עד לתאריך הרשום בחבילה.</li>
+                <li class="term" style="font-size:.82rem;color:#f87171;"><strong>המחיר תקף לרגע ההצעה בלבד</strong> ועשוי להשתנות.</li>
+            </ul>
+        </div>
+
+        <div class="checkbox-row" style="margin-bottom:1.25rem;">
+            <input type="checkbox" id="terms-check" aria-required="true">
+            <label for="terms-check">קראתי את כל התנאים לעיל והנני מסכים/ה להם. אני מבין/ה שמילוי הטופס אינו מחייב הזמנה — נציג יחזור אליי לאישור סופי.</label>
+        </div>
+        <p id="terms-check-err" style="color:#f87171;font-size:.75rem;display:none;margin-bottom:.75rem;" role="alert">יש לאשר את התנאים לפני שליחה</p>
+
+        <div style="display:flex;gap:.65rem;flex-wrap:wrap;">
+            <button onclick="confirmTermsAndSend()" id="confirm-send-btn" class="btn btn-primary" style="flex:1;">
+                אשר ושלח
+            </button>
+            <button onclick="closeTerms()" class="btn btn-ghost">חזור לטופס</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     MODAL 4 · SUCCESS
+═══════════════════════════════════════ -->
+<div class="overlay" id="ov-success" role="alertdialog" aria-modal="true" aria-labelledby="success-title">
+  <div class="sheet anim" style="max-width:380px;text-align:center;border-radius:1.5rem !important;">
+    <div style="padding:2.5rem 1.5rem;">
+        <div style="width:64px;height:64px;background:rgba(34,197,94,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;" aria-hidden="true">
+            <i data-lucide="check-circle-2" style="width:32px;height:32px;color:#4ade80;"></i>
+        </div>
+        <h3 id="success-title" style="font-size:1.5rem;font-weight:900;margin:0 0 .65rem;">הטופס נשלח!</h3>
+        <p style="color:#666;font-size:.9rem;line-height:1.65;margin:0 0 1.75rem;">קיבלנו את הפרטים שלך ונחזור אליך בהקדם לאישור הזמנה. 🔴</p>
+        <button onclick="closeSuccess()" class="btn btn-primary" style="width:100%;" aria-label="סגור הודעה">סגור</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
      JAVASCRIPT
-============================================================ -->
+═══════════════════════════════════════ -->
 <script>
-// ===================== DATA =====================
+// ── DATA ────────────────────────────────
 const DEFAULT_PACKAGES = [
-    { id:'pkg_1', number:1, status:'active', recommended:false, name:'חווית בודפשט מלאה', price:'3,213', dates:'22–25/07/26', days:'רביעי–שבת', nights:'4 לילות', airline:'', flightOut:'14:40', flightIn:'19:10', luggage:'מזוודה 20kg לנוסע', hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room, לינה + ארוחת בוקר', cancelDate:'18/07/26', shuttle:'הסעה הלוך-חזור למשחק', note:'' },
-    { id:'pkg_2', number:2, status:'active', recommended:true,  name:'סופ"ש ארוך',        price:'3,435', dates:'23–26/07/26', days:'חמישי–ראשון', nights:'4 לילות', airline:'ארקיע', flightOut:'06:00', flightIn:'20:40', luggage:'מזוודה 20kg לנוסע', hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room, לינה + ארוחת בוקר', cancelDate:'19/07/26', shuttle:'הסעות הלוך-חזור למשחק', note:'מומלץ' },
-    { id:'pkg_3', number:3, status:'active', recommended:false, name:'קוויקי בהונגריה',  price:'2,900', dates:'22–24/07/26', days:'רביעי–שישי',  nights:'2 לילות', airline:'אלעל',  flightOut:'03:50', flightIn:'09:10', luggage:'טרולי 8kg לנוסע',    hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room, לינה + ארוחת בוקר', cancelDate:'15/07/26', shuttle:'הסעות הלוך-חזור למשחק', note:'' }
+    { id:'pkg_1', status:'active', name:'חווית בודפשט מלאה', price:'3,213', dates:'22–25/07/26', days:'רביעי–שבת', nights:'4 לילות', airline:'', flightOut:'14:40', flightIn:'19:10', luggage:'מזוודה 20kg לנוסע', hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room · לינה + ארוחת בוקר', cancelDate:'18/07/26', shuttle:'הסעה הלוך-חזור למשחק', note:'' },
+    { id:'pkg_2', status:'active', name:'סופ"ש ארוך',        price:'3,435', dates:'23–26/07/26', days:'חמישי–ראשון', nights:'4 לילות', airline:'ארקיע', flightOut:'06:00', flightIn:'20:40', luggage:'מזוודה 20kg לנוסע', hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room · לינה + ארוחת בוקר', cancelDate:'19/07/26', shuttle:'הסעות הלוך-חזור למשחק', note:'מומלץ' },
+    { id:'pkg_3', status:'active', name:'קוויקי בהונגריה',  price:'2,900', dates:'22–24/07/26', days:'רביעי–שישי',  nights:'2 לילות', airline:'אלעל',  flightOut:'03:50', flightIn:'09:10', luggage:'טרולי 8kg לנוסע',    hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room · לינה + ארוחת בוקר', cancelDate:'15/07/26', shuttle:'הסעות הלוך-חזור למשחק', note:'' }
 ];
 
-function getPackages() {
-    try { const s = localStorage.getItem('budapest_packages'); return s ? JSON.parse(s) : DEFAULT_PACKAGES; }
-    catch(e) { return DEFAULT_PACKAGES; }
-}
+function getPkgs() { try { const s = localStorage.getItem('budapest_packages'); return s ? JSON.parse(s) : DEFAULT_PACKAGES; } catch(e) { return DEFAULT_PACKAGES; } }
 
-let selectedPkg = null;
+let _activePkg = null;
+let _pendingFormData = null;
 
-// ===================== RENDER CARDS =====================
+// ── RENDER CARDS ─────────────────────────
 function renderPackages() {
-    const pkgs = getPackages().filter(p => p.status !== 'hidden');
+    const pkgs = getPkgs().filter(p => p.status !== 'hidden');
     const container = document.getElementById('package-cards');
     const select = document.getElementById('packageType');
 
-    document.getElementById('packages-heading').textContent = pkgs.length + ' חבילות לבחירה';
+    document.querySelectorAll('.packages-count-target').forEach(el => { el.textContent = pkgs.length + ' חבילות לבחירה'; });
 
     container.innerHTML = pkgs.map((p, i) => {
-        const isSoldOut = p.status === 'soldout';
-        const flightLine = (p.airline ? p.airline + ' — ' : '') + 'יציאה ' + p.flightOut + ' | חזרה ' + p.flightIn;
-
+        const sold = p.status === 'soldout';
+        const flight = (p.airline ? p.airline + ' · ' : '') + p.flightOut + ' → ' + p.flightIn;
         return `
         <div role="listitem">
-          <article class="pkg-card ${isSoldOut ? 'soldout' : ''}"
-                   aria-label="חבילה ${i+1}: ${p.name}, מחיר ${p.price} שקלים${isSoldOut ? ', אזלה' : ''}"
-                   ${!isSoldOut ? `onclick="openPkgDetail('${p.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPkgDetail('${p.id}')}"` : 'aria-disabled="true"'}>
+          <article class="pkg-card ${sold ? 'soldout' : ''}"
+              aria-label="${p.name}${sold ? ' — אזלה' : ''}"
+              ${!sold ? `tabindex="0" onclick="openDetail('${p.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDetail('${p.id}')}"` : 'aria-disabled="true"'}>
 
-            ${isSoldOut ? `
-              <div class="absolute inset-0 rounded-2xl flex items-center justify-center z-10 bg-black/50 pointer-events-none" aria-hidden="true">
-                <span class="badge-yellow text-base px-6 py-2">אזלה</span>
-              </div>` : ''}
+            ${sold ? `<div style="position:absolute;inset:0;border-radius:1.25rem;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:5;pointer-events:none;" aria-hidden="true"><span style="background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.3);color:#eab308;font-weight:800;font-size:.9rem;padding:.4rem 1.2rem;border-radius:999px;">אזלה</span></div>` : ''}
 
-            <div class="p-5">
-              <!-- Top row -->
-              <div class="flex items-start justify-between gap-3 mb-3 flex-wrap">
-                <div>
-                  <div class="flex items-center gap-2 flex-wrap mb-1">
-                    <span class="badge-red" aria-hidden="true">חבילה ${i+1}</span>
-                    ${p.note ? `<span class="text-xs text-red-400 font-bold">${p.note}</span>` : ''}
-                  </div>
-                  <h3 class="text-lg font-black leading-tight">${p.name}</h3>
-                  <p class="text-gray-500 text-xs mt-0.5">${p.dates} | ${p.days}</p>
+            <div style="padding:1.25rem 1.4rem;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+                    <div>
+                        <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.4rem;">
+                            <span style="background:var(--red);color:#fff;font-size:.65rem;font-weight:800;letter-spacing:.06em;padding:.18rem .6rem;border-radius:999px;" aria-hidden="true">חבילה ${i+1}</span>
+                            ${p.note ? `<span style="color:var(--red);font-size:.75rem;font-weight:700;">${p.note}</span>` : ''}
+                        </div>
+                        <h3 style="font-size:1.15rem;font-weight:900;margin:0 0 .2rem;line-height:1.2;">${p.name}</h3>
+                        <p style="color:#555;font-size:.78rem;margin:0;">${p.dates} · ${p.days}</p>
+                    </div>
+                    <div style="text-align:left;flex-shrink:0;">
+                        <div style="font-size:clamp(1.5rem,4vw,2rem);font-weight:900;line-height:1;">${p.price}₪</div>
+                        <div style="font-size:.7rem;color:#444;margin-top:.1rem;">לאדם · זוגי</div>
+                    </div>
                 </div>
-                <div class="text-left flex-shrink-0">
-                  <div class="price-big">${p.price}₪</div>
-                  <div class="text-gray-500 text-xs">לאדם, זוגי</div>
-                </div>
-              </div>
 
-              <div class="divider my-3" aria-hidden="true"></div>
+                <div style="height:1px;background:rgba(255,255,255,.05);margin:.9rem 0;" aria-hidden="true"></div>
 
-              <!-- Info rows -->
-              <div class="space-y-2">
-                <div class="info-row">
-                  <i data-lucide="plane-takeoff" class="w-4 h-4" aria-hidden="true"></i>
-                  <span>${flightLine}</span>
+                <div style="display:flex;flex-direction:column;gap:.5rem;">
+                    <div style="display:flex;align-items:flex-start;gap:.55rem;color:#777;font-size:.82rem;">
+                        <i data-lucide="plane-takeoff" style="width:14px;height:14px;color:var(--red);flex-shrink:0;margin-top:2px;" aria-hidden="true"></i>
+                        ${flight}
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:.55rem;color:#777;font-size:.82rem;">
+                        <i data-lucide="briefcase" style="width:14px;height:14px;color:var(--red);flex-shrink:0;margin-top:2px;" aria-hidden="true"></i>
+                        ${p.luggage}
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:.55rem;color:#777;font-size:.82rem;">
+                        <i data-lucide="building-2" style="width:14px;height:14px;color:var(--red);flex-shrink:0;margin-top:2px;" aria-hidden="true"></i>
+                        ${p.hotel} · ${p.hotelBasis}
+                    </div>
                 </div>
-                <div class="info-row">
-                  <i data-lucide="briefcase" class="w-4 h-4" aria-hidden="true"></i>
-                  <span>${p.luggage}</span>
-                </div>
-                <div class="info-row">
-                  <i data-lucide="building-2" class="w-4 h-4" aria-hidden="true"></i>
-                  <span>${p.hotel}</span>
-                </div>
-                ${p.shuttle ? `<div class="info-row"><i data-lucide="bus" class="w-4 h-4" aria-hidden="true"></i><span>${p.shuttle}</span></div>` : ''}
-                <div class="info-row">
-                  <i data-lucide="shield-check" class="w-4 h-4" aria-hidden="true"></i>
-                  <span>ביטול חינם למלון עד ${p.cancelDate}</span>
-                </div>
-              </div>
 
-              <!-- Bottom row -->
-              <div class="flex items-center justify-between mt-4 flex-wrap gap-2">
-                <span class="badge-outline">${p.nights}</span>
-                ${!isSoldOut ? `
-                <span class="flex items-center gap-1 text-red-500 text-xs font-bold" aria-hidden="true">
-                  לפרטים ולהזמנה
-                  <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
-                </span>` : ''}
-              </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:.5rem;">
+                    <span style="border:1px solid rgba(230,30,42,.35);color:#e61e2a;font-size:.68rem;font-weight:700;padding:.18rem .55rem;border-radius:999px;">${p.nights}</span>
+                    ${!sold ? `<span style="color:#555;font-size:.75rem;display:flex;align-items:center;gap:.3rem;" aria-hidden="true">פרטים והזמנה <i data-lucide="arrow-left" style="width:13px;height:13px;"></i></span>` : ''}
+                </div>
             </div>
           </article>
         </div>`;
     }).join('');
 
-    // Rebuild select
     const active = pkgs.filter(p => p.status === 'active');
     while (select.options.length > 1) select.remove(1);
     active.forEach((p, i) => {
-        const o = document.createElement('option');
-        o.value = p.name + ' - ' + p.price + '₪';
-        o.textContent = 'חבילה ' + (i+1) + ' — ' + p.name + ' (' + p.price + '₪)';
+        const o = new Option(`חבילה ${i+1} — ${p.name} (${p.price}₪)`, `${p.name} - ${p.price}₪`);
         select.appendChild(o);
     });
 
     lucide.createIcons();
 }
 
-// ===================== PKG DETAIL MODAL =====================
-function openPkgDetail(id) {
-    const pkgs = getPackages();
-    const p = pkgs.find(x => x.id === id);
+// ── DETAIL MODAL ─────────────────────────
+function openDetail(id) {
+    const p = getPkgs().find(x => x.id === id);
     if (!p || p.status === 'soldout') return;
-    selectedPkg = p;
+    _activePkg = p;
 
-    // Fill header
-    document.getElementById('pd-pkg-name-block').innerHTML = `
-        <div class="flex items-center gap-2 flex-wrap mb-1">
-            <span class="badge-red">חבילה</span>
-            ${p.note ? `<span class="text-xs text-red-400 font-bold">${p.note}</span>` : ''}
+    const idx = getPkgs().filter(x => x.status !== 'hidden').findIndex(x => x.id === id);
+    document.getElementById('d-pkg-num').textContent = `חבילה ${idx + 1}`;
+    document.querySelector('#detail-sheet #detail-title, #ov-detail #detail-title, h3[id="d-name"], #d-pkg-num').nextElementSibling && null;
+
+    // fill fields
+    const nameEl = document.getElementById('ov-detail').querySelector('h3');
+    if (nameEl) nameEl.textContent = p.name;
+
+    // Use the labelled elements
+    document.getElementById('d-pkg-num').textContent = `חבילה ${idx + 1}`;
+
+    // The h3 with id="detail-title" — set name
+    const titleEls = document.getElementById('ov-detail').querySelectorAll('h3');
+    titleEls.forEach(el => { if (el.id === 'detail-title' || el.hasAttribute('id') && el.id.includes('d-name')) el.textContent = p.name; });
+
+    // Actually let me just use the IDs properly:
+    document.getElementById('detail-title').textContent = p.name;
+    document.getElementById('d-dates').textContent = p.dates + ' · ' + p.days;
+    document.getElementById('d-price').textContent = p.price + '₪';
+    document.getElementById('d-hotel-basis').textContent = '✓ ' + p.hotelBasis;
+
+    // Flight details
+    const flightLine = (p.airline ? p.airline + ' · ' : 'טיסה ישירה · ') + 'יציאה ' + p.flightOut + ' | חזרה ' + p.flightIn;
+    document.getElementById('d-flight-details').innerHTML = `
+        <div style="display:flex;gap:.6rem;color:#888;font-size:.84rem;align-items:flex-start;">
+            <i data-lucide="plane-takeoff" style="width:14px;height:14px;color:var(--red);flex-shrink:0;margin-top:2px;" aria-hidden="true"></i>
+            ${flightLine}
         </div>
-        <h3 class="text-xl font-black">${p.name}</h3>
-        <p class="text-gray-400 text-sm">${p.dates} | ${p.days}</p>`;
-
-    document.getElementById('pd-price').textContent = p.price + '₪';
-    document.getElementById('pd-tile-flight').textContent = p.flightOut + ' → ' + p.flightIn;
-    document.getElementById('pd-tile-nights').textContent = p.nights;
-    document.getElementById('pd-hotel-basis').textContent = '✓ ' + p.hotelBasis;
-    document.getElementById('pd-flight-line').textContent = (p.airline ? p.airline + ' — ' : 'טיסה ישירה ') + 'יציאה ' + p.flightOut + ' | חזרה ' + p.flightIn;
-    document.getElementById('pd-luggage').textContent = p.luggage;
-    document.getElementById('pd-shuttle').textContent = p.shuttle || 'ללא הסעות';
-    document.getElementById('pd-cancel').textContent = 'ביטול חינם למלון עד ' + p.cancelDate;
+        <div style="display:flex;gap:.6rem;color:#888;font-size:.84rem;align-items:flex-start;">
+            <i data-lucide="briefcase" style="width:14px;height:14px;color:var(--red);flex-shrink:0;margin-top:2px;" aria-hidden="true"></i>
+            ${p.luggage}
+        </div>
+        ${p.shuttle ? `<div style="display:flex;gap:.6rem;color:#888;font-size:.84rem;align-items:flex-start;"><i data-lucide="bus" style="width:14px;height:14px;color:var(--red);flex-shrink:0;margin-top:2px;" aria-hidden="true"></i>${p.shuttle}</div>` : ''}
+        <div style="display:flex;gap:.6rem;color:#888;font-size:.84rem;align-items:flex-start;">
+            <i data-lucide="shield-check" style="width:14px;height:14px;color:var(--red);flex-shrink:0;margin-top:2px;" aria-hidden="true"></i>
+            ביטול חינם למלון עד ${p.cancelDate}
+        </div>`;
 
     // Preselect in form
     const sel = document.getElementById('packageType');
     const val = p.name + ' - ' + p.price + '₪';
     for (let o of sel.options) { if (o.value === val) { o.selected = true; break; } }
 
-    openOverlay('pkg-detail-overlay');
+    openOv('ov-detail');
     lucide.createIcons();
 }
 
-function closePkgDetail() { closeOverlay('pkg-detail-overlay'); }
+function closeDetail() { closeOv('ov-detail'); }
 
-// ===================== CONTACT MODAL =====================
-function openContactModal() {
-    closePkgDetail();
-    setTimeout(() => openOverlay('contact-overlay'), 200);
-}
-function closeContactModal() { closeOverlay('contact-overlay'); }
+// ── CONTACT MODAL ────────────────────────
+function openContact() { closeDetail(); setTimeout(() => openOv('ov-contact'), 180); }
+function closeContact() { closeOv('ov-contact'); }
 
-// ===================== OVERLAY HELPERS =====================
-const _prevFocus = {};
-function openOverlay(id) {
-    _prevFocus[id] = document.activeElement;
+// ── TERMS MODAL ──────────────────────────
+function openTerms() { openOv('ov-terms'); }
+function closeTerms() { closeOv('ov-terms'); setTimeout(() => openOv('ov-contact'), 180); }
+
+// ── SUCCESS ──────────────────────────────
+function closeSuccess() { closeOv('ov-success'); }
+
+// ── OVERLAY HELPERS ───────────────────────
+const _prev = {};
+function openOv(id) {
+    _prev[id] = document.activeElement;
     const el = document.getElementById(id);
-    el.classList.add('show');
+    el.classList.add('open');
     document.body.style.overflow = 'hidden';
-    // Focus first focusable element
-    const focusable = el.querySelectorAll('button, input, select, textarea, a[href]');
-    if (focusable.length) { focusable[0].focus(); }
-    // Trap focus
-    el.addEventListener('keydown', trapFocus);
+    el.addEventListener('keydown', _trap);
+    const f = el.querySelectorAll('button,input,select,textarea,a[href],[tabindex="0"]');
+    if (f.length) f[0].focus();
 }
-function closeOverlay(id) {
+function closeOv(id) {
     const el = document.getElementById(id);
-    el.classList.remove('show');
-    document.body.style.overflow = '';
-    el.removeEventListener('keydown', trapFocus);
-    if (_prevFocus[id]) { _prevFocus[id].focus(); _prevFocus[id] = null; }
+    el.classList.remove('open');
+    el.removeEventListener('keydown', _trap);
+    if (!document.querySelector('.overlay.open')) document.body.style.overflow = '';
+    if (_prev[id]) { _prev[id].focus(); _prev[id] = null; }
 }
-function trapFocus(e) {
+function _trap(e) {
     if (e.key !== 'Tab') return;
-    const panel = e.currentTarget.querySelector('.modal-panel');
-    const focusable = [...panel.querySelectorAll('button:not([disabled]), input, select, textarea, a[href], [tabindex="0"]')].filter(el => !el.closest('[aria-hidden="true"]'));
-    if (!focusable.length) return;
-    const first = focusable[0], last = focusable[focusable.length - 1];
-    if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
-    else { if (document.activeElement === last) { e.preventDefault(); first.focus(); } }
+    const sheet = e.currentTarget.querySelector('.sheet');
+    const all = [...sheet.querySelectorAll('button:not([disabled]),input,select,textarea,a[href],[tabindex="0"]')];
+    if (!all.length) return;
+    if (e.shiftKey) { if (document.activeElement === all[0]) { e.preventDefault(); all[all.length-1].focus(); } }
+    else { if (document.activeElement === all[all.length-1]) { e.preventDefault(); all[0].focus(); } }
 }
-
 document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-        if (document.getElementById('pkg-detail-overlay').classList.contains('show')) closePkgDetail();
-        else if (document.getElementById('contact-overlay').classList.contains('show')) closeContactModal();
-        else if (document.getElementById('success-overlay').classList.contains('show')) closeSuccess();
-    }
+    if (e.key !== 'Escape') return;
+    if (document.getElementById('ov-terms').classList.contains('open')) closeTerms();
+    else if (document.getElementById('ov-contact').classList.contains('open')) closeContact();
+    else if (document.getElementById('ov-detail').classList.contains('open')) closeDetail();
+    else if (document.getElementById('ov-success').classList.contains('open')) closeSuccess();
 });
-
-// Click backdrop to close
-['pkg-detail-overlay', 'contact-overlay'].forEach(id => {
+['ov-detail','ov-contact','ov-terms'].forEach(id => {
     document.getElementById(id).addEventListener('click', function(e) {
         if (e.target === this) {
-            if (id === 'pkg-detail-overlay') closePkgDetail();
-            else closeContactModal();
+            if (id === 'ov-detail') closeDetail();
+            else if (id === 'ov-contact') closeContact();
+            else closeTerms();
         }
     });
 });
 
-// ===================== FORM VALIDATION =====================
+// ── FORM VALIDATION ──────────────────────
 function validate() {
-    let valid = true;
-    const fields = [
-        { id: 'nameHe', test: v => v.trim() !== '', msg: 'שדה חובה' },
-        { id: 'nameEn', test: v => v.trim() !== '', msg: 'שדה חובה' },
-        { id: 'idNumber', test: v => v.trim() !== '', msg: 'שדה חובה' },
-        { id: 'phone', test: v => v.trim() !== '', msg: 'שדה חובה' },
-        { id: 'email', test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), msg: 'נא להזין כתובת מייל תקינה' },
-        { id: 'passengers', test: v => v !== '', msg: 'שדה חובה' },
-        { id: 'packageType', test: v => v !== '', msg: 'שדה חובה' },
+    const rules = [
+        { id:'nameHe',  fn: v => v.trim() !== '' },
+        { id:'nameEn',  fn: v => v.trim() !== '' },
+        { id:'idNumber',fn: v => v.trim() !== '' },
+        { id:'phone',   fn: v => v.trim() !== '' },
+        { id:'email',   fn: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+        { id:'passengers', fn: v => v !== '' },
+        { id:'packageType', fn: v => v !== '' },
     ];
-    fields.forEach(f => {
-        const el = document.getElementById(f.id);
-        const err = document.getElementById('err-' + f.id);
-        const fail = !f.test(el.value);
+    let ok = true;
+    rules.forEach(r => {
+        const el = document.getElementById(r.id);
+        const err = document.getElementById('e-' + r.id);
+        const fail = !r.fn(el.value);
         el.classList.toggle('error', fail);
-        if (err) {
-            err.textContent = f.msg;
-            err.classList.toggle('show', fail);
-        }
-        if (fail) { valid = false; el.setAttribute('aria-invalid', 'true'); }
-        else { el.removeAttribute('aria-invalid'); }
+        err && err.classList.toggle('on', fail);
+        if (fail) { el.setAttribute('aria-invalid', 'true'); ok = false; }
+        else el.removeAttribute('aria-invalid');
     });
-    if (!valid) {
-        const firstErr = document.querySelector('.input-field.error');
-        if (firstErr) firstErr.focus();
-    }
-    return valid;
+    if (!ok) { const first = document.querySelector('.field.error'); if (first) first.focus(); }
+    return ok;
 }
 
-// ===================== FORM SUBMIT =====================
+// ── FORM SUBMIT → OPEN TERMS ─────────────
 document.getElementById('lead-form').addEventListener('submit', function(e) {
     e.preventDefault();
     if (!validate()) return;
 
-    const btn = document.getElementById('submit-btn');
-    document.getElementById('btn-text').classList.add('hidden');
-    document.getElementById('btn-loader').classList.remove('hidden');
-    btn.disabled = true;
-    btn.setAttribute('aria-busy', 'true');
-
-    const data = {
+    _pendingFormData = {
         id: 'lead_' + Date.now(),
         submittedAt: new Date().toISOString(),
         status: 'ממתין',
@@ -917,38 +727,47 @@ document.getElementById('lead-form').addEventListener('submit', function(e) {
         notes: document.getElementById('notes').value.trim()
     };
 
-    try {
-        const stored = JSON.parse(localStorage.getItem('budapest_leads') || '[]');
-        stored.unshift(data);
-        localStorage.setItem('budapest_leads', JSON.stringify(stored));
-    } catch(e) { /* localStorage unavailable */ }
-
-    const FORMSPREE_ID = 'YOUR_FORM_ID';
-    const submit = FORMSPREE_ID !== 'YOUR_FORM_ID'
-        ? fetch('https://formspree.io/f/' + FORMSPREE_ID, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ 'שם בעברית': data.nameHe, 'שם באנגלית': data.nameEn, 'ת.ז.': data.idNumber, 'טלפון': data.phone, 'אימייל': data.email, 'נוסעים': data.passengers, 'חבילה': data.packageType, 'הערות': data.notes })
-          })
-        : Promise.resolve();
-
-    submit.finally(() => {
-        setTimeout(() => {
-            document.getElementById('btn-text').classList.remove('hidden');
-            document.getElementById('btn-loader').classList.add('hidden');
-            btn.disabled = false;
-            btn.removeAttribute('aria-busy');
-            closeContactModal();
-            setTimeout(() => openOverlay('success-overlay'), 150);
-            document.getElementById('lead-form').reset();
-        }, 700);
-    });
+    document.getElementById('terms-check').checked = false;
+    document.getElementById('terms-check-err').style.display = 'none';
+    closeContact();
+    setTimeout(() => openOv('ov-terms'), 180);
 });
 
-// ===================== SUCCESS =====================
-function closeSuccess() { closeOverlay('success-overlay'); }
+// ── CONFIRM TERMS & SEND ─────────────────
+function confirmTermsAndSend() {
+    const checked = document.getElementById('terms-check').checked;
+    const errEl = document.getElementById('terms-check-err');
+    if (!checked) { errEl.style.display = 'block'; document.getElementById('terms-check').focus(); return; }
+    errEl.style.display = 'none';
 
-// ===================== INIT =====================
+    const btn = document.getElementById('confirm-send-btn');
+    btn.disabled = true;
+    btn.setAttribute('aria-busy', 'true');
+    btn.innerHTML = 'שולח...';
+
+    try {
+        const stored = JSON.parse(localStorage.getItem('budapest_leads') || '[]');
+        stored.unshift(_pendingFormData);
+        localStorage.setItem('budapest_leads', JSON.stringify(stored));
+    } catch(e) {}
+
+    const FORMSPREE_ID = 'YOUR_FORM_ID';
+    const req = FORMSPREE_ID !== 'YOUR_FORM_ID'
+        ? fetch('https://formspree.io/f/' + FORMSPREE_ID, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify({ 'שם בעברית':_pendingFormData.nameHe, 'שם באנגלית':_pendingFormData.nameEn, 'ת.ז.':_pendingFormData.idNumber, 'טלפון':_pendingFormData.phone, 'אימייל':_pendingFormData.email, 'נוסעים':_pendingFormData.passengers, 'חבילה':_pendingFormData.packageType, 'הערות':_pendingFormData.notes }) })
+        : Promise.resolve();
+
+    req.finally(() => {
+        setTimeout(() => {
+            btn.disabled = false; btn.removeAttribute('aria-busy'); btn.innerHTML = 'אשר ושלח';
+            closeOv('ov-terms');
+            setTimeout(() => openOv('ov-success'), 150);
+            document.getElementById('lead-form').reset();
+            _pendingFormData = null;
+        }, 600);
+    });
+}
+
+// ── INIT ─────────────────────────────────
 renderPackages();
 </script>
 </body>
