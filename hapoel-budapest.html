@@ -264,166 +264,10 @@
 
     <div class="text-center mb-10">
         <p class="section-label mb-2">בחר את החבילה שלך</p>
-        <h2 class="text-3xl font-black">3 חבילות לבחירה</h2>
+        <h2 class="text-3xl font-black" id="packages-heading">חבילות לבחירה</h2>
     </div>
 
-    <div class="space-y-5" id="package-cards">
-
-        <!-- חבילה 1 -->
-        <div class="package-card rounded-2xl p-6 cursor-pointer" data-package="חווית בודפשט מלאה - 3,213₪" onclick="selectPackage(this)">
-            <div class="flex items-start justify-between mb-4 flex-wrap gap-2">
-                <div>
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="badge">חבילה 1</span>
-                        <span class="text-xs text-gray-500 font-medium">22–25/07/26 | רביעי–שבת</span>
-                    </div>
-                    <h3 class="text-xl font-black mt-1">חווית בודפשט מלאה</h3>
-                </div>
-                <div class="text-left">
-                    <div class="price-tag">3,213₪</div>
-                    <div class="price-sub">לאדם, הרכב זוגי</div>
-                </div>
-            </div>
-
-            <div class="divider mb-4"></div>
-
-            <div class="grid grid-cols-1 gap-2.5 mb-4">
-                <div class="info-row">
-                    <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
-                    <span>טיסה ישירה הלוך 14:40 | חזור 19:10</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="briefcase" class="w-4 h-4"></i>
-                    <span>מזוודה 20kg לנוסע</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="building-2" class="w-4 h-4"></i>
-                    <span>Eurostars Palazzo Zichy — Deluxe Room, לינה + ארוחת בוקר</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="bus" class="w-4 h-4"></i>
-                    <span>הסעה הלוך-חזור למשחק</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="shield-check" class="w-4 h-4"></i>
-                    <span>ביטול חינם למלון עד 18/07/26</span>
-                </div>
-            </div>
-
-            <div class="flex items-center justify-between mt-3">
-                <span class="badge-outline">4 לילות</span>
-                <div class="select-indicator hidden">
-                    <span class="flex items-center gap-1 text-green-400 text-sm font-bold">
-                        <i data-lucide="check-circle" class="w-4 h-4"></i> נבחר
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <!-- חבילה 2 -->
-        <div class="package-card rounded-2xl p-6 cursor-pointer" data-package="סופ&quot;ש ארוך - 3,435₪" onclick="selectPackage(this)">
-            <div class="flex items-start justify-between mb-4 flex-wrap gap-2">
-                <div>
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="badge">חבילה 2</span>
-                        <span class="text-xs text-red-500 font-bold">מומלץ</span>
-                        <span class="text-xs text-gray-500 font-medium">23–26/07/26 | חמישי–ראשון</span>
-                    </div>
-                    <h3 class="text-xl font-black mt-1">סופ"ש ארוך</h3>
-                </div>
-                <div class="text-left">
-                    <div class="price-tag">3,435₪</div>
-                    <div class="price-sub">לאדם, הרכב זוגי</div>
-                </div>
-            </div>
-
-            <div class="divider mb-4"></div>
-
-            <div class="grid grid-cols-1 gap-2.5 mb-4">
-                <div class="info-row">
-                    <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
-                    <span>ארקיע — הלוך 06:00 | חזור 20:40</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="briefcase" class="w-4 h-4"></i>
-                    <span>מזוודה 20kg לנוסע</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="building-2" class="w-4 h-4"></i>
-                    <span>Eurostars Palazzo Zichy — Deluxe Room, לינה + ארוחת בוקר</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="bus" class="w-4 h-4"></i>
-                    <span>הסעות הלוך-חזור למשחק</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="shield-check" class="w-4 h-4"></i>
-                    <span>ביטול חינם למלון עד 19/07/26</span>
-                </div>
-            </div>
-
-            <div class="flex items-center justify-between mt-3">
-                <span class="badge-outline">4 לילות</span>
-                <div class="select-indicator hidden">
-                    <span class="flex items-center gap-1 text-green-400 text-sm font-bold">
-                        <i data-lucide="check-circle" class="w-4 h-4"></i> נבחר
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <!-- חבילה 3 -->
-        <div class="package-card rounded-2xl p-6 cursor-pointer" data-package="קוויקי בהונגריה - 2,900₪" onclick="selectPackage(this)">
-            <div class="flex items-start justify-between mb-4 flex-wrap gap-2">
-                <div>
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="badge">חבילה 3</span>
-                        <span class="text-xs text-gray-500 font-medium">22–24/07/26 | רביעי–שישי</span>
-                    </div>
-                    <h3 class="text-xl font-black mt-1">קוויקי בהונגריה</h3>
-                </div>
-                <div class="text-left">
-                    <div class="price-tag">2,900₪</div>
-                    <div class="price-sub">לאדם, הרכב זוגי</div>
-                </div>
-            </div>
-
-            <div class="divider mb-4"></div>
-
-            <div class="grid grid-cols-1 gap-2.5 mb-4">
-                <div class="info-row">
-                    <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
-                    <span>אלעל — הלוך 03:50 | חזור 09:10</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="briefcase" class="w-4 h-4"></i>
-                    <span>טרולי 8kg לנוסע</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="building-2" class="w-4 h-4"></i>
-                    <span>Eurostars Palazzo Zichy — Deluxe Room, לינה + ארוחת בוקר</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="bus" class="w-4 h-4"></i>
-                    <span>הסעות הלוך-חזור למשחק</span>
-                </div>
-                <div class="info-row">
-                    <i data-lucide="shield-check" class="w-4 h-4"></i>
-                    <span>ביטול חינם למלון עד 15/07/26</span>
-                </div>
-            </div>
-
-            <div class="flex items-center justify-between mt-3">
-                <span class="badge-outline">2 לילות</span>
-                <div class="select-indicator hidden">
-                    <span class="flex items-center gap-1 text-green-400 text-sm font-bold">
-                        <i data-lucide="check-circle" class="w-4 h-4"></i> נבחר
-                    </span>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    <div class="space-y-5" id="package-cards"></div>
 </div>
 
 <!-- ======== FORM ======== -->
@@ -488,9 +332,6 @@
                         <label class="block text-xs font-bold text-gray-400 mb-1.5">סוג חבילה *</label>
                         <select name="packageType" id="packageType" class="input-field" required>
                             <option value="" disabled selected>בחר חבילה</option>
-                            <option value="חווית בודפשט מלאה - 3,213₪">חבילה 1 — חווית בודפשט מלאה (3,213₪)</option>
-                            <option value='סופ"ש ארוך - 3,435₪'>חבילה 2 — סופ"ש ארוך (3,435₪)</option>
-                            <option value="קוויקי בהונגריה - 2,900₪">חבילה 3 — קוויקי בהונגריה (2,900₪)</option>
                         </select>
                         <p class="error-msg" id="err-packageType">שדה חובה</p>
                     </div>
@@ -559,61 +400,170 @@
 </div>
 
 <script>
-// Package selection
+// ===================== PACKAGES DATA =====================
+const DEFAULT_PACKAGES = [
+    {
+        id: 'pkg_1', number: 1, status: 'active', recommended: false,
+        name: 'חווית בודפשט מלאה', price: '3,213', dates: '22–25/07/26', days: 'רביעי–שבת', nights: '4 לילות',
+        airline: '', flightOut: '14:40', flightIn: '19:10', luggage: 'מזוודה 20kg לנוסע',
+        hotel: 'Eurostars Palazzo Zichy', hotelBasis: 'Deluxe Room, לינה + ארוחת בוקר',
+        cancelDate: '18/07/26', shuttle: 'הסעה הלוך-חזור למשחק', note: ''
+    },
+    {
+        id: 'pkg_2', number: 2, status: 'active', recommended: true,
+        name: 'סופ"ש ארוך', price: '3,435', dates: '23–26/07/26', days: 'חמישי–ראשון', nights: '4 לילות',
+        airline: 'ארקיע', flightOut: '06:00', flightIn: '20:40', luggage: 'מזוודה 20kg לנוסע',
+        hotel: 'Eurostars Palazzo Zichy', hotelBasis: 'Deluxe Room, לינה + ארוחת בוקר',
+        cancelDate: '19/07/26', shuttle: 'הסעות הלוך-חזור למשחק', note: 'מומלץ'
+    },
+    {
+        id: 'pkg_3', number: 3, status: 'active', recommended: false,
+        name: 'קוויקי בהונגריה', price: '2,900', dates: '22–24/07/26', days: 'רביעי–שישי', nights: '2 לילות',
+        airline: 'אלעל', flightOut: '03:50', flightIn: '09:10', luggage: 'טרולי 8kg לנוסע',
+        hotel: 'Eurostars Palazzo Zichy', hotelBasis: 'Deluxe Room, לינה + ארוחת בוקר',
+        cancelDate: '15/07/26', shuttle: 'הסעות הלוך-חזור למשחק', note: ''
+    }
+];
+
+function getPackages() {
+    const stored = localStorage.getItem('budapest_packages');
+    return stored ? JSON.parse(stored) : DEFAULT_PACKAGES;
+}
+
+// ===================== RENDER PACKAGES =====================
+function renderPackages() {
+    const pkgs = getPackages().filter(p => p.status !== 'hidden');
+    const container = document.getElementById('package-cards');
+    const select = document.getElementById('packageType');
+
+    // Update heading count
+    const activeCount = pkgs.filter(p => p.status === 'active').length;
+    const total = pkgs.length;
+    document.getElementById('packages-heading').textContent = total + ' חבילות לבחירה';
+
+    // Build cards
+    container.innerHTML = pkgs.map((p, i) => {
+        const isSoldOut = p.status === 'soldout';
+        const pkgValue = p.name + ' - ' + p.price + '₪';
+        const flightLine = (p.airline ? p.airline + ' — ' : 'טיסה ישירה ') + 'הלוך ' + p.flightOut + ' | חזור ' + p.flightIn;
+
+        return `
+        <div class="package-card rounded-2xl p-6 ${isSoldOut ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}"
+             data-package="${pkgValue.replace(/"/g, '&quot;')}"
+             ${!isSoldOut ? 'onclick="selectPackage(this)"' : ''}>
+
+            ${isSoldOut ? '<div class="absolute inset-0 rounded-2xl flex items-center justify-center z-10 bg-black/40"><span class="bg-yellow-500/20 border border-yellow-500/40 text-yellow-300 font-black text-lg px-6 py-2 rounded-full">אזלה</span></div>' : ''}
+
+            <div class="flex items-start justify-between mb-4 flex-wrap gap-2">
+                <div>
+                    <div class="flex items-center gap-2 mb-1 flex-wrap">
+                        <span class="badge">חבילה ${i + 1}</span>
+                        ${p.note ? `<span class="text-xs text-red-500 font-bold">${p.note}</span>` : ''}
+                        <span class="text-xs text-gray-500 font-medium">${p.dates} | ${p.days}</span>
+                    </div>
+                    <h3 class="text-xl font-black mt-1">${p.name}</h3>
+                </div>
+                <div class="text-left">
+                    <div class="price-tag">${p.price}₪</div>
+                    <div class="price-sub">לאדם, הרכב זוגי</div>
+                </div>
+            </div>
+
+            <div class="divider mb-4"></div>
+
+            <div class="grid grid-cols-1 gap-2.5 mb-4">
+                <div class="info-row">
+                    <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
+                    <span>${flightLine}</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                    <span>${p.luggage}</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="building-2" class="w-4 h-4"></i>
+                    <span>${p.hotel} — ${p.hotelBasis}</span>
+                </div>
+                ${p.shuttle ? `<div class="info-row"><i data-lucide="bus" class="w-4 h-4"></i><span>${p.shuttle}</span></div>` : ''}
+                <div class="info-row">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span>ביטול חינם למלון עד ${p.cancelDate}</span>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-3">
+                <span class="badge-outline">${p.nights}</span>
+                <div class="select-indicator hidden">
+                    <span class="flex items-center gap-1 text-green-400 text-sm font-bold">
+                        <i data-lucide="check-circle" class="w-4 h-4"></i> נבחר
+                    </span>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+
+    // Rebuild select options (only active packages)
+    const activeOpts = pkgs.filter(p => p.status === 'active');
+    while (select.options.length > 1) select.remove(1);
+    activeOpts.forEach((p, i) => {
+        const opt = document.createElement('option');
+        opt.value = p.name + ' - ' + p.price + '₪';
+        opt.textContent = 'חבילה ' + (i + 1) + ' — ' + p.name + ' (' + p.price + '₪)';
+        select.appendChild(opt);
+    });
+
+    lucide.createIcons();
+}
+
+// ===================== PACKAGE SELECTION =====================
 function selectPackage(card) {
     document.querySelectorAll('.package-card').forEach(c => {
         c.classList.remove('selected');
-        c.querySelector('.select-indicator').classList.add('hidden');
+        const ind = c.querySelector('.select-indicator');
+        if (ind) ind.classList.add('hidden');
     });
     card.classList.add('selected');
     card.querySelector('.select-indicator').classList.remove('hidden');
-    const pkgValue = card.getAttribute('data-package');
+    const val = card.getAttribute('data-package');
     const select = document.getElementById('packageType');
     for (let opt of select.options) {
-        if (opt.value === pkgValue) { opt.selected = true; break; }
+        if (opt.value === val) { opt.selected = true; break; }
     }
     document.getElementById('form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
     lucide.createIcons();
 }
 
-// Sync package select back to cards
 document.getElementById('packageType').addEventListener('change', function() {
     const val = this.value;
     document.querySelectorAll('.package-card').forEach(c => {
         c.classList.remove('selected');
-        c.querySelector('.select-indicator').classList.add('hidden');
+        const ind = c.querySelector('.select-indicator');
+        if (ind) ind.classList.add('hidden');
         if (c.getAttribute('data-package') === val) {
             c.classList.add('selected');
-            c.querySelector('.select-indicator').classList.remove('hidden');
+            if (ind) ind.classList.remove('hidden');
         }
     });
     lucide.createIcons();
 });
 
-// Validation
+// ===================== FORM =====================
 function validate() {
     let valid = true;
     const fields = ['nameHe', 'nameEn', 'idNumber', 'phone', 'email', 'passengers', 'packageType'];
     fields.forEach(id => {
         const el = document.getElementById(id);
         const err = document.getElementById('err-' + id);
-        if (!el.value.trim()) {
-            el.classList.add('error');
-            if (err) err.classList.add('show');
-            valid = false;
-        } else if (id === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value)) {
-            el.classList.add('error');
-            if (err) err.classList.add('show');
-            valid = false;
-        } else {
-            el.classList.remove('error');
-            if (err) err.classList.remove('show');
-        }
+        const empty = !el.value.trim();
+        const badEmail = id === 'email' && !empty && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);
+        const fail = empty || badEmail;
+        el.classList.toggle('error', fail);
+        if (err) err.classList.toggle('show', fail);
+        if (fail) valid = false;
     });
     return valid;
 }
 
-// Form submit
 document.getElementById('lead-form').addEventListener('submit', function(e) {
     e.preventDefault();
     if (!validate()) return;
@@ -637,29 +587,16 @@ document.getElementById('lead-form').addEventListener('submit', function(e) {
         notes: document.getElementById('notes').value.trim()
     };
 
-    // Save to localStorage
     const stored = JSON.parse(localStorage.getItem('budapest_leads') || '[]');
     stored.unshift(data);
     localStorage.setItem('budapest_leads', JSON.stringify(stored));
 
-    // ===== FORMSPREE =====
-    // להחלפה: שנה את YOUR_FORM_ID לאחרי הרשמה ב-formspree.io
     const FORMSPREE_ID = 'YOUR_FORM_ID';
-
     const submitPromise = FORMSPREE_ID !== 'YOUR_FORM_ID'
         ? fetch('https://formspree.io/f/' + FORMSPREE_ID, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({
-                'שם בעברית': data.nameHe,
-                'שם באנגלית': data.nameEn,
-                'תעודת זהות': data.idNumber,
-                'טלפון': data.phone,
-                'אימייל': data.email,
-                'נוסעים': data.passengers,
-                'חבילה': data.packageType,
-                'הערות': data.notes
-            })
+            body: JSON.stringify({ 'שם בעברית': data.nameHe, 'שם באנגלית': data.nameEn, 'תעודת זהות': data.idNumber, 'טלפון': data.phone, 'אימייל': data.email, 'נוסעים': data.passengers, 'חבילה': data.packageType, 'הערות': data.notes })
           }).then(() => {})
         : Promise.resolve();
 
@@ -670,16 +607,13 @@ document.getElementById('lead-form').addEventListener('submit', function(e) {
             btn.disabled = false;
             document.getElementById('success-overlay').classList.add('show');
             document.getElementById('lead-form').reset();
-            document.querySelectorAll('.package-card').forEach(c => {
-                c.classList.remove('selected');
-                c.querySelector('.select-indicator').classList.add('hidden');
-            });
-            lucide.createIcons();
+            renderPackages();
         }, 800);
     });
 });
 
-lucide.createIcons();
+// ===================== INIT =====================
+renderPackages();
 </script>
 </body>
 </html>
