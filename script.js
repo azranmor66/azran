@@ -3,8 +3,14 @@
 // ==========================================
 const treeConfig = {
     links: [
-       
-        { 
+        {
+            label: "✈️ הפועל בבודפשט — חבילות טיסה",
+            url: "hapoel-budapest.html",
+            icon: "plane",
+            visible: true,
+            highlight: true
+        },
+        {
             label: "הפועל על פי עזרן - ערוץ הווטסאפ הרשמי", 
             url: "https://whatsapp.com/channel/0029VbBiFme2UPBIGn82mC3Z", // עדכן לינק
             icon: "message-circle", 

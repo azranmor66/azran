@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול לידים | בודפשט 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root { --accent: #e61e2a; }
+        body { background: #0a0a0a; font-family: 'Heebo', sans-serif; color: #fff; }
+        .input-field {
+            background: #0d0d0d; border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; padding: 0.75rem 1rem; border-radius: 0.5rem;
+            outline: none; font-family: 'Heebo', sans-serif; transition: border-color 0.2s;
+        }
+        .input-field:focus { border-color: var(--accent); }
+        .card { background: #111; border: 1px solid rgba(255,255,255,0.07); border-radius: 1rem; }
+        .status-badge {
+            font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.65rem;
+            border-radius: 999px; cursor: pointer; transition: all 0.2s;
+        }
+        .status-ממתין { background: rgba(234,179,8,0.15); color: #eab308; border: 1px solid rgba(234,179,8,0.3); }
+        .status-יצרנו-קשר { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+        .status-הוזמן { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+        .status-בוטל { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+        .lead-row { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s; }
+        .lead-row:last-child { border-bottom: none; }
+        .lead-row:hover { background: rgba(255,255,255,0.02); }
+        .stat-card { background: #111; border: 1px solid rgba(255,255,255,0.07); border-radius: 0.75rem; padding: 1.25rem; }
+        .btn { background: var(--accent); color: white; font-weight: 700; padding: 0.65rem 1.5rem; border-radius: 999px; border: none; cursor: pointer; font-family: 'Heebo', sans-serif; transition: all 0.2s; font-size: 0.9rem; }
+        .btn:hover { background: #b01520; transform: translateY(-1px); }
+        .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: #aaa; font-weight: 600; padding: 0.55rem 1.25rem; border-radius: 999px; cursor: pointer; font-family: 'Heebo', sans-serif; transition: all 0.2s; font-size: 0.85rem; }
+        .btn-ghost:hover { border-color: white; color: white; }
+        .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+        .modal-bg.show { display: flex; }
+        .login-screen { display: flex; min-height: 100vh; align-items: center; justify-content: center; padding: 1rem; }
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(230,30,42,0.4), transparent); }
+        #app { display: none; }
+        .filter-btn { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #888; padding: 0.35rem 0.9rem; border-radius: 999px; cursor: pointer; font-family: 'Heebo', sans-serif; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; }
+        .filter-btn.active, .filter-btn:hover { border-color: var(--accent); color: white; background: rgba(230,30,42,0.1); }
+        .export-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #aaa; padding: 0.45rem 1rem; border-radius: 0.5rem; cursor: pointer; font-family: 'Heebo', sans-serif; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; display: flex; align-items: center; gap: 0.4rem; }
+        .export-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen" class="login-screen">
+    <div class="w-full max-w-sm">
+        <div class="text-center mb-8">
+            <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/LogoAzranJosepwhite.png"
+                 alt="Logo" class="h-12 object-contain mx-auto mb-4"
+                 onerror="this.src='https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png'">
+            <h1 class="text-2xl font-black">ניהול לידים</h1>
+            <p class="text-gray-500 text-sm mt-1">בודפשט 2026 — פאנל פרטי</p>
+        </div>
+        <div class="card p-6">
+            <label class="block text-xs font-bold text-gray-400 mb-2">סיסמה</label>
+            <input type="password" id="password-input" class="input-field w-full mb-3" placeholder="הזן סיסמה" onkeydown="if(event.key==='Enter') login()">
+            <p id="login-error" class="text-red-400 text-xs mb-3 hidden">סיסמה שגויה</p>
+            <button onclick="login()" class="btn w-full">כניסה</button>
+        </div>
+        <p class="text-center text-gray-700 text-xs mt-6">
+            <a href="index.html" class="hover:text-gray-500">← חזרה לדף הראשי</a>
+        </p>
+    </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="min-h-screen">
+
+    <!-- Header -->
+    <div class="border-b border-white/[0.06] px-4 py-4">
+        <div class="max-w-5xl mx-auto flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-3">
+                <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/LogoAzranJosepwhite.png"
+                     alt="Logo" class="h-8 object-contain"
+                     onerror="this.src='https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png'">
+                <div>
+                    <h1 class="font-black text-base leading-tight">ניהול לידים — בודפשט 2026</h1>
+                    <p class="text-gray-600 text-xs">פאנל פרטי</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="exportCSV()" class="export-btn">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                    ייצוא CSV
+                </button>
+                <button onclick="logout()" class="btn-ghost text-xs">יציאה</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 py-6">
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8" id="stats-grid">
+        </div>
+
+        <!-- Filters & Search -->
+        <div class="flex flex-wrap gap-3 items-center justify-between mb-5">
+            <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-xs text-gray-500 font-bold ml-1">סינון:</span>
+                <button class="filter-btn active" onclick="setFilter('all', this)">הכל</button>
+                <button class="filter-btn" onclick="setFilter('ממתין', this)">ממתין</button>
+                <button class="filter-btn" onclick="setFilter('יצרנו קשר', this)">יצרנו קשר</button>
+                <button class="filter-btn" onclick="setFilter('הוזמן', this)">הוזמן</button>
+                <button class="filter-btn" onclick="setFilter('בוטל', this)">בוטל</button>
+            </div>
+            <input type="text" id="search-input" class="input-field text-sm" style="width:220px" placeholder="חיפוש שם / טלפון..." oninput="renderLeads()">
+        </div>
+
+        <!-- Leads List -->
+        <div class="card" id="leads-container">
+            <div class="p-8 text-center text-gray-600">
+                <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 opacity-40"></i>
+                <p class="text-sm">אין לידים עדיין</p>
+            </div>
+        </div>
+
+        <p class="text-xs text-gray-700 mt-4 text-center">
+            הנתונים שמורים בדפדפן הזה בלבד. לשיתוף — השתמש בייצוא CSV ושלח למשווק.
+        </p>
+
+    </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="modal-bg" id="detail-modal">
+    <div class="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between mb-5">
+            <h3 class="text-lg font-black" id="modal-name"></h3>
+            <button onclick="closeModal()" class="text-gray-600 hover:text-white transition">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        <div id="modal-content" class="space-y-3"></div>
+        <div class="mt-5 pt-5 border-t border-white/[0.06]">
+            <p class="text-xs font-bold text-gray-500 mb-2">עדכון סטטוס:</p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="updateStatus('ממתין')" class="status-badge status-ממתין">ממתין</button>
+                <button onclick="updateStatus('יצרנו קשר')" class="status-badge status-יצרנו-קשר">יצרנו קשר</button>
+                <button onclick="updateStatus('הוזמן')" class="status-badge status-הוזמן">הוזמן ✓</button>
+                <button onclick="updateStatus('בוטל')" class="status-badge status-בוטל">בוטל</button>
+            </div>
+        </div>
+        <div class="mt-4">
+            <p class="text-xs font-bold text-gray-500 mb-2">הערת מעקב:</p>
+            <textarea id="modal-note" class="input-field w-full resize-none text-sm" rows="2" placeholder="הוסף הערה פנימית..."></textarea>
+            <button onclick="saveNote()" class="btn text-sm mt-2 px-4 py-2">שמור הערה</button>
+        </div>
+        <div class="mt-4 flex justify-end">
+            <button onclick="deleteLead()" class="text-xs text-red-700 hover:text-red-500 transition">מחק ליד</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const PASS = 'hapoel2026';
+let currentFilter = 'all';
+let currentLeadId = null;
+
+function login() {
+    const val = document.getElementById('password-input').value;
+    if (val === PASS) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+        renderAll();
+    } else {
+        document.getElementById('login-error').classList.remove('hidden');
+    }
+}
+
+function logout() {
+    document.getElementById('login-screen').style.display = '';
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('password-input').value = '';
+}
+
+function getLeads() {
+    return JSON.parse(localStorage.getItem('budapest_leads') || '[]');
+}
+function saveLeads(leads) {
+    localStorage.setItem('budapest_leads', JSON.stringify(leads));
+}
+
+function setFilter(val, btn) {
+    currentFilter = val;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderLeads();
+}
+
+function renderAll() {
+    renderStats();
+    renderLeads();
+    lucide.createIcons();
+}
+
+function renderStats() {
+    const leads = getLeads();
+    const stats = [
+        { label: 'סה"כ לידים', value: leads.length, icon: 'users', color: 'text-white' },
+        { label: 'ממתינים', value: leads.filter(l => l.status === 'ממתין').length, icon: 'clock', color: 'text-yellow-400' },
+        { label: 'הוזמנו', value: leads.filter(l => l.status === 'הוזמן').length, icon: 'check-circle', color: 'text-green-400' },
+        { label: 'סה"כ נוסעים', value: leads.reduce((s, l) => s + (parseInt(l.passengers) || 0), 0), icon: 'plane', color: 'text-red-400' },
+    ];
+    document.getElementById('stats-grid').innerHTML = stats.map(s => `
+        <div class="stat-card">
+            <div class="flex items-center gap-2 mb-1">
+                <i data-lucide="${s.icon}" class="w-4 h-4 ${s.color} opacity-70"></i>
+                <span class="text-xs text-gray-500">${s.label}</span>
+            </div>
+            <div class="text-3xl font-black ${s.color}">${s.value}</div>
+        </div>
+    `).join('');
+    lucide.createIcons();
+}
+
+function renderLeads() {
+    const leads = getLeads();
+    const search = document.getElementById('search-input').value.trim().toLowerCase();
+    const filtered = leads.filter(l => {
+        const matchFilter = currentFilter === 'all' || l.status === currentFilter;
+        const matchSearch = !search ||
+            l.nameHe.toLowerCase().includes(search) ||
+            l.nameEn.toLowerCase().includes(search) ||
+            l.phone.includes(search) ||
+            l.email.toLowerCase().includes(search);
+        return matchFilter && matchSearch;
+    });
+
+    const container = document.getElementById('leads-container');
+    if (!filtered.length) {
+        container.innerHTML = `<div class="p-8 text-center text-gray-600 text-sm">אין תוצאות</div>`;
+        lucide.createIcons();
+        return;
+    }
+
+    const statusClass = { 'ממתין': 'status-ממתין', 'יצרנו קשר': 'status-יצרנו-קשר', 'הוזמן': 'status-הוזמן', 'בוטל': 'status-בוטל' };
+
+    container.innerHTML = filtered.map(l => `
+        <div class="lead-row px-4 py-4 flex items-center justify-between gap-4 cursor-pointer hover:bg-white/[0.02] flex-wrap" onclick="openModal('${l.id}')">
+            <div class="flex items-center gap-3 min-w-0">
+                <div class="w-9 h-9 rounded-full bg-red-900/30 border border-red-800/30 flex items-center justify-center flex-shrink-0">
+                    <span class="text-sm font-bold text-red-400">${l.nameHe.charAt(0)}</span>
+                </div>
+                <div class="min-w-0">
+                    <p class="font-bold text-sm truncate">${l.nameHe}</p>
+                    <p class="text-gray-500 text-xs truncate">${l.phone} | ${l.passengers} נוסעים</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 flex-wrap flex-shrink-0">
+                <span class="text-xs text-gray-600 hidden md:block">${l.packageType.split(' - ')[0]}</span>
+                <span class="status-badge ${statusClass[l.status] || 'status-ממתין'}">${l.status}</span>
+                <span class="text-gray-700 text-xs">${new Date(l.submittedAt).toLocaleDateString('he-IL')}</span>
+                <i data-lucide="chevron-left" class="w-4 h-4 text-gray-700"></i>
+            </div>
+        </div>
+    `).join('');
+    lucide.createIcons();
+}
+
+function openModal(id) {
+    const leads = getLeads();
+    const lead = leads.find(l => l.id === id);
+    if (!lead) return;
+    currentLeadId = id;
+    document.getElementById('modal-name').textContent = lead.nameHe;
+    document.getElementById('modal-note').value = lead.note || '';
+    const fields = [
+        ['שם בעברית', lead.nameHe],
+        ['שם באנגלית', lead.nameEn],
+        ['תעודת זהות', lead.idNumber],
+        ['טלפון', `<a href="tel:${lead.phone}" class="text-blue-400 hover:underline">${lead.phone}</a>`],
+        ['אימייל', `<a href="mailto:${lead.email}" class="text-blue-400 hover:underline">${lead.email}</a>`],
+        ['כמות נוסעים', lead.passengers],
+        ['חבילה', lead.packageType],
+        ['הערות', lead.notes || '—'],
+        ['נשלח', new Date(lead.submittedAt).toLocaleString('he-IL')],
+    ];
+    document.getElementById('modal-content').innerHTML = fields.map(([k, v]) => `
+        <div class="flex gap-3 text-sm">
+            <span class="text-gray-500 font-bold w-28 flex-shrink-0">${k}:</span>
+            <span class="text-white">${v}</span>
+        </div>
+    `).join('');
+    document.getElementById('detail-modal').classList.add('show');
+    lucide.createIcons();
+}
+
+function closeModal() {
+    document.getElementById('detail-modal').classList.remove('show');
+    currentLeadId = null;
+}
+
+function updateStatus(status) {
+    if (!currentLeadId) return;
+    const leads = getLeads();
+    const lead = leads.find(l => l.id === currentLeadId);
+    if (lead) { lead.status = status; saveLeads(leads); renderAll(); }
+}
+
+function saveNote() {
+    if (!currentLeadId) return;
+    const leads = getLeads();
+    const lead = leads.find(l => l.id === currentLeadId);
+    if (lead) {
+        lead.note = document.getElementById('modal-note').value;
+        saveLeads(leads);
+        renderStats();
+    }
+}
+
+function deleteLead() {
+    if (!currentLeadId) return;
+    if (!confirm('למחוק ליד זה לצמיתות?')) return;
+    const leads = getLeads().filter(l => l.id !== currentLeadId);
+    saveLeads(leads);
+    closeModal();
+    renderAll();
+}
+
+function exportCSV() {
+    const leads = getLeads();
+    if (!leads.length) { alert('אין לידים לייצוא'); return; }
+    const headers = ['תאריך', 'שם בעברית', 'שם באנגלית', 'ת.ז.', 'טלפון', 'אימייל', 'נוסעים', 'חבילה', 'סטטוס', 'הערות', 'הערת מעקב'];
+    const rows = leads.map(l => [
+        new Date(l.submittedAt).toLocaleString('he-IL'),
+        l.nameHe, l.nameEn, l.idNumber, l.phone, l.email,
+        l.passengers, l.packageType, l.status,
+        (l.notes || '').replace(/,/g, ' '), (l.note || '').replace(/,/g, ' ')
+    ]);
+    const csv = '﻿' + [headers, ...rows].map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    a.download = 'budapest_leads_' + new Date().toISOString().slice(0, 10) + '.csv';
+    a.click();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

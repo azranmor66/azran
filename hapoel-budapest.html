@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הפועל בבודפשט | חבילות טיסה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --accent: #e61e2a;
+            --accent-dark: #b01520;
+            --bg: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card2: #161616;
+        }
+        * { box-sizing: border-box; }
+        body {
+            background-color: var(--bg);
+            font-family: 'Heebo', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        .hero-bg {
+            background: radial-gradient(ellipse at top, rgba(230,30,42,0.18) 0%, transparent 60%),
+                        radial-gradient(ellipse at bottom right, rgba(230,30,42,0.08) 0%, transparent 50%),
+                        #0a0a0a;
+        }
+        .package-card {
+            background: linear-gradient(135deg, #141414 0%, #0f0f0f 100%);
+            border: 1px solid rgba(255,255,255,0.07);
+            transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+            position: relative;
+            overflow: hidden;
+        }
+        .package-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(230,30,42,0.06) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.35s;
+        }
+        .package-card:hover::before { opacity: 1; }
+        .package-card:hover {
+            border-color: rgba(230,30,42,0.5);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(230,30,42,0.15);
+        }
+        .package-card.selected {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(230,30,42,0.3), 0 20px 60px rgba(230,30,42,0.2);
+        }
+        .package-card.selected::before { opacity: 1; }
+        .badge {
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+        }
+        .badge-outline {
+            border: 1px solid rgba(230,30,42,0.5);
+            color: #e61e2a;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+        }
+        .input-field {
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: 0.6rem;
+            outline: none;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .input-field:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(230,30,42,0.12);
+        }
+        .input-field::placeholder { color: #555; }
+        .btn-red {
+            background: var(--accent);
+            color: white;
+            font-weight: 800;
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 6px 24px rgba(230,30,42,0.35);
+            font-family: 'Heebo', sans-serif;
+            letter-spacing: 0.02em;
+        }
+        .btn-red:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(230,30,42,0.5);
+        }
+        .btn-red:disabled {
+            background: #444;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(230,30,42,0.4), transparent);
+        }
+        .price-tag {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+        }
+        .price-sub {
+            font-size: 0.75rem;
+            color: #888;
+            font-weight: 400;
+        }
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ccc;
+            font-size: 0.88rem;
+        }
+        .info-row svg { color: var(--accent); flex-shrink: 0; }
+        .section-label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+        .terms-item {
+            display: flex;
+            gap: 0.75rem;
+            color: #aaa;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .terms-item:last-child { border-bottom: none; }
+        .terms-item::before {
+            content: '•';
+            color: var(--accent);
+            flex-shrink: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .success-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .success-overlay.show { display: flex; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeUp 0.6s ease-out forwards; }
+        .pulse-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        .sticky-cta {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            width: calc(100% - 2rem);
+            max-width: 400px;
+            transition: all 0.3s;
+        }
+        .form-section {
+            background: linear-gradient(180deg, #0f0f0f 0%, #111 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        select.input-field option { background: #1a1a1a; color: white; }
+        .flight-badge {
+            background: rgba(230,30,42,0.1);
+            border: 1px solid rgba(230,30,42,0.2);
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .error-msg { color: #f87171; font-size: 0.78rem; margin-top: 0.25rem; display: none; }
+        .error-msg.show { display: block; }
+        .input-field.error { border-color: #f87171; }
+    </style>
+</head>
+<body>
+
+<!-- ======== HERO ======== -->
+<div class="hero-bg pt-10 pb-16 px-4">
+    <div class="max-w-2xl mx-auto text-center">
+        <div class="flex justify-center mb-6">
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-red-700 to-red-900 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-700"></div>
+                <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/LogoAzranJosepwhite.png"
+                     alt="Azran Logo"
+                     class="relative h-16 object-contain"
+                     onerror="this.src='https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/logo.png'">
+            </div>
+        </div>
+
+        <div class="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+            <span class="section-label">הפועל תל אביב | אירופה 2026</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-black leading-tight mb-4">
+            הפועל <span class="text-[#e61e2a]">בבודפשט</span> 🔴
+        </h1>
+        <p class="text-gray-400 text-lg max-w-md mx-auto leading-relaxed">
+            חבילות טיסה + מלון + הסעות למשחק.<br>
+            שלוש אפשרויות, כל תקציב, חוויה אחת.
+        </p>
+
+        <div class="flex items-center justify-center gap-3 mt-6 flex-wrap">
+            <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="map-pin" class="w-4 h-4 text-red-500"></i>
+                בודפשט, הונגריה
+            </div>
+            <span class="text-gray-600">|</span>
+            <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="calendar" class="w-4 h-4 text-red-500"></i>
+                יולי 2026
+            </div>
+            <span class="text-gray-600">|</span>
+            <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="plane" class="w-4 h-4 text-red-500"></i>
+                טיסות ישירות
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======== PACKAGES ======== -->
+<div class="max-w-2xl mx-auto px-4 py-12" id="packages">
+
+    <div class="text-center mb-10">
+        <p class="section-label mb-2">בחר את החבילה שלך</p>
+        <h2 class="text-3xl font-black">3 חבילות לבחירה</h2>
+    </div>
+
+    <div class="space-y-5" id="package-cards">
+
+        <!-- חבילה 1 -->
+        <div class="package-card rounded-2xl p-6 cursor-pointer" data-package="חווית בודפשט מלאה - 3,213₪" onclick="selectPackage(this)">
+            <div class="flex items-start justify-between mb-4 flex-wrap gap-2">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="badge">חבילה 1</span>
+                        <span class="text-xs text-gray-500 font-medium">22–25/07/26 | רביעי–שבת</span>
+                    </div>
+                    <h3 class="text-xl font-black mt-1">חווית בודפשט מלאה</h3>
+                </div>
+                <div class="text-left">
+                    <div class="price-tag">3,213₪</div>
+                    <div class="price-sub">לאדם, הרכב זוגי</div>
+                </div>
+            </div>
+
+            <div class="divider mb-4"></div>
+
+            <div class="grid grid-cols-1 gap-2.5 mb-4">
+                <div class="info-row">
+                    <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
+                    <span>טיסה ישירה הלוך 14:40 | חזור 19:10</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                    <span>מזוודה 20kg לנוסע</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="building-2" class="w-4 h-4"></i>
+                    <span>Eurostars Palazzo Zichy — Deluxe Room, לינה + ארוחת בוקר</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="bus" class="w-4 h-4"></i>
+                    <span>הסעה הלוך-חזור למשחק</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span>ביטול חינם למלון עד 18/07/26</span>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-3">
+                <span class="badge-outline">4 לילות</span>
+                <div class="select-indicator hidden">
+                    <span class="flex items-center gap-1 text-green-400 text-sm font-bold">
+                        <i data-lucide="check-circle" class="w-4 h-4"></i> נבחר
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- חבילה 2 -->
+        <div class="package-card rounded-2xl p-6 cursor-pointer" data-package="סופ&quot;ש ארוך - 3,435₪" onclick="selectPackage(this)">
+            <div class="flex items-start justify-between mb-4 flex-wrap gap-2">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="badge">חבילה 2</span>
+                        <span class="text-xs text-red-500 font-bold">מומלץ</span>
+                        <span class="text-xs text-gray-500 font-medium">23–26/07/26 | חמישי–ראשון</span>
+                    </div>
+                    <h3 class="text-xl font-black mt-1">סופ"ש ארוך</h3>
+                </div>
+                <div class="text-left">
+                    <div class="price-tag">3,435₪</div>
+                    <div class="price-sub">לאדם, הרכב זוגי</div>
+                </div>
+            </div>
+
+            <div class="divider mb-4"></div>
+
+            <div class="grid grid-cols-1 gap-2.5 mb-4">
+                <div class="info-row">
+                    <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
+                    <span>ארקיע — הלוך 06:00 | חזור 20:40</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                    <span>מזוודה 20kg לנוסע</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="building-2" class="w-4 h-4"></i>
+                    <span>Eurostars Palazzo Zichy — Deluxe Room, לינה + ארוחת בוקר</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="bus" class="w-4 h-4"></i>
+                    <span>הסעות הלוך-חזור למשחק</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span>ביטול חינם למלון עד 19/07/26</span>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-3">
+                <span class="badge-outline">4 לילות</span>
+                <div class="select-indicator hidden">
+                    <span class="flex items-center gap-1 text-green-400 text-sm font-bold">
+                        <i data-lucide="check-circle" class="w-4 h-4"></i> נבחר
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- חבילה 3 -->
+        <div class="package-card rounded-2xl p-6 cursor-pointer" data-package="קוויקי בהונגריה - 2,900₪" onclick="selectPackage(this)">
+            <div class="flex items-start justify-between mb-4 flex-wrap gap-2">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="badge">חבילה 3</span>
+                        <span class="text-xs text-gray-500 font-medium">22–24/07/26 | רביעי–שישי</span>
+                    </div>
+                    <h3 class="text-xl font-black mt-1">קוויקי בהונגריה</h3>
+                </div>
+                <div class="text-left">
+                    <div class="price-tag">2,900₪</div>
+                    <div class="price-sub">לאדם, הרכב זוגי</div>
+                </div>
+            </div>
+
+            <div class="divider mb-4"></div>
+
+            <div class="grid grid-cols-1 gap-2.5 mb-4">
+                <div class="info-row">
+                    <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
+                    <span>אלעל — הלוך 03:50 | חזור 09:10</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                    <span>טרולי 8kg לנוסע</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="building-2" class="w-4 h-4"></i>
+                    <span>Eurostars Palazzo Zichy — Deluxe Room, לינה + ארוחת בוקר</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="bus" class="w-4 h-4"></i>
+                    <span>הסעות הלוך-חזור למשחק</span>
+                </div>
+                <div class="info-row">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span>ביטול חינם למלון עד 15/07/26</span>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-3">
+                <span class="badge-outline">2 לילות</span>
+                <div class="select-indicator hidden">
+                    <span class="flex items-center gap-1 text-green-400 text-sm font-bold">
+                        <i data-lucide="check-circle" class="w-4 h-4"></i> נבחר
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ======== FORM ======== -->
+<div class="max-w-2xl mx-auto px-4 pb-16" id="form-section">
+    <div class="form-section rounded-2xl p-6 md:p-8">
+        <div class="text-center mb-8">
+            <p class="section-label mb-2">השאר פרטים</p>
+            <h2 class="text-2xl font-black">ניצור איתך קשר לאישור</h2>
+            <p class="text-gray-500 text-sm mt-2">ממלאים פרטים ← אנחנו חוזרים ← נוסעים לבודפשט 🔴</p>
+        </div>
+
+        <form id="lead-form" novalidate>
+            <div class="space-y-4">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 mb-1.5">שם מלא בעברית *</label>
+                        <input type="text" name="nameHe" id="nameHe" class="input-field" placeholder="ישראל ישראלי" required>
+                        <p class="error-msg" id="err-nameHe">שדה חובה</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 mb-1.5">שם מלא באנגלית *</label>
+                        <input type="text" name="nameEn" id="nameEn" class="input-field" placeholder="Israel Israeli" required>
+                        <p class="error-msg" id="err-nameEn">שדה חובה</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 mb-1.5">תעודת זהות *</label>
+                        <input type="text" name="idNumber" id="idNumber" class="input-field" placeholder="000000000" maxlength="9" inputmode="numeric" required>
+                        <p class="error-msg" id="err-idNumber">שדה חובה</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 mb-1.5">טלפון נייד *</label>
+                        <input type="tel" name="phone" id="phone" class="input-field" placeholder="050-0000000" inputmode="tel" required>
+                        <p class="error-msg" id="err-phone">שדה חובה</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1.5">אימייל *</label>
+                    <input type="email" name="email" id="email" class="input-field" placeholder="israel@gmail.com" required>
+                    <p class="error-msg" id="err-email">נא להזין כתובת מייל תקינה</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 mb-1.5">כמות נוסעים *</label>
+                        <select name="passengers" id="passengers" class="input-field" required>
+                            <option value="" disabled selected>בחר כמות</option>
+                            <option value="1">1 נוסע</option>
+                            <option value="2">2 נוסעים</option>
+                            <option value="3">3 נוסעים</option>
+                            <option value="4">4 נוסעים</option>
+                            <option value="5">5 נוסעים</option>
+                            <option value="6+">6+ נוסעים</option>
+                        </select>
+                        <p class="error-msg" id="err-passengers">שדה חובה</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 mb-1.5">סוג חבילה *</label>
+                        <select name="packageType" id="packageType" class="input-field" required>
+                            <option value="" disabled selected>בחר חבילה</option>
+                            <option value="חווית בודפשט מלאה - 3,213₪">חבילה 1 — חווית בודפשט מלאה (3,213₪)</option>
+                            <option value='סופ"ש ארוך - 3,435₪'>חבילה 2 — סופ"ש ארוך (3,435₪)</option>
+                            <option value="קוויקי בהונגריה - 2,900₪">חבילה 3 — קוויקי בהונגריה (2,900₪)</option>
+                        </select>
+                        <p class="error-msg" id="err-packageType">שדה חובה</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1.5">הערות / בקשות מיוחדות</label>
+                    <textarea name="notes" id="notes" class="input-field resize-none" rows="3" placeholder="כל בקשה מיוחדת, שאלה, או מידע נוסף..."></textarea>
+                </div>
+
+            </div>
+
+            <div class="mt-6 p-4 bg-white/[0.03] rounded-xl border border-white/[0.06]">
+                <p class="text-xs text-gray-500 text-center leading-relaxed">
+                    בשליחת הטופס אתה מאשר קבלת פנייה חוזרת בנוגע לחבילה שנבחרה. הפנייה אינה מחייבת הזמנה. מחירים כפופים לזמינות.
+                </p>
+            </div>
+
+            <div class="mt-6 flex justify-center">
+                <button type="submit" id="submit-btn" class="btn-red w-full md:w-auto">
+                    <span id="btn-text">שלח ואחכה לחזרה</span>
+                    <span id="btn-loader" class="hidden">שולח...</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ======== TERMS ======== -->
+<div class="max-w-2xl mx-auto px-4 pb-16">
+    <div class="divider mb-10"></div>
+    <div class="text-center mb-8">
+        <p class="section-label mb-2">תנאים ואותיות קטנות</p>
+        <h2 class="text-2xl font-black">מה חשוב לדעת</h2>
+    </div>
+    <div class="bg-[#0d0d0d] rounded-2xl border border-white/[0.06] p-6 space-y-0">
+        <div class="terms-item">כרטיס למשחק <strong class="text-white">אינו</strong> כלול בחבילה. רכישת כרטיסים תתבצע ישירות דרך מועדון הפועל תל אביב — עקבו אחרי הפרסומים הרשמיים ברשתות החברתיות וערוצי המדיה של המועדון.</div>
+        <div class="terms-item">החבילות אינן כוללות העברות שדה תעופה ↔ מלון, אך ניתן להוסיף לפי בקשה.</div>
+        <div class="terms-item">העברות מלון ↔ אצטדיון אינן כלולות. ניתן להוסיף — בהמשך יפורסמו חבילות הכוללות העברות אלו.</div>
+        <div class="terms-item">ניתן לשנות את החבילה לפי בקשה: הוספה/הורדת יום, החלפת מלון, שינוי שעת טיסה.</div>
+        <div class="terms-item"><strong class="text-white">ביטול טיסות:</strong> הטיסות לא ניתנות לביטול.</div>
+        <div class="terms-item"><strong class="text-white">ביטול מלון:</strong> ניתן לביטול עד לתאריך הרשום בכל חבילה.</div>
+        <div class="terms-item"><strong class="text-red-400">המחיר תקף לרגע ההצעה בלבד!</strong> המחירים עשויים להשתנות בהתאם לביקוש ולזמינות המלון וחברות התעופה.</div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center text-gray-700 text-xs pb-10 px-4">
+    <div class="divider max-w-2xl mx-auto mb-6"></div>
+    <p>עזרן — הפועל על פי עזרן | © 2026</p>
+    <p class="mt-1">מור עזרן | <a href="index.html" class="text-red-700 hover:text-red-500">חזרה לדף הראשי</a></p>
+</footer>
+
+<!-- ======== SUCCESS OVERLAY ======== -->
+<div class="success-overlay" id="success-overlay">
+    <div class="bg-[#111] border border-white/10 rounded-2xl p-8 max-w-sm w-full text-center animate-in">
+        <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="check-circle-2" class="w-8 h-8 text-green-400"></i>
+        </div>
+        <h3 class="text-2xl font-black mb-2">הטופס נשלח!</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-6">קיבלנו את הפרטים שלך ונחזור אליך בהקדם לאישור הזמנה. 🔴</p>
+        <button onclick="document.getElementById('success-overlay').classList.remove('show')" class="btn-red text-sm px-6 py-3">
+            סגור
+        </button>
+    </div>
+</div>
+
+<script>
+// Package selection
+function selectPackage(card) {
+    document.querySelectorAll('.package-card').forEach(c => {
+        c.classList.remove('selected');
+        c.querySelector('.select-indicator').classList.add('hidden');
+    });
+    card.classList.add('selected');
+    card.querySelector('.select-indicator').classList.remove('hidden');
+    const pkgValue = card.getAttribute('data-package');
+    const select = document.getElementById('packageType');
+    for (let opt of select.options) {
+        if (opt.value === pkgValue) { opt.selected = true; break; }
+    }
+    document.getElementById('form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    lucide.createIcons();
+}
+
+// Sync package select back to cards
+document.getElementById('packageType').addEventListener('change', function() {
+    const val = this.value;
+    document.querySelectorAll('.package-card').forEach(c => {
+        c.classList.remove('selected');
+        c.querySelector('.select-indicator').classList.add('hidden');
+        if (c.getAttribute('data-package') === val) {
+            c.classList.add('selected');
+            c.querySelector('.select-indicator').classList.remove('hidden');
+        }
+    });
+    lucide.createIcons();
+});
+
+// Validation
+function validate() {
+    let valid = true;
+    const fields = ['nameHe', 'nameEn', 'idNumber', 'phone', 'email', 'passengers', 'packageType'];
+    fields.forEach(id => {
+        const el = document.getElementById(id);
+        const err = document.getElementById('err-' + id);
+        if (!el.value.trim()) {
+            el.classList.add('error');
+            if (err) err.classList.add('show');
+            valid = false;
+        } else if (id === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value)) {
+            el.classList.add('error');
+            if (err) err.classList.add('show');
+            valid = false;
+        } else {
+            el.classList.remove('error');
+            if (err) err.classList.remove('show');
+        }
+    });
+    return valid;
+}
+
+// Form submit
+document.getElementById('lead-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const btn = document.getElementById('submit-btn');
+    document.getElementById('btn-text').classList.add('hidden');
+    document.getElementById('btn-loader').classList.remove('hidden');
+    btn.disabled = true;
+
+    const data = {
+        id: 'lead_' + Date.now(),
+        submittedAt: new Date().toISOString(),
+        status: 'ממתין',
+        nameHe: document.getElementById('nameHe').value.trim(),
+        nameEn: document.getElementById('nameEn').value.trim(),
+        idNumber: document.getElementById('idNumber').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        passengers: document.getElementById('passengers').value,
+        packageType: document.getElementById('packageType').value,
+        notes: document.getElementById('notes').value.trim()
+    };
+
+    // Save to localStorage
+    const stored = JSON.parse(localStorage.getItem('budapest_leads') || '[]');
+    stored.unshift(data);
+    localStorage.setItem('budapest_leads', JSON.stringify(stored));
+
+    // ===== FORMSPREE =====
+    // להחלפה: שנה את YOUR_FORM_ID לאחרי הרשמה ב-formspree.io
+    const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+    const submitPromise = FORMSPREE_ID !== 'YOUR_FORM_ID'
+        ? fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+                'שם בעברית': data.nameHe,
+                'שם באנגלית': data.nameEn,
+                'תעודת זהות': data.idNumber,
+                'טלפון': data.phone,
+                'אימייל': data.email,
+                'נוסעים': data.passengers,
+                'חבילה': data.packageType,
+                'הערות': data.notes
+            })
+          }).then(() => {})
+        : Promise.resolve();
+
+    submitPromise.finally(() => {
+        setTimeout(() => {
+            document.getElementById('btn-text').classList.remove('hidden');
+            document.getElementById('btn-loader').classList.add('hidden');
+            btn.disabled = false;
+            document.getElementById('success-overlay').classList.add('show');
+            document.getElementById('lead-form').reset();
+            document.querySelectorAll('.package-card').forEach(c => {
+                c.classList.remove('selected');
+                c.querySelector('.select-indicator').classList.add('hidden');
+            });
+            lucide.createIcons();
+        }, 800);
+    });
+});
+
+lucide.createIcons();
+</script>
+</body>
+</html>
