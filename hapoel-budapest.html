@@ -498,9 +498,9 @@
 <script>
 // ── DATA ────────────────────────────────
 const DEFAULT_PACKAGES = [
-    { id:'pkg_1', status:'active', name:'חווית בודפשט מלאה', price:'3,213', dates:'22–25/07/26', days:'רביעי–שבת', nights:'4 לילות', airline:'', flightOut:'14:40', flightIn:'19:10', luggage:'מזוודה 20kg לנוסע', hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room · לינה + ארוחת בוקר', cancelDate:'18/07/26', shuttle:'הסעה הלוך-חזור למשחק', note:'' },
-    { id:'pkg_2', status:'active', name:'סופ"ש ארוך',        price:'3,435', dates:'23–26/07/26', days:'חמישי–ראשון', nights:'4 לילות', airline:'ארקיע', flightOut:'06:00', flightIn:'20:40', luggage:'מזוודה 20kg לנוסע', hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room · לינה + ארוחת בוקר', cancelDate:'19/07/26', shuttle:'הסעות הלוך-חזור למשחק', note:'מומלץ' },
-    { id:'pkg_3', status:'active', name:'קוויקי בהונגריה',  price:'4,480', dates:'22–24/07/26', days:'רביעי–שישי',  nights:'2 לילות', airline:'וויזאייר / בלו בירד', flightOut:'10:10', flightIn:'19:25', luggage:'מזוודה 20kg לנוסע', hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room · לינה + ארוחת בוקר', cancelDate:'18/07/26', shuttle:'הסעות הלוך-חזור למשחק', note:'' }
+    { id:'pkg_1', status:'active',   name:'חווית בודפשט מלאה', price:'4,440', dates:'22–25/07/26', days:'רביעי–שבת',   nights:'3 לילות', airline:'', flightOut:'05:45', flightIn:'22:00', luggage:'מזוודה 23kg לנוסע', hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room · לינה + ארוחת בוקר', cancelDate:'18/07/26', shuttle:'הסעה הלוך-חזור למשחק', note:'' },
+    { id:'pkg_2', status:'soldout',  name:'סופ"ש ארוך',        price:'3,435', dates:'23–26/07/26', days:'חמישי–ראשון', nights:'4 לילות', airline:'ארקיע', flightOut:'06:00', flightIn:'20:40', luggage:'מזוודה 20kg לנוסע', hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room · לינה + ארוחת בוקר', cancelDate:'19/07/26', shuttle:'הסעות הלוך-חזור למשחק', note:'מומלץ' },
+    { id:'pkg_3', status:'active',   name:'קוויקי בהונגריה',  price:'4,305', dates:'22–24/07/26', days:'רביעי–שישי',  nights:'2 לילות', airline:'וויזאייר / בלו בירד', flightOut:'10:10', flightIn:'19:25', luggage:'מזוודה 20kg לנוסע', hotel:'Eurostars Palazzo Zichy', hotelBasis:'Deluxe Room · לינה + ארוחת בוקר', cancelDate:'18/07/26', shuttle:'הסעות הלוך-חזור למשחק', note:'' }
 ];
 
 function getPkgs() { try { const s = localStorage.getItem('budapest_packages'); return s ? JSON.parse(s) : DEFAULT_PACKAGES; } catch(e) { return DEFAULT_PACKAGES; } }
