@@ -116,16 +116,22 @@
     <div style="max-width:580px; margin:0 auto; text-align:center;">
 
         <!-- LOGOS — Azran + Medina Travel -->
-        <div style="display:flex;align-items:center;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-bottom:1.6rem;">
-            <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/azrannewlogo.png"
-                 alt="לוגו עזרן"
-                 style="height: clamp(36px, 10vw, 52px); width: auto; object-fit: contain; display: block; mix-blend-mode: screen;"
-                 onerror="this.style.display='none'">
-            <span style="width:1px;height:36px;background:rgba(255,255,255,.18);display:block;" aria-hidden="true"></span>
-            <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/medina%20travel.png"
-                 alt="לוגו מדינה טרוולס"
-                 style="height: clamp(32px, 9vw, 46px); width: auto; object-fit: contain; display: block; mix-blend-mode: screen;"
-                 onerror="this.style.display='none'">
+        <div style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.6rem;">
+            <!-- עזרן — אדום על לבן: מוצג על pill לבן -->
+            <div style="background:#fff;border-radius:10px;padding:6px 14px;display:flex;align-items:center;">
+                <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/azrannewlogo.png"
+                     alt="לוגו עזרן"
+                     style="height: clamp(32px, 9vw, 44px); width: auto; object-fit: contain; display: block;"
+                     onerror="this.parentElement.style.display='none'">
+            </div>
+            <span style="width:1px;height:36px;background:rgba(255,255,255,.2);display:block;" aria-hidden="true"></span>
+            <!-- מדינה טרוולס — לבן על שקוף: מוצג ישירות על הרקע הכהה -->
+            <div style="display:flex;align-items:center;">
+                <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/medina%20travel.png"
+                     alt="לוגו מדינה טרוולס"
+                     style="height: clamp(30px, 8vw, 42px); width: auto; object-fit: contain; display: block; filter: brightness(0) invert(1);"
+                     onerror="this.parentElement.style.display='none'">
+            </div>
         </div>
 
         <p class="eyebrow" style="margin-bottom:.9rem;">הפועל תל אביב · אירופה 2026</p>
