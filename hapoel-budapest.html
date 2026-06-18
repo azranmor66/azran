@@ -33,7 +33,7 @@
         /* ── PACKAGE CARDS ── */
         .pkg-card { background: #0f0f0f; border: 1px solid rgba(255,255,255,.07); border-radius: 1.25rem; cursor: pointer; transition: border-color .3s, transform .3s, box-shadow .3s; position: relative; overflow: hidden; }
         .pkg-card:hover { border-color: rgba(230,30,42,.4); transform: translateY(-3px); box-shadow: 0 14px 40px rgba(230,30,42,.1); }
-        .pkg-card.soldout { opacity: .5; cursor: not-allowed; }
+        .pkg-card.soldout { opacity: 1; cursor: not-allowed; }
         .pkg-card.soldout:hover { transform: none; box-shadow: none; border-color: rgba(255,255,255,.07); }
 
         /* ── BUTTONS ── */
@@ -115,16 +115,18 @@
 <header style="background: radial-gradient(ellipse 100% 60% at 50% -5%, rgba(230,30,42,.2) 0%, transparent 65%), #080808; padding: clamp(3rem,8vw,5rem) 1rem clamp(3.5rem,9vw,6rem);" role="banner">
     <div style="max-width:580px; margin:0 auto; text-align:center;">
 
-        <!-- LOGOS — Azran + Medina Travel -->
+        <!-- LOGOS — Azran (red on white → pill) + Medina Travel (white on transparent → invert) -->
         <div style="display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.8rem;">
-            <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/azrannewlogo.png"
-                 alt="לוגו עזרן"
-                 style="height: clamp(52px, 15vw, 80px); width: auto; object-fit: contain; display: block;"
-                 onerror="this.style.display='none'">
-            <span style="width:1px;height:52px;background:rgba(255,255,255,.2);display:block;flex-shrink:0;" aria-hidden="true"></span>
+            <div style="background:#fff;border-radius:14px;padding:10px 24px;display:flex;align-items:center;">
+                <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/azrannewlogo.png"
+                     alt="לוגו עזרן"
+                     style="height: clamp(52px, 14vw, 72px); width: auto; object-fit: contain; display: block;"
+                     onerror="this.parentElement.style.display='none'">
+            </div>
+            <span style="width:1px;height:56px;background:rgba(255,255,255,.2);display:block;flex-shrink:0;" aria-hidden="true"></span>
             <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/medina%20travel.png"
                  alt="לוגו מדינה טרוולס"
-                 style="height: clamp(48px, 14vw, 74px); width: auto; object-fit: contain; display: block;"
+                 style="height: clamp(50px, 13vw, 68px); width: auto; object-fit: contain; display: block; filter: brightness(0) invert(1);"
                  onerror="this.style.display='none'">
         </div>
 
@@ -525,7 +527,10 @@ function renderPackages() {
               aria-label="${p.name}${sold ? ' — אזלה' : ''}"
               ${!sold ? `tabindex="0" onclick="openDetail('${p.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDetail('${p.id}')}"` : 'aria-disabled="true"'}>
 
-            ${sold ? `<div style="position:absolute;inset:0;border-radius:1.25rem;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:5;pointer-events:none;" aria-hidden="true"><span style="background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.3);color:#eab308;font-weight:800;font-size:.9rem;padding:.4rem 1.2rem;border-radius:999px;">אזלה</span></div>` : ''}
+            ${sold ? `<div style="position:absolute;inset:0;border-radius:1.25rem;background:rgba(0,0,0,.75);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:5;pointer-events:none;gap:.6rem;" aria-hidden="true">
+                <span style="background:var(--red);color:#fff;font-weight:900;font-size:1.6rem;letter-spacing:.04em;padding:.5rem 2rem;border-radius:999px;">אזלה</span>
+                <span style="color:rgba(255,255,255,.6);font-size:.8rem;font-weight:600;">החבילה אינה זמינה יותר</span>
+              </div>` : ''}
 
             <div style="padding:1.25rem 1.4rem;">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
