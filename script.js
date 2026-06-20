@@ -179,10 +179,18 @@ function renderLinktree() {
             const themeClass = link.highlight ? highlightClass : normalClass;
             const iconColor = link.highlight ? "text-white" : "text-[#ff0040]";
 
+            const CUSTOM_ICONS = {
+                instagram: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+                twitter:   `<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+            };
+            const iconHtml = CUSTOM_ICONS[link.icon]
+                ? `<span class="${iconColor} group-hover:text-white transition">${CUSTOM_ICONS[link.icon]}</span>`
+                : `<span class="${iconColor} group-hover:text-white transition"><i data-lucide="${link.icon}"></i></span>`;
+
             return `
             <a href="${link.url}" target="${link.url.startsWith('http') ? '_blank' : '_self'}" class="${baseClass} ${themeClass}">
                 <div class="flex items-center gap-4">
-                    <span class="${iconColor} group-hover:text-white transition"><i data-lucide="${link.icon}"></i></span>
+                    ${iconHtml}
                     <span class="font-bold text-lg">${link.label}</span>
                 </div>
                 <i data-lucide="chevron-left" class="opacity-50 group-hover:opacity-100 transition"></i>
