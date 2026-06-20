@@ -7,7 +7,7 @@ const treeConfig = {
             label: "✈️ הפועל בבודפשט — חבילות טיסה",
             url: "hapoel-budapest.html",
             icon: "plane",
-            visible: true,
+            visible: false,
             highlight: true
         },
         {
@@ -17,10 +17,10 @@ const treeConfig = {
             visible: true 
         },
          { 
-            label: "לתמיכה בפעילות", 
-            url: "https://buymeacoffee.com/azran", 
-            icon: "globe", 
-            visible: true, 
+            label: "לתמיכה בפעילות",
+            url: "https://buymeacoffee.com/azran",
+            icon: "globe",
+            visible: false,
             highlight: true 
         },
           { 
