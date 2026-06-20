@@ -276,23 +276,31 @@ function switchTab(id,el){
 }
 
 async function loadDashboard(){
-  const [{count:posts},{count:comments},{count:users},{count:cats}]=await Promise.all([
-    sb.from('posts').select('id',{count:'exact',head:true}),
-    sb.from('comments').select('id',{count:'exact',head:true}),
-    sb.from('profiles').select('id',{count:'exact',head:true}),
-    sb.from('forum_categories').select('id',{count:'exact',head:true}),
-  ]);
-  document.getElementById('dash-stats').innerHTML=`
-    <div class="stat-card"><div class="n">${posts||0}</div><div class="l">נושאים</div></div>
-    <div class="stat-card"><div class="n">${comments||0}</div><div class="l">תגובות</div></div>
-    <div class="stat-card"><div class="n">${users||0}</div><div class="l">חברים</div></div>
-    <div class="stat-card"><div class="n">${cats||0}</div><div class="l">קטגוריות</div></div>`;
-  const {data:recent}=await sb.from('posts').select('id,title,category,created_at,profiles(username)').order('created_at',{ascending:false}).limit(10);
-  document.getElementById('recent-posts').innerHTML=recent?.length
-    ?`<table class="admin-table"><thead><tr><th>כותרת</th><th>קטגוריה</th><th>מחבר</th><th>לפני</th></tr></thead><tbody>${
-      recent.map(p=>`<tr><td><a href="forum-post.html?id=${p.id}" style="color:var(--red);text-decoration:none;">${p.title}</a></td><td>${p.category}</td><td>@${p.profiles?.username||'?'}</td><td>${timeAgo(p.created_at)}</td></tr>`).join('')
-    }</tbody></table>`
-    :'<p class="empty">אין פוסטים</p>';
+  try {
+    const [r1,r2,r3,r4]=await Promise.all([
+      sb.from('posts').select('*',{count:'exact',head:true}),
+      sb.from('comments').select('*',{count:'exact',head:true}),
+      sb.from('profiles').select('*',{count:'exact',head:true}),
+      sb.from('forum_categories').select('*',{count:'exact',head:true}),
+    ]);
+    document.getElementById('dash-stats').innerHTML=`
+      <div class="stat-card"><div class="n">${r1.count||0}</div><div class="l">נושאים</div></div>
+      <div class="stat-card"><div class="n">${r2.count||0}</div><div class="l">תגובות</div></div>
+      <div class="stat-card"><div class="n">${r3.count||0}</div><div class="l">חברים</div></div>
+      <div class="stat-card"><div class="n">${r4.count||0}</div><div class="l">קטגוריות</div></div>`;
+  } catch(e) {
+    document.getElementById('dash-stats').innerHTML='<p class="empty">שגיאה בטעינת סטטיסטיקות</p>';
+  }
+  try {
+    const {data:recent}=await sb.from('posts').select('id,title,category,created_at,profiles(username)').order('created_at',{ascending:false}).limit(10);
+    document.getElementById('recent-posts').innerHTML=recent?.length
+      ?`<table class="admin-table"><thead><tr><th>כותרת</th><th>קטגוריה</th><th>מחבר</th><th>לפני</th></tr></thead><tbody>${
+        recent.map(p=>`<tr><td><a href="forum-post.html?id=${p.id}" style="color:var(--red);text-decoration:none;">${p.title}</a></td><td>${p.category}</td><td>@${p.profiles?.username||'?'}</td><td>${timeAgo(p.created_at)}</td></tr>`).join('')
+      }</tbody></table>`
+      :'<p class="empty">אין פוסטים עדיין</p>';
+  } catch(e) {
+    document.getElementById('recent-posts').innerHTML='<p class="empty">שגיאה בטעינת פוסטים</p>';
+  }
 }
 
 async function loadCategories(){
