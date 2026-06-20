@@ -1,20 +1,92 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>הצהרת נגישות | עזרן</title>
-    <style>body{font-family:sans-serif; padding:50px; line-height:1.6; max-width:800px; margin:0 auto;}</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הצהרת נגישות | עזרן</title>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a0a0a;color:#e0e0e0;font-family:'Assistant',sans-serif;line-height:1.8;}
+nav{background:rgba(10,10,10,0.95);border-bottom:1px solid rgba(255,255,255,0.08);padding:14px 8%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+.nav-brand{font-size:1.3rem;font-weight:900;color:#fff;text-decoration:none;letter-spacing:1px;}
+.nav-brand span{color:#e61e2a;}
+.nav-back{color:#aaa;text-decoration:none;font-size:0.88rem;font-weight:600;}
+.nav-back:hover{color:#fff;}
+.wrap{max-width:760px;margin:0 auto;padding:60px 20px 100px;}
+h1{font-size:2rem;font-weight:900;color:#fff;margin-bottom:8px;}
+.subtitle{color:#888;font-size:0.9rem;margin-bottom:48px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.08);}
+h2{font-size:1.15rem;font-weight:800;color:#fff;margin:36px 0 12px;}
+p,li{font-size:0.95rem;color:#ccc;margin-bottom:12px;}
+ul{padding-right:20px;}
+li{margin-bottom:8px;}
+a{color:#e61e2a;}
+.highlight{background:rgba(230,30,42,0.07);border:1px solid rgba(230,30,42,0.2);border-radius:10px;padding:16px 20px;margin:24px 0;}
+.status-badge{display:inline-block;background:rgba(30,180,30,0.15);border:1px solid rgba(30,180,30,0.3);color:#5dca5d;font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:6px;margin-bottom:16px;}
+footer{text-align:center;padding:40px;border-top:1px solid rgba(255,255,255,0.06);color:#555;font-size:0.82rem;}
+</style>
 </head>
 <body>
-    <h1>הצהרת נגישות - עזרן (Azran.cc)</h1>
-    <p>אני רואה חשיבות רבה במתן שירות שוויוני לכלל הגולשים ובשיפור חוויית הגלישה לאנשים עם מוגבלות. האתר הונגש בהתאם לתקן WCAG 2.1 ברמה AA.</p>
-    <h2>אמצעי הנגישות באתר:</h2>
+<nav>
+    <a href="home.html" class="nav-brand">AZRAN<span>.</span>CC</a>
+    <a href="home.html" class="nav-back">← חזרה לאתר</a>
+</nav>
+
+<div class="wrap">
+    <h1>הצהרת נגישות</h1>
+    <p class="subtitle">עדכון אחרון: יוני 2026</p>
+
+    <span class="status-badge">עומד בדרישות הנגישות</span>
+
+    <div class="highlight">
+        <p>אתר <strong>azran.cc</strong> מחויב לנגישות דיגיטלית עבור כלל המשתמשים, לרבות אנשים עם מוגבלות, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), תשע"ג-2013.</p>
+    </div>
+
+    <h2>רמת הנגישות</h2>
+    <p>האתר שואף לעמוד בדרישות תקן <strong>WCAG 2.1 ברמה AA</strong>, שהוא התקן הבינלאומי לנגישות אתרי אינטרנט.</p>
+
+    <h2>התאמות נגישות באתר</h2>
     <ul>
-        <li>תמיכה בקורא מסך.</li>
-        <li>ניווט באמצעות מקלדת.</li>
-        <li>כפתור נגישות המאפשר שינוי ניגודיות, הגדלת טקסט והדגשת קישורים.</li>
+        <li>תמיכה מלאה בשפה העברית וכיוון RTL</li>
+        <li>תגיות alt לכל התמונות</li>
+        <li>ניתן לנווט באתר באמצעות מקלדת בלבד</li>
+        <li>כותרות מובנות בהיררכיה תקינה (H1, H2, H3)</li>
+        <li>ניגודיות צבעים העומדת בדרישות WCAG AA</li>
+        <li>גופן קריא בגדלים מתאימים</li>
+        <li>האתר מותאם לגדלי מסך שונים (רספונסיבי)</li>
+        <li>שימוש ב-ARIA labels לאלמנטים אינטראקטיביים</li>
     </ul>
-    <p>במידה ומצאתם תקלה, ניתן ליצור קשר במייל: mor@azran.cc</p>
-    <a href="/">חזרה לאתר</a>
+
+    <h2>כלי נגישות</h2>
+    <p>האתר מצויד בתוסף נגישות של <strong>Enable</strong> המאפשר:</p>
+    <ul>
+        <li>הגדלת טקסט</li>
+        <li>ניגודיות גבוהה</li>
+        <li>מצב גווני אפור</li>
+        <li>הדגשת קישורים</li>
+        <li>עצירת אנימציות</li>
+        <li>תצוגה מונגשת לקוראי מסך</li>
+    </ul>
+    <p>כפתור הנגישות נמצא בצד הימני של המסך.</p>
+
+    <h2>מגבלות ידועות</h2>
+    <ul>
+        <li>תכני צד שלישי (Spotify, Instagram) — נגישותם תלויה בספקים החיצוניים ואינה בשליטתנו.</li>
+        <li>ייתכנו פערי נגישות בתכנים שנוצרו לפני יולי 2025.</li>
+    </ul>
+
+    <h2>פנייה בנושא נגישות</h2>
+    <p>נתקלת בבעיית נגישות? אנו מזמינים אותך לפנות אלינו ונטפל בכך בהקדם:</p>
+    <ul>
+        <li><strong>שם רכז הנגישות:</strong> מור עזרן</li>
+        <li><strong>דואר אלקטרוני:</strong> <a href="mailto:mor.a@genie.co.il">mor.a@genie.co.il</a></li>
+        <li><strong>זמן מענה מקסימלי:</strong> 5 ימי עסקים</li>
+    </ul>
+
+    <h2>עדכון הצהרה זו</h2>
+    <p>הצהרה זו עודכנה לאחרונה ביוני 2026. אנו בודקים ומעדכנים את נגישות האתר באופן שוטף.</p>
+</div>
+
+<footer>© 2026 עזרן | <a href="home.html" style="color:#555;">חזרה לאתר</a></footer>
 </body>
 </html>

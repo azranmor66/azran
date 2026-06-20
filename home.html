@@ -2,14 +2,20 @@
 <html lang="he" dir="rtl">
 <head>
     
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0DZ7GRB0J5"></script>
+<!-- Google Analytics — נטען רק אחרי הסכמה -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-0DZ7GRB0J5');
+  function loadGA() {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0DZ7GRB0J5';
+    document.head.appendChild(s);
+    gtag('config', 'G-0DZ7GRB0J5');
+    gtag('config', 'G-ETHSZD36Z6');
+  }
+  if (localStorage.getItem('cookie-consent') === 'accepted') { loadGA(); }
 </script>
 
     <meta charset="UTF-8">
@@ -21,12 +27,6 @@
     <link rel="canonical" href="https://azran.cc/">
     
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETHSZD36Z6"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date()); gtag('config', 'G-ETHSZD36Z6');
-    </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -154,15 +154,80 @@
         footer { padding: 60px; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); }
         footer a { color: var(--text-muted); text-decoration: none; margin: 0 12px; font-size: 0.85rem; }
 
-        @media (max-width: 950px) { 
-            .magazine-grid, .multimedia-grid { grid-template-columns: 1fr; } 
-            .main-logo { width: 140px; }
+        /* ── COOKIE BANNER ── */
+        #cookie-banner {
+            position: fixed; bottom: 0; right: 0; left: 0; z-index: 99999;
+            background: #1a1a1a; border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 18px 24px; display: flex; align-items: center; justify-content: space-between;
+            gap: 16px; flex-wrap: wrap;
+        }
+        #cookie-banner p { font-size: 0.85rem; color: #ccc; margin: 0; flex: 1; min-width: 200px; }
+        #cookie-banner a { color: var(--hapoel-red); }
+        .cookie-btns { display: flex; gap: 10px; flex-shrink: 0; }
+        .cookie-accept {
+            background: var(--hapoel-red); color: #fff; border: none; cursor: pointer;
+            padding: 9px 22px; border-radius: 8px; font-weight: 800; font-size: 0.85rem;
+            font-family: 'Assistant', sans-serif;
+        }
+        .cookie-reject {
+            background: transparent; color: #aaa; border: 1px solid #444; cursor: pointer;
+            padding: 9px 22px; border-radius: 8px; font-weight: 700; font-size: 0.85rem;
+            font-family: 'Assistant', sans-serif;
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width: 768px) {
+            nav { padding: 12px 5%; }
+            .nav-links a:not([aria-label]) { display: none; }
+
+            .container { padding: 90px 16px 40px; }
+
+            header { margin-bottom: 40px; }
+            .main-logo { width: 130px; }
+            header h1 { font-size: 1.8rem; }
+
+            .magazine-grid { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
+            .featured-card { min-height: 340px; padding: 24px; border-radius: 18px; }
+            .featured-content h1 { font-size: 1.6rem !important; }
+            .small-card { padding: 14px; gap: 14px; border-radius: 14px; }
+            .small-thumb { width: 68px; height: 68px; }
+
+            .section-header { font-size: 1.4rem; margin-bottom: 24px; }
+
+            .media-list { grid-template-columns: 1fr; gap: 12px; margin-bottom: 40px; }
+            .media-card { padding: 16px; border-radius: 14px; }
+
+            .multimedia-grid { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
+            .multimedia-box { padding: 20px; border-radius: 18px; }
+            .reel-wrap { flex: 0 0 240px; }
+
+            .wa-banner { padding: 36px 20px; border-radius: 24px; }
+            .wa-banner h2 { font-size: 1.6rem; }
+            .wa-btn { padding: 12px 28px; font-size: 0.95rem; }
+
+            footer { padding: 40px 20px; }
+            footer a { margin: 0 8px; }
+
             .bmc-text { display: none; }
-            .bmc-floating-btn { width: 50px; height: 50px; justify-content: center; padding: 0; }
+            .bmc-floating-btn { width: 50px; height: 50px; justify-content: center; padding: 0; bottom: 20px; left: 16px; }
+        }
+
+        @media (max-width: 950px) {
+            .magazine-grid, .multimedia-grid { grid-template-columns: 1fr; }
+            .main-logo { width: 140px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- באנר עוגיות -->
+    <div id="cookie-banner" style="display:none;" role="dialog" aria-label="הסכמה לשימוש בעוגיות">
+        <p>אנו משתמשים בעוגיות לצורך ניתוח תנועה באתר (Google Analytics). המשך גלישה מהווה הסכמה. <a href="privacy.html">מדיניות פרטיות</a></p>
+        <div class="cookie-btns">
+            <button class="cookie-accept" onclick="acceptCookies()">אני מסכים</button>
+            <button class="cookie-reject" onclick="rejectCookies()">דחה</button>
+        </div>
+    </div>
 
     <nav>
         <a href="/" class="nav-brand">AZRAN<span>.</span>CC</a>
@@ -241,6 +306,23 @@
             <a href="/accessibility.html">נגישות</a> | <a href="/privacy.html">פרטיות</a> | <a href="/terms.html">תקנון</a>
         </div>
     </footer>
+
+    <script>
+        (function(){
+            if (!localStorage.getItem('cookie-consent')) {
+                document.getElementById('cookie-banner').style.display = 'flex';
+            }
+        })();
+        function acceptCookies() {
+            localStorage.setItem('cookie-consent', 'accepted');
+            document.getElementById('cookie-banner').style.display = 'none';
+            loadGA();
+        }
+        function rejectCookies() {
+            localStorage.setItem('cookie-consent', 'rejected');
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+    </script>
 
     <script async src="//www.instagram.com/embed.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
