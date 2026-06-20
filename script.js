@@ -173,15 +173,16 @@ function renderLinktree() {
     const html = treeConfig.links
         .filter(link => link.visible)
         .map(link => {
-            const baseClass = "w-full p-4 rounded-xl flex items-center justify-between transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg group";
-            const normalClass = "bg-[#111] border border-[#222] hover:border-[#ff0040]";
-            const highlightClass = "bg-[#ff0040] border border-[#ff0040] text-white hover:bg-[#d90036]";
+            const baseClass = "w-full p-4 rounded-2xl flex items-center justify-between transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl group";
+            const normalClass = "bg-[#111] border border-[#2a2a2a] hover:border-[#e61e2a] hover:bg-[#1a0a0a]";
+            const highlightClass = "bg-[#e61e2a] border border-[#e61e2a] text-white hover:bg-[#c91020] hover:shadow-[0_8px_30px_rgba(230,30,42,0.4)]";
             const themeClass = link.highlight ? highlightClass : normalClass;
             const iconColor = link.highlight ? "text-white" : "text-[#ff0040]";
 
             const CUSTOM_ICONS = {
                 instagram: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
                 twitter:   `<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+                'music-2': `<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>`,
             };
             const iconHtml = CUSTOM_ICONS[link.icon]
                 ? `<span class="${iconColor} group-hover:text-white transition">${CUSTOM_ICONS[link.icon]}</span>`
