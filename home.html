@@ -42,22 +42,15 @@ body { background: var(--bg); color: var(--text); font-family: 'Heebo', sans-ser
 
 /* ── NAV ── */
 nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    background: rgba(8,8,8,0.85); backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 5%;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 64px;
+    position: fixed; top: 0; width: 100%; background: rgba(10,10,10,0.8);
+    backdrop-filter: blur(30px); z-index: 1000; border-bottom: 1px solid var(--border);
+    padding: 12px 8%; display: flex; justify-content: space-between; align-items: center;
 }
-.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nav-logo img { height: 34px; width: auto; }
-.nav-links { display: flex; align-items: center; gap: 28px; }
-.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.03em; transition: color 0.2s; }
-.nav-links a:hover { color: #fff; }
-.nav-social { display: flex; align-items: center; gap: 16px; }
-.nav-social a { color: var(--muted2); font-size: 1.1rem; text-decoration: none; transition: color 0.2s; }
-.nav-social a:hover { color: var(--red); }
-.nav-divider { width: 1px; height: 20px; background: var(--border); }
+.nav-brand { font-size: 1.5rem; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 1px; }
+.nav-brand span { color: var(--red); }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { color: #fff; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: 0.3s; }
+.nav-links i { font-size: 1.2rem; }
 
 /* ── HERO ── */
 .hero {
@@ -290,17 +283,10 @@ footer a:hover { color: var(--muted); }
 
 <!-- NAV -->
 <nav>
-    <a href="/home.html" class="nav-logo">
-        <img src="https://raw.githubusercontent.com/azranmor66/azran/main/assets/images/azrannewlogo.png" alt="עזרן">
-    </a>
+    <a href="/" class="nav-brand">AZRAN<span>.</span>CC</a>
     <div class="nav-links">
-        <a href="#blog">ניתוחים</a>
-        <a href="#media">מדיה</a>
-        <a href="#press">תקשורת</a>
-        <a href="https://azran.cc" target="_blank">לינקטרי</a>
-    </div>
-    <div class="nav-social">
-        <div class="nav-divider"></div>
+        <a href="#blog">הבלוג</a>
+        <a href="#media">תקשורת</a>
         <a href="https://instagram.com/morazran" target="_blank" aria-label="אינסטגרם"><i class="fab fa-instagram"></i></a>
         <a href="https://tiktok.com/@azranmor" target="_blank" aria-label="טיקטוק"><i class="fab fa-tiktok"></i></a>
         <a href="https://x.com/AzranMor" target="_blank" aria-label="טוויטר"><i class="fab fa-twitter"></i></a>
