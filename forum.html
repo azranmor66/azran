@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>פורום האוהדים | עזרן</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #e61e2a;
+  --bg: #080808;
+  --surface: #111;
+  --surface2: #181818;
+  --border: rgba(255,255,255,0.07);
+  --text: #f0f0f0;
+  --muted: #888;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Heebo',sans-serif; min-height:100vh; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; width:100%; background:rgba(8,8,8,0.9);
+  backdrop-filter:blur(20px); border-bottom:1px solid var(--border);
+  padding:0 5%; height:60px; display:flex; align-items:center; justify-content:space-between; z-index:100;
+}
+.nav-brand { font-size:1.2rem; font-weight:900; color:#fff; text-decoration:none; letter-spacing:1px; }
+.nav-brand span { color:var(--red); }
+.nav-right { display:flex; align-items:center; gap:16px; }
+.nav-right a { color:var(--muted); text-decoration:none; font-size:0.85rem; font-weight:600; transition:color 0.2s; }
+.nav-right a:hover { color:#fff; }
+#auth-btn { background:var(--red); color:#fff; border:none; padding:8px 18px; border-radius:8px; font-family:'Heebo',sans-serif; font-weight:800; font-size:0.85rem; cursor:pointer; transition:background 0.2s; }
+#auth-btn:hover { background:#c91020; }
+#user-info { display:flex; align-items:center; gap:10px; font-size:0.85rem; }
+#user-info span { color:var(--muted); }
+#logout-btn { background:none; border:1px solid var(--border); color:var(--muted); padding:6px 14px; border-radius:8px; font-family:'Heebo',sans-serif; font-size:0.82rem; cursor:pointer; transition:all 0.2s; }
+#logout-btn:hover { border-color:var(--red); color:var(--red); }
+
+/* LAYOUT */
+.page { max-width:900px; margin:0 auto; padding:80px 5% 60px; }
+
+/* HEADER */
+.forum-header { margin-bottom:36px; }
+.forum-header h1 { font-size:2rem; font-weight:900; }
+.forum-header h1 span { color:var(--red); }
+.forum-header p { color:var(--muted); margin-top:6px; font-size:0.9rem; }
+
+/* CATEGORIES */
+.cats { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
+.cat-btn {
+  background:var(--surface); border:1px solid var(--border); color:var(--muted);
+  padding:7px 16px; border-radius:999px; font-family:'Heebo',sans-serif; font-size:0.82rem;
+  font-weight:700; cursor:pointer; transition:all 0.2s;
+}
+.cat-btn:hover, .cat-btn.active { background:var(--red); border-color:var(--red); color:#fff; }
+
+/* TOOLBAR */
+.toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+.sort-btns { display:flex; gap:8px; }
+.sort-btn {
+  background:none; border:none; color:var(--muted); font-family:'Heebo',sans-serif;
+  font-size:0.82rem; font-weight:700; cursor:pointer; padding:6px 12px; border-radius:8px; transition:all 0.2s;
+}
+.sort-btn.active, .sort-btn:hover { background:var(--surface2); color:#fff; }
+#new-post-btn {
+  background:var(--red); color:#fff; border:none; padding:10px 22px; border-radius:10px;
+  font-family:'Heebo',sans-serif; font-weight:800; font-size:0.88rem; cursor:pointer; transition:background 0.2s;
+  display:flex; align-items:center; gap:8px;
+}
+#new-post-btn:hover { background:#c91020; }
+#new-post-btn.hidden { display:none; }
+
+/* POSTS */
+#posts-list { display:flex; flex-direction:column; gap:12px; }
+.post-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:14px;
+  display:flex; gap:0; overflow:hidden; transition:border-color 0.2s;
+  text-decoration:none; color:var(--text);
+}
+.post-card:hover { border-color:rgba(230,30,42,0.4); }
+
+.vote-col {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:4px; padding:16px 14px; background:var(--surface2); min-width:56px;
+}
+.vote-col button {
+  background:none; border:none; color:var(--muted); cursor:pointer; font-size:1.1rem;
+  line-height:1; padding:2px; transition:color 0.2s;
+}
+.vote-col button:hover { color:#fff; }
+.vote-col button.up.active { color:var(--red); }
+.vote-col button.down.active { color:#5b8dd9; }
+.vote-count { font-size:0.85rem; font-weight:800; color:#fff; }
+
+.post-body { padding:16px 18px; flex:1; min-width:0; }
+.post-meta { display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+.post-cat {
+  background:rgba(230,30,42,0.12); color:var(--red); border:1px solid rgba(230,30,42,0.2);
+  font-size:0.68rem; font-weight:800; letter-spacing:0.08em; padding:3px 10px; border-radius:999px;
+}
+.post-author { font-size:0.78rem; color:var(--muted); }
+.post-time { font-size:0.75rem; color:#555; }
+.post-title { font-size:1.05rem; font-weight:800; line-height:1.35; margin-bottom:10px; }
+.post-footer { display:flex; align-items:center; gap:16px; }
+.post-comments { font-size:0.78rem; color:var(--muted); display:flex; align-items:center; gap:5px; }
+
+.empty-state { text-align:center; padding:80px 20px; color:var(--muted); }
+.empty-state p { font-size:1rem; margin-top:12px; }
+
+/* SKELETON */
+.skel { background:linear-gradient(90deg,var(--surface) 25%,var(--surface2) 50%,var(--surface) 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; border-radius:14px; height:90px; }
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+
+/* MODALS */
+.modal-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000;
+  display:flex; align-items:center; justify-content:center; padding:20px;
+}
+.modal-overlay.hidden { display:none; }
+.modal {
+  background:var(--surface); border:1px solid var(--border); border-radius:20px;
+  padding:32px; width:100%; max-width:520px; max-height:90vh; overflow-y:auto;
+}
+.modal h2 { font-size:1.4rem; font-weight:900; margin-bottom:24px; }
+.modal h2 span { color:var(--red); }
+.form-group { margin-bottom:16px; }
+.form-group label { display:block; font-size:0.82rem; font-weight:700; color:var(--muted); margin-bottom:6px; }
+.form-group input, .form-group textarea, .form-group select {
+  width:100%; background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+  color:#fff; font-family:'Heebo',sans-serif; font-size:0.95rem; padding:10px 14px;
+  outline:none; transition:border-color 0.2s; resize:vertical;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--red); }
+.form-group select option { background:var(--surface2); }
+.modal-btns { display:flex; gap:10px; margin-top:20px; }
+.btn-submit {
+  flex:1; background:var(--red); color:#fff; border:none; padding:12px; border-radius:10px;
+  font-family:'Heebo',sans-serif; font-weight:800; font-size:0.95rem; cursor:pointer; transition:background 0.2s;
+}
+.btn-submit:hover { background:#c91020; }
+.btn-submit:disabled { opacity:0.5; cursor:not-allowed; }
+.btn-cancel {
+  background:none; border:1px solid var(--border); color:var(--muted); padding:12px 20px; border-radius:10px;
+  font-family:'Heebo',sans-serif; font-weight:700; font-size:0.95rem; cursor:pointer; transition:all 0.2s;
+}
+.btn-cancel:hover { border-color:var(--muted); color:#fff; }
+.auth-toggle { text-align:center; margin-top:16px; font-size:0.85rem; color:var(--muted); }
+.auth-toggle button { background:none; border:none; color:var(--red); font-family:'Heebo',sans-serif; font-weight:700; cursor:pointer; font-size:0.85rem; }
+.error-msg { background:rgba(230,30,42,0.1); border:1px solid rgba(230,30,42,0.3); color:#ff8888; font-size:0.82rem; padding:10px 14px; border-radius:8px; margin-bottom:14px; display:none; }
+.error-msg.show { display:block; }
+
+/* MOBILE */
+@media(max-width:600px) {
+  .page { padding:72px 4% 60px; }
+  .forum-header h1 { font-size:1.5rem; }
+  .toolbar { flex-direction:column; align-items:flex-start; gap:12px; }
+  #new-post-btn { width:100%; justify-content:center; }
+  .post-title { font-size:0.95rem; }
+  .modal { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a href="home.html" class="nav-brand">AZRAN<span>.</span>CC</a>
+    <a href="home.html" style="color:var(--muted);text-decoration:none;font-size:0.82rem;">← אתר ראשי</a>
+  </div>
+  <div class="nav-right">
+    <div id="user-info" style="display:none;">
+      <span id="username-display"></span>
+      <button id="logout-btn" onclick="logout()">יציאה</button>
+    </div>
+    <button id="auth-btn" onclick="openAuth()">התחבר / הרשם</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="forum-header">
+    <h1>פורום <span>האוהדים</span></h1>
+    <p>הבית של אוהדי הפועל תל אביב — דבר, דון, תתווכח.</p>
+  </div>
+
+  <div class="cats">
+    <button class="cat-btn active" onclick="filterCat('הכל',this)">🔴 הכל</button>
+    <button class="cat-btn" onclick="filterCat('משחקים',this)">⚽ משחקים</button>
+    <button class="cat-btn" onclick="filterCat('טקטיקה',this)">📊 טקטיקה</button>
+    <button class="cat-btn" onclick="filterCat('חדשות',this)">📰 חדשות</button>
+    <button class="cat-btn" onclick="filterCat('ביציע',this)">🏟️ ביציע</button>
+    <button class="cat-btn" onclick="filterCat('כללי',this)">💬 כללי</button>
+  </div>
+
+  <div class="toolbar">
+    <div class="sort-btns">
+      <button class="sort-btn active" onclick="setSort('hot',this)">🔥 חם</button>
+      <button class="sort-btn" onclick="setSort('new',this)">✨ חדש</button>
+      <button class="sort-btn" onclick="setSort('top',this)">⬆️ מוביל</button>
+    </div>
+    <button id="new-post-btn" class="hidden" onclick="openNewPost()">
+      <span style="font-size:1.1rem;">+</span> פוסט חדש
+    </button>
+  </div>
+
+  <div id="posts-list">
+    <div class="skel"></div>
+    <div class="skel"></div>
+    <div class="skel"></div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay hidden" id="auth-modal">
+  <div class="modal">
+    <h2 id="auth-title">התחבר ל<span>פורום</span></h2>
+    <div class="error-msg" id="auth-error"></div>
+    <div class="form-group">
+      <label>אימייל</label>
+      <input type="email" id="auth-email" placeholder="your@email.com" dir="ltr">
+    </div>
+    <div class="form-group">
+      <label>סיסמה</label>
+      <input type="password" id="auth-password" placeholder="••••••••" dir="ltr">
+    </div>
+    <div class="modal-btns">
+      <button class="btn-submit" id="auth-submit-btn" onclick="submitAuth()">התחבר</button>
+      <button class="btn-cancel" onclick="closeAuth()">ביטול</button>
+    </div>
+    <div class="auth-toggle">
+      אין לך חשבון? <button onclick="toggleAuthMode()">הרשם כאן</button>
+    </div>
+  </div>
+</div>
+
+<!-- NEW POST MODAL -->
+<div class="modal-overlay hidden" id="post-modal">
+  <div class="modal">
+    <h2>פוסט <span>חדש</span></h2>
+    <div class="error-msg" id="post-error"></div>
+    <div class="form-group">
+      <label>קטגוריה</label>
+      <select id="post-cat">
+        <option value="משחקים">⚽ משחקים</option>
+        <option value="טקטיקה">📊 טקטיקה</option>
+        <option value="חדשות">📰 חדשות</option>
+        <option value="ביציע">🏟️ ביציע</option>
+        <option value="כללי" selected>💬 כללי</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>כותרת</label>
+      <input type="text" id="post-title" placeholder="מה על הלב?">
+    </div>
+    <div class="form-group">
+      <label>תוכן</label>
+      <textarea id="post-content" rows="6" placeholder="כתוב כאן..."></textarea>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-submit" id="post-submit-btn" onclick="submitPost()">פרסם</button>
+      <button class="btn-cancel" onclick="closePostModal()">ביטול</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPA_URL = 'https://ujpjgdtscgukldbtyadi.supabase.co';
+const SUPA_KEY = 'sb_publishable_56RVvOjXom3wW5OFZj6Qyw_r41lz2ux';
+const sb = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+let currentUser = null;
+let currentCat = 'הכל';
+let currentSort = 'hot';
+let authMode = 'login';
+
+function timeAgo(ts) {
+  const diff = (Date.now() - new Date(ts)) / 1000;
+  if (diff < 60) return 'עכשיו';
+  if (diff < 3600) return `לפני ${Math.floor(diff/60)} דק׳`;
+  if (diff < 86400) return `לפני ${Math.floor(diff/3600)} שע׳`;
+  return `לפני ${Math.floor(diff/86400)} ימים`;
+}
+
+// AUTH
+sb.auth.onAuthStateChange(async (event, session) => {
+  currentUser = session?.user || null;
+  if (currentUser) {
+    const { data: profile } = await sb.from('profiles').select('username').eq('id', currentUser.id).single();
+    document.getElementById('username-display').textContent = profile?.username || currentUser.email;
+    document.getElementById('user-info').style.display = 'flex';
+    document.getElementById('auth-btn').style.display = 'none';
+    document.getElementById('new-post-btn').classList.remove('hidden');
+  } else {
+    document.getElementById('user-info').style.display = 'none';
+    document.getElementById('auth-btn').style.display = 'block';
+    document.getElementById('new-post-btn').classList.add('hidden');
+  }
+});
+
+async function logout() {
+  await sb.auth.signOut();
+}
+
+function openAuth() { document.getElementById('auth-modal').classList.remove('hidden'); }
+function closeAuth() {
+  document.getElementById('auth-modal').classList.add('hidden');
+  document.getElementById('auth-error').classList.remove('show');
+  document.getElementById('auth-email').value = '';
+  document.getElementById('auth-password').value = '';
+}
+
+function toggleAuthMode() {
+  authMode = authMode === 'login' ? 'register' : 'login';
+  document.getElementById('auth-title').innerHTML = authMode === 'login' ? 'התחבר ל<span>פורום</span>' : 'הצטרף ל<span>פורום</span>';
+  document.getElementById('auth-submit-btn').textContent = authMode === 'login' ? 'התחבר' : 'הרשם';
+  document.querySelector('.auth-toggle').innerHTML = authMode === 'login'
+    ? 'אין לך חשבון? <button onclick="toggleAuthMode()">הרשם כאן</button>'
+    : 'יש לך חשבון? <button onclick="toggleAuthMode()">התחבר</button>';
+}
+
+async function submitAuth() {
+  const email = document.getElementById('auth-email').value.trim();
+  const password = document.getElementById('auth-password').value;
+  const btn = document.getElementById('auth-submit-btn');
+  const errEl = document.getElementById('auth-error');
+  if (!email || !password) return;
+  btn.disabled = true;
+  btn.textContent = '...';
+  let err;
+  if (authMode === 'login') {
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    err = error;
+  } else {
+    const { error } = await sb.auth.signUp({ email, password });
+    err = error;
+    if (!err) {
+      errEl.style.background = 'rgba(30,180,30,0.1)';
+      errEl.style.borderColor = 'rgba(30,180,30,0.3)';
+      errEl.style.color = '#5dca5d';
+      errEl.textContent = 'נשלח מייל אימות — בדוק את תיבת הדואר שלך!';
+      errEl.classList.add('show');
+      btn.disabled = false;
+      btn.textContent = 'הרשם';
+      return;
+    }
+  }
+  if (err) {
+    errEl.textContent = err.message.includes('Invalid') ? 'אימייל או סיסמה שגויים' : err.message;
+    errEl.classList.add('show');
+  } else {
+    closeAuth();
+  }
+  btn.disabled = false;
+  btn.textContent = authMode === 'login' ? 'התחבר' : 'הרשם';
+}
+
+// POSTS
+async function loadPosts() {
+  const container = document.getElementById('posts-list');
+  let query = sb.from('posts')
+    .select('*, profiles(username)')
+    .order(currentSort === 'new' ? 'created_at' : currentSort === 'top' ? 'votes_count' : 'votes_count', { ascending: false });
+  if (currentCat !== 'הכל') query = query.eq('category', currentCat);
+  const { data: posts, error } = await query.limit(50);
+  if (error || !posts?.length) {
+    container.innerHTML = `<div class="empty-state"><div style="font-size:2.5rem;">🔴</div><p>${error ? 'שגיאה בטעינה' : 'אין פוסטים עדיין — היה הראשון!'}</p></div>`;
+    return;
+  }
+  let userVotes = {};
+  if (currentUser) {
+    const { data: votes } = await sb.from('post_votes').select('post_id,value').eq('user_id', currentUser.id);
+    votes?.forEach(v => userVotes[v.post_id] = v.value);
+  }
+  container.innerHTML = posts.map(p => `
+    <div class="post-card" style="cursor:pointer;" onclick="goToPost('${p.id}')">
+      <div class="vote-col" onclick="event.stopPropagation()">
+        <button class="up ${userVotes[p.id]===1?'active':''}" onclick="vote('${p.id}',1,this)" title="חיובי">▲</button>
+        <span class="vote-count">${p.votes_count || 0}</span>
+        <button class="down ${userVotes[p.id]===-1?'active':''}" onclick="vote('${p.id}',-1,this)" title="שלילי">▼</button>
+      </div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="post-cat">${p.category}</span>
+          <span class="post-author">@${p.profiles?.username || 'אנונימי'}</span>
+          <span class="post-time">${timeAgo(p.created_at)}</span>
+        </div>
+        <div class="post-title">${p.title}</div>
+        <div class="post-footer">
+          <span class="post-comments">💬 ${p.comments_count || 0} תגובות</span>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function goToPost(id) {
+  window.location.href = `forum-post.html?id=${id}`;
+}
+
+function filterCat(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  loadPosts();
+}
+
+function setSort(sort, el) {
+  currentSort = sort;
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  loadPosts();
+}
+
+async function vote(postId, value, btn) {
+  if (!currentUser) { openAuth(); return; }
+  const { data: existing } = await sb.from('post_votes').select('value').eq('user_id', currentUser.id).eq('post_id', postId).single();
+  if (existing) {
+    if (existing.value === value) {
+      await sb.from('post_votes').delete().eq('user_id', currentUser.id).eq('post_id', postId);
+      await sb.from('posts').update({ votes_count: sb.rpc('decrement', { x: value }) }).eq('id', postId);
+    } else {
+      await sb.from('post_votes').update({ value }).eq('user_id', currentUser.id).eq('post_id', postId);
+      await sb.from('posts').update({ votes_count: sb.rpc('increment', { x: value * 2 }) }).eq('id', postId);
+    }
+  } else {
+    await sb.from('post_votes').insert({ user_id: currentUser.id, post_id: postId, value });
+    const { data: post } = await sb.from('posts').select('votes_count').eq('id', postId).single();
+    await sb.from('posts').update({ votes_count: (post?.votes_count || 0) + value }).eq('id', postId);
+  }
+  loadPosts();
+}
+
+// NEW POST
+function openNewPost() {
+  if (!currentUser) { openAuth(); return; }
+  document.getElementById('post-modal').classList.remove('hidden');
+}
+function closePostModal() {
+  document.getElementById('post-modal').classList.add('hidden');
+  document.getElementById('post-error').classList.remove('show');
+}
+
+async function submitPost() {
+  const title = document.getElementById('post-title').value.trim();
+  const content = document.getElementById('post-content').value.trim();
+  const category = document.getElementById('post-cat').value;
+  const btn = document.getElementById('post-submit-btn');
+  const errEl = document.getElementById('post-error');
+  if (!title || !content) { errEl.textContent = 'נא למלא כותרת ותוכן'; errEl.classList.add('show'); return; }
+  btn.disabled = true; btn.textContent = '...';
+  const { error } = await sb.from('posts').insert({ title, content, category, author_id: currentUser.id });
+  if (error) {
+    errEl.textContent = 'שגיאה בפרסום — נסה שוב';
+    errEl.classList.add('show');
+  } else {
+    closePostModal();
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-content').value = '';
+    loadPosts();
+  }
+  btn.disabled = false; btn.textContent = 'פרסם';
+}
+
+// keyboard close modals
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeAuth(); closePostModal(); }
+});
+document.getElementById('auth-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeAuth(); });
+document.getElementById('post-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closePostModal(); });
+
+loadPosts();
+</script>
+</body>
+</html>
